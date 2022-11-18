@@ -26,6 +26,11 @@
 		F0D386FB292829D5001B8DA1 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386FA292829D5001B8DA1 /* LoginRouter.swift */; };
 		F0D3870329282D9B001B8DA1 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = F0D3870229282D9B001B8DA1 /* SnapKit */; };
 		F0D387052928311E001B8DA1 /* UIView + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D387042928311E001B8DA1 /* UIView + extension.swift */; };
+		F0D3870D292835C5001B8DA1 /* RegisterProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3870C292835C5001B8DA1 /* RegisterProtocols.swift */; };
+		F0D3870F29283705001B8DA1 /* RegisterRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3870E29283705001B8DA1 /* RegisterRouter.swift */; };
+		F0D3871129283714001B8DA1 /* RegisterPresenter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3871029283714001B8DA1 /* RegisterPresenter.swift.swift */; };
+		F0D387132928371F001B8DA1 /* RegisterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D387122928371F001B8DA1 /* RegisterInteractor.swift */; };
+		F0D3871529283FFC001B8DA1 /* UIStackView + extension.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3871429283FFC001B8DA1 /* UIStackView + extension.swift.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +54,11 @@
 		F0D386F8292828BB001B8DA1 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		F0D386FA292829D5001B8DA1 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		F0D387042928311E001B8DA1 /* UIView + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView + extension.swift"; sourceTree = "<group>"; };
+		F0D3870C292835C5001B8DA1 /* RegisterProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterProtocols.swift; sourceTree = "<group>"; };
+		F0D3870E29283705001B8DA1 /* RegisterRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRouter.swift; sourceTree = "<group>"; };
+		F0D3871029283714001B8DA1 /* RegisterPresenter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterPresenter.swift.swift; sourceTree = "<group>"; };
+		F0D387122928371F001B8DA1 /* RegisterInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterInteractor.swift; sourceTree = "<group>"; };
+		F0D3871429283FFC001B8DA1 /* UIStackView + extension.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView + extension.swift.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,8 +130,8 @@
 			isa = PBXGroup;
 			children = (
 				F0D386EE29282357001B8DA1 /* LoginModule */,
+				F0D3870629283525001B8DA1 /* RegisterModule */,
 				F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */,
-				F0D386CF29281E4C001B8DA1 /* RegisterViewController.swift */,
 				F0D386D129281E57001B8DA1 /* PhotoViewerViewController.swift */,
 				F0D386D329281E5F001B8DA1 /* VideoPlayerViewController.swift */,
 				F0D386D529281E6A001B8DA1 /* NewConversationViewController.swift */,
@@ -137,6 +147,7 @@
 				F0D386EA29282169001B8DA1 /* UIButton + Extension.swift */,
 				F0D386EC29282251001B8DA1 /* UIImageView + Extension.swift */,
 				F0D387042928311E001B8DA1 /* UIView + extension.swift */,
+				F0D3871429283FFC001B8DA1 /* UIStackView + extension.swift.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -144,11 +155,11 @@
 		F0D386EE29282357001B8DA1 /* LoginModule */ = {
 			isa = PBXGroup;
 			children = (
-				F0D386F2292823C0001B8DA1 /* Protocols */,
-				F0D386F3292823DB001B8DA1 /* Router */,
 				F0D386EF29282374001B8DA1 /* View */,
-				F0D386F1292823A9001B8DA1 /* Presenter */,
 				F0D386F02928238E001B8DA1 /* Interactor */,
+				F0D386F1292823A9001B8DA1 /* Presenter */,
+				F0D386F3292823DB001B8DA1 /* Router */,
+				F0D386F2292823C0001B8DA1 /* Protocols */,
 			);
 			path = LoginModule;
 			sourceTree = "<group>";
@@ -191,6 +202,58 @@
 				F0D386FA292829D5001B8DA1 /* LoginRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		F0D3870629283525001B8DA1 /* RegisterModule */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3870B29283592001B8DA1 /* View */,
+				F0D3870A2928358B001B8DA1 /* Interactor */,
+				F0D3870929283584001B8DA1 /* Presenter */,
+				F0D387082928357F001B8DA1 /* Router */,
+				F0D3870729283535001B8DA1 /* Protocols */,
+			);
+			path = RegisterModule;
+			sourceTree = "<group>";
+		};
+		F0D3870729283535001B8DA1 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3870C292835C5001B8DA1 /* RegisterProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F0D387082928357F001B8DA1 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3870E29283705001B8DA1 /* RegisterRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		F0D3870929283584001B8DA1 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3871029283714001B8DA1 /* RegisterPresenter.swift.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F0D3870A2928358B001B8DA1 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				F0D387122928371F001B8DA1 /* RegisterInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		F0D3870B29283592001B8DA1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F0D386CF29281E4C001B8DA1 /* RegisterViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -271,12 +334,17 @@
 			files = (
 				F0D386ED29282251001B8DA1 /* UIImageView + Extension.swift in Sources */,
 				F0D386CE29281E44001B8DA1 /* LoginViewController.swift in Sources */,
+				F0D3871129283714001B8DA1 /* RegisterPresenter.swift.swift in Sources */,
 				F0D386F9292828BB001B8DA1 /* LoginInteractor.swift in Sources */,
 				F0D386D629281E6A001B8DA1 /* NewConversationViewController.swift in Sources */,
 				F0D387052928311E001B8DA1 /* UIView + extension.swift in Sources */,
+				F0D3870F29283705001B8DA1 /* RegisterRouter.swift in Sources */,
 				F0D386B529281C17001B8DA1 /* ConversationsViewController.swift in Sources */,
+				F0D3871529283FFC001B8DA1 /* UIStackView + extension.swift.swift in Sources */,
 				F0D386E9292820FA001B8DA1 /* UITextField + extension.swift in Sources */,
 				F0D386D829281E76001B8DA1 /* ProfileViewControllerViewController.swift in Sources */,
+				F0D3870D292835C5001B8DA1 /* RegisterProtocols.swift in Sources */,
+				F0D387132928371F001B8DA1 /* RegisterInteractor.swift in Sources */,
 				F0D386D229281E57001B8DA1 /* PhotoViewerViewController.swift in Sources */,
 				F0D386FB292829D5001B8DA1 /* LoginRouter.swift in Sources */,
 				F0D386D429281E5F001B8DA1 /* VideoPlayerViewController.swift in Sources */,

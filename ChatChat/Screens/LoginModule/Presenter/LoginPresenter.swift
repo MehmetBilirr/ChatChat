@@ -9,11 +9,13 @@ import Foundation
 
 
 class LoginPresenter:ViewToPresenterLoginProtocol {
-    var loginInteractor: PresenterToInteractorLoginProtocol?
+     var loginInteractor: PresenterToInteractorLoginProtocol?
     
     func login(email: String, password: String) {
         loginInteractor?.login(email: email, password: password)
     }
-    
+    func register() {
+        loginInteractor?.register()
+    }
     
 }

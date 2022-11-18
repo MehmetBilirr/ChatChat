@@ -29,13 +29,16 @@ extension LoginViewController {
     func style(){
         view.backgroundColor = .systemBackground
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(didTapRegister(_:)))
+        
         imageView.configureImageView(imageName: "chat")
         
         emailTxtFld.configureStyle(placeHolder: "  Email adress...", txtColor: .black)
         
         passwordTxtFld.configureStyle(placeHolder: "  Password...", txtColor: .black)
         
-        loginButton.configureButton(title: "Login")
+        loginButton.configureButton(title: "Login", backgroundClr: .secondaryLabel)
+        loginButton.addTarget(self, action: #selector(didTapLogin(_:)), for: .touchUpInside)
         
     }
     
@@ -75,6 +78,15 @@ extension LoginViewController {
         }
         
       
+    }
+    
+    @objc func didTapLogin(_ sender:UIButton){
+        guard let mail = emailTxtFld.text, let pass = passwordTxtFld.text else {return}
+        loginPresenter?.login(email: mail, password: pass)
+    }
+    
+    @objc func didTapRegister(_ sender:UIButton) {
+        loginPresenter?.register()
     }
     
 }

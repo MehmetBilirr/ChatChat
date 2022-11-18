@@ -12,13 +12,13 @@ import UIKit
 
 extension UIButton {
     
-    func configureButton(title:String) {
+    func configureButton(title:String,backgroundClr:UIColor) {
         translatesAutoresizingMaskIntoConstraints = false
         setTitle(title, for: .normal)
         layer.cornerRadius = 12
         layer.masksToBounds = true
         setTitleColor(.white, for: .normal)
-        backgroundColor = .link
+        backgroundColor = backgroundClr
     }
     
 }

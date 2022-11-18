@@ -9,11 +9,17 @@ import Foundation
 import UIKit
 
 class LoginInteractor:PresenterToInteractorLoginProtocol {
-    weak var navigationController: UINavigationController?
-    func login(email: String, password: String) {
-        
-    }
+     var navigationController: UINavigationController?
     
+    func login(email: String, password: String) {
+        if email == "" && password == "" {
+            navigationController?.pushViewController(RegisterViewController(), animated: true)
+        }
+    }
+    func register() {
+        
+        navigationController?.pushViewController(RegisterViewController(), animated: true)
+    }
     
     
 }
