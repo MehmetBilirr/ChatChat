@@ -13,15 +13,25 @@ class ProfileInteractor:PresenterToInteractorProfileProcotol {
     var navigationController: UINavigationController?
     
     func logOut() {
-        AuthManager.shared.firebaseLogOut { bool in
-            if bool {
-                let navLoginVc = UINavigationController(rootViewController: LoginViewController())
-                navLoginVc.modalPresentationStyle = .fullScreen
-                navigationController?.present(navLoginVc, animated: true)
-                
-                
+        
+        let actionSheet = UIAlertController(title: "Do you want to logout?", message: "", preferredStyle: .actionSheet)
+        
+        actionSheet.configureAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        actionSheet.configureAction(title: "Logout", style: .default) { [weak self] _ in
+            AuthManager.shared.firebaseLogOut { bool in
+                if bool {
+                    let navLoginVc = UINavigationController(rootViewController: LoginViewController())
+                    navLoginVc.modalPresentationStyle = .fullScreen
+                    self?.navigationController?.present(navLoginVc, animated: true)
+                    
+                    
+                }
             }
         }
+        navigationController?.present(actionSheet, animated: true)
+        
+        
     }
     
     
