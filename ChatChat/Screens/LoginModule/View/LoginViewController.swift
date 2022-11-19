@@ -36,6 +36,8 @@ extension LoginViewController {
         emailTxtFld.configureStyle(placeHolder: "  Email adress...", txtColor: .black)
         
         passwordTxtFld.configureStyle(placeHolder: "  Password...", txtColor: .black)
+        passwordTxtFld.isSecureTextEntry = true
+        passwordTxtFld.enablePasswordToggle()
         
         loginButton.configureButton(title: "Login", backgroundClr: .secondaryLabel)
         loginButton.addTarget(self, action: #selector(didTapLogin(_:)), for: .touchUpInside)
@@ -52,7 +54,7 @@ extension LoginViewController {
             make.top.equalTo(view.top).offset(50)
             make.centerX.equalToSuperview()
             make.height.equalTo(view.height/3)
-            make.width.equalTo(view.width)
+            make.width.equalTo(view.width/2)
         }
         
         emailTxtFld.snp.makeConstraints { make in
@@ -87,6 +89,8 @@ extension LoginViewController {
     
     @objc func didTapRegister(_ sender:UIButton) {
         loginPresenter?.register()
+        passwordTxtFld.text = ""
+        emailTxtFld.text = ""
     }
     
 }

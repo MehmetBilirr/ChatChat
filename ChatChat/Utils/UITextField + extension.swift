@@ -17,6 +17,9 @@ extension UITextField {
         translatesAutoresizingMaskIntoConstraints = false
         placeholder = placeHolder
         textColor = .black
+        autocapitalizationType = .none
+        returnKeyType = .continue
+        autocorrectionType = .no
         leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
         leftViewMode = .always
         layer.cornerRadius = 12

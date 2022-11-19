@@ -12,9 +12,13 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
      var navigationController: UINavigationController?
     
     func login(email: String, password: String) {
-        if email == "" && password == "" {
-            navigationController?.pushViewController(RegisterViewController(), animated: true)
-        }
+            AuthManager.shared.firebaseSignIn(email: email, password: password) { [weak self] bool in
+                if bool {
+                    self?.navigationController?.pushViewController(RegisterViewController(), animated: true)
+                }
+            }
+            
+        
     }
     func register() {
         
