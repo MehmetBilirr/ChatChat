@@ -28,7 +28,7 @@ class AuthManager {
         }
     
     
-    func firebsaseSignUp(email:String,password:String,completion:@escaping(Bool) -> Void){
+    func firebaseSignUp(email:String,password:String,completion:@escaping(Bool) -> Void){
         
         Auth.auth().createUser(withEmail: email, password: password) { data, error in
             if error != nil {

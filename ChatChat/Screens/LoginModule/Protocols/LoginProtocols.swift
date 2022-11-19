@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-protocol ViewToPresenterLoginProtocol:AnyObject{
+protocol ViewToPresenterLoginProtocol{
     var loginInteractor : PresenterToInteractorLoginProtocol? {get set}
     
     func login(email:String,password:String)
@@ -17,7 +17,7 @@ protocol ViewToPresenterLoginProtocol:AnyObject{
 
 }
 
-protocol PresenterToInteractorLoginProtocol:AnyObject{
+protocol PresenterToInteractorLoginProtocol{
     var navigationController:UINavigationController? {get set}
     func login(email:String,password:String)
     func register()
@@ -26,6 +26,6 @@ protocol PresenterToInteractorLoginProtocol:AnyObject{
 
 
 
-protocol PresenterToRouterLoginProtocol:AnyObject {
+protocol PresenterToRouterLoginProtocol {
     static func createModule(ref : LoginViewController,navigationController:UINavigationController)
 }

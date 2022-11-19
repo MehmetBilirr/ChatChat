@@ -14,11 +14,11 @@ class RegisterInteractor:PresenterToInteractorRegisterProtocol {
     
     func register(profileImageView: UIImageView, firstName: String, lastName: String, email: String, password: String) {
         
-        AuthManager.shared.firebsaseSignUp(email: email, password: password) { bool in
+        AuthManager.shared.firebaseSignUp(email: email, password: password) { [weak self] bool in
             if bool {
-                DataBaseManager.shared.setupProfile(imageView: profileImageView, firstName: firstName, lastName: lastName) { bool in
+                DataBaseManager.shared.setupProfile(imageView: profileImageView, firstName: firstName, lastName: lastName) { [weak self] bool in
                     if bool {
-                        ProgressHUD.showSuccess()
+                        self?.navigationController?.pushViewController(MainTabBarController(), animated: true)
                     }
                 }
             }

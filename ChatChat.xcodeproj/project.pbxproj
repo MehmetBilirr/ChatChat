@@ -43,6 +43,11 @@
 		F0D3C061292914B70084C977 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C060292914B60084C977 /* AuthManager.swift */; };
 		F0D3C0642929151C0084C977 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = F0D3C0632929151C0084C977 /* ProgressHUD */; };
 		F0D3C06929291C010084C977 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C06829291C010084C977 /* DataBaseManager.swift */; };
+		F0D3C0722929254D0084C977 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C0712929254D0084C977 /* MainTabBarController.swift */; };
+		F0D3C07429293EB30084C977 /* ProfileProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C07329293EB30084C977 /* ProfileProtocols.swift */; };
+		F0D3C076292940000084C977 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C075292940000084C977 /* ProfileRouter.swift */; };
+		F0D3C0782929404E0084C977 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C0772929404E0084C977 /* ProfilePresenter.swift */; };
+		F0D3C07A292942080084C977 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C079292942080084C977 /* ProfileInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +80,11 @@
 		F0D3C05C292911980084C977 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0D3C060292914B60084C977 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		F0D3C06829291C010084C977 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
+		F0D3C0712929254D0084C977 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		F0D3C07329293EB30084C977 /* ProfileProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProtocols.swift; sourceTree = "<group>"; };
+		F0D3C075292940000084C977 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		F0D3C0772929404E0084C977 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
+		F0D3C079292942080084C977 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,11 +159,12 @@
 			children = (
 				F0D386EE29282357001B8DA1 /* LoginModule */,
 				F0D3870629283525001B8DA1 /* RegisterModule */,
+				F0D3C06A292924050084C977 /* ProfileModule */,
+				F0D3C070292925010084C977 /* MainTabBarModule */,
 				F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */,
 				F0D386D129281E57001B8DA1 /* PhotoViewerViewController.swift */,
 				F0D386D329281E5F001B8DA1 /* VideoPlayerViewController.swift */,
 				F0D386D529281E6A001B8DA1 /* NewConversationViewController.swift */,
-				F0D386D729281E76001B8DA1 /* ProfileViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -300,6 +311,66 @@
 			path = DataBaseManager;
 			sourceTree = "<group>";
 		};
+		F0D3C06A292924050084C977 /* ProfileModule */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3C06F292924410084C977 /* View */,
+				F0D3C06E2929243A0084C977 /* Interactor */,
+				F0D3C06D292924330084C977 /* Presenter */,
+				F0D3C06C2929242D0084C977 /* Router */,
+				F0D3C06B292924280084C977 /* Protocols */,
+			);
+			path = ProfileModule;
+			sourceTree = "<group>";
+		};
+		F0D3C06B292924280084C977 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3C07329293EB30084C977 /* ProfileProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F0D3C06C2929242D0084C977 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3C075292940000084C977 /* ProfileRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		F0D3C06D292924330084C977 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3C0772929404E0084C977 /* ProfilePresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F0D3C06E2929243A0084C977 /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3C079292942080084C977 /* ProfileInteractor.swift */,
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		F0D3C06F292924410084C977 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F0D386D729281E76001B8DA1 /* ProfileViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F0D3C070292925010084C977 /* MainTabBarModule */ = {
+			isa = PBXGroup;
+			children = (
+				F0D3C0712929254D0084C977 /* MainTabBarController.swift */,
+			);
+			path = MainTabBarModule;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -389,14 +460,18 @@
 			files = (
 				F0D386ED29282251001B8DA1 /* UIImageView + Extension.swift in Sources */,
 				F0D386CE29281E44001B8DA1 /* LoginViewController.swift in Sources */,
+				F0D3C0722929254D0084C977 /* MainTabBarController.swift in Sources */,
 				F0D3871129283714001B8DA1 /* RegisterPresenter.swift.swift in Sources */,
 				F0D386F9292828BB001B8DA1 /* LoginInteractor.swift in Sources */,
 				F0D386D629281E6A001B8DA1 /* NewConversationViewController.swift in Sources */,
 				F0D387052928311E001B8DA1 /* UIView + extension.swift in Sources */,
 				F0D3870F29283705001B8DA1 /* RegisterRouter.swift in Sources */,
 				F0D3C061292914B70084C977 /* AuthManager.swift in Sources */,
+				F0D3C07A292942080084C977 /* ProfileInteractor.swift in Sources */,
 				F0D386B529281C17001B8DA1 /* ConversationsViewController.swift in Sources */,
+				F0D3C0782929404E0084C977 /* ProfilePresenter.swift in Sources */,
 				F0D3871529283FFC001B8DA1 /* UIStackView + extension.swift.swift in Sources */,
+				F0D3C07429293EB30084C977 /* ProfileProtocols.swift in Sources */,
 				F0D386E9292820FA001B8DA1 /* UITextField + extension.swift in Sources */,
 				F0D386D829281E76001B8DA1 /* ProfileViewController.swift in Sources */,
 				F0D3870D292835C5001B8DA1 /* RegisterProtocols.swift in Sources */,
@@ -406,6 +481,7 @@
 				F0D3C06929291C010084C977 /* DataBaseManager.swift in Sources */,
 				F0D386D429281E5F001B8DA1 /* VideoPlayerViewController.swift in Sources */,
 				F0D386F7292828A4001B8DA1 /* LoginPresenter.swift in Sources */,
+				F0D3C076292940000084C977 /* ProfileRouter.swift in Sources */,
 				F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */,
 				F0D3C04C29290E160084C977 /* UIAlertController + extension.swift in Sources */,
 				F0D386F529282725001B8DA1 /* LoginProtocols.swift in Sources */,

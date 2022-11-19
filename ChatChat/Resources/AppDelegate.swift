@@ -20,10 +20,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = loginNavVC
+        setRootVC()
         return true
     }
 
+    private func setRootVC() {
+        
+        if Auth.auth().currentUser == nil {
+            window?.rootViewController = loginNavVC
+        }
+        else {
+            
+            window?.rootViewController = MainTabBarController()
+        }
+        
+    }
    
 
 }

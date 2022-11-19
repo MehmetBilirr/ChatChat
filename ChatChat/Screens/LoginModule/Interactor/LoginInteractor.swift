@@ -14,7 +14,9 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
     func login(email: String, password: String) {
             AuthManager.shared.firebaseSignIn(email: email, password: password) { [weak self] bool in
                 if bool {
-                    self?.navigationController?.pushViewController(RegisterViewController(), animated: true)
+                    let vc = MainTabBarController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.navigationController?.present(vc, animated: true)
                 }
             }
             
