@@ -42,6 +42,7 @@
 		F0D3C05D292911980084C977 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F0D3C05C292911980084C977 /* GoogleService-Info.plist */; };
 		F0D3C061292914B70084C977 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C060292914B60084C977 /* AuthManager.swift */; };
 		F0D3C0642929151C0084C977 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = F0D3C0632929151C0084C977 /* ProgressHUD */; };
+		F0D3C06929291C010084C977 /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C06829291C010084C977 /* DataBaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		F0D3C04B29290E160084C977 /* UIAlertController + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController + extension.swift"; sourceTree = "<group>"; };
 		F0D3C05C292911980084C977 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F0D3C060292914B60084C977 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		F0D3C06829291C010084C977 /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,6 +295,7 @@
 		F0D3C06529291AE60084C977 /* DataBaseManager */ = {
 			isa = PBXGroup;
 			children = (
+				F0D3C06829291C010084C977 /* DataBaseManager.swift */,
 			);
 			path = DataBaseManager;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 				F0D387132928371F001B8DA1 /* RegisterInteractor.swift in Sources */,
 				F0D386D229281E57001B8DA1 /* PhotoViewerViewController.swift in Sources */,
 				F0D386FB292829D5001B8DA1 /* LoginRouter.swift in Sources */,
+				F0D3C06929291C010084C977 /* DataBaseManager.swift in Sources */,
 				F0D386D429281E5F001B8DA1 /* VideoPlayerViewController.swift in Sources */,
 				F0D386F7292828A4001B8DA1 /* LoginPresenter.swift in Sources */,
 				F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */,

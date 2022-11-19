@@ -16,7 +16,11 @@ class RegisterInteractor:PresenterToInteractorRegisterProtocol {
         
         AuthManager.shared.firebsaseSignUp(email: email, password: password) { bool in
             if bool {
-                ProgressHUD.showSuccess()
+                DataBaseManager.shared.setupProfile(imageView: profileImageView, firstName: firstName, lastName: lastName) { bool in
+                    if bool {
+                        ProgressHUD.showSuccess()
+                    }
+                }
             }
         }
     }
