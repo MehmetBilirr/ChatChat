@@ -15,11 +15,17 @@ class ConversationsViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         Profile.loadCurrentProfile { profile, error in
-            guard let firstName = profile?.firstName,let lastName = profile?.lastName,let email = profile?.email else {return}
+            guard let profile = profile else {return}
+            let firstName = profile.firstName
+            let lastName = profile.lastName
+            let email = profile.email
+            
             print(firstName)
             print(lastName)
             print(email)
+           
         }
+        
     }
 
 

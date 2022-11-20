@@ -14,11 +14,13 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
      var navigationController: UINavigationController?
     
     func login(email: String, password: String) {
+        ProgressHUD.show()
             AuthManager.shared.firebaseSignIn(email: email, password: password) { [weak self] bool in
                 if bool {
                     let vc = MainTabBarController()
                     vc.modalPresentationStyle = .fullScreen
                     self?.navigationController?.present(vc, animated: true)
+                    ProgressHUD.dismiss()
                 }
             }
             
@@ -27,11 +29,10 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
     
     func loginWithFB(token: String) {
         AuthManager.shared.firebaseSignInWithFB(token: token)
-        let personImage = UIImageView(image: UIImage(named: "person"))
         Profile.loadCurrentProfile { profile, error in
-            guard let firstName = profile?.firstName,let lastName = profile?.lastName else {return}
+            guard let firstName = profile?.firstName,let lastName = profile?.lastName,let imageUrl = profile?.imageURL(forMode: .square, size: CGSize(width: 200, height: 200))?.absoluteString else {return}
             ProgressHUD.show()
-            DataBaseManager.shared.setupProfile(imageView: personImage, firstName: firstName, lastName: lastName) { [weak self] bool in
+            DataBaseManager.shared.createDataFirestoreFB(imageUrl: imageUrl, firstName: firstName, lastName: lastName) { [weak self] bool in
                 if bool {
                     let vc = MainTabBarController()
                     vc.modalPresentationStyle = .fullScreen

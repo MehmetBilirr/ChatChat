@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
 
 
 class ProfileInteractor:PresenterToInteractorProfileProcotol {
@@ -21,6 +22,7 @@ class ProfileInteractor:PresenterToInteractorProfileProcotol {
         actionSheet.configureAction(title: "Logout", style: .default) { [weak self] _ in
             AuthManager.shared.firebaseLogOut { bool in
                 if bool {
+                    LoginManager().logOut()
                     let navLoginVc = UINavigationController(rootViewController: LoginViewController())
                     navLoginVc.modalPresentationStyle = .fullScreen
                     self?.navigationController?.present(navLoginVc, animated: true)

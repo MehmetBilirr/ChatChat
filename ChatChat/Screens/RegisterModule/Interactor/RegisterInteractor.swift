@@ -18,7 +18,9 @@ class RegisterInteractor:PresenterToInteractorRegisterProtocol {
             if bool {
                 DataBaseManager.shared.setupProfile(imageView: profileImageView, firstName: firstName, lastName: lastName) { [weak self] bool in
                     if bool {
-                        self?.navigationController?.pushViewController(MainTabBarController(), animated: true)
+                        let navLoginVc = UINavigationController(rootViewController: LoginViewController())
+                        navLoginVc.modalPresentationStyle = .fullScreen
+                        self?.navigationController?.present(navLoginVc, animated: true)
                     }
                 }
             }

@@ -12,6 +12,7 @@ import FirebaseAuth
 
 
 
+
 final class LoginViewController: UIViewController {
     var loginPresenter:ViewToPresenterLoginProtocol?
     private let fbLoginButton = FBLoginButton()
@@ -120,7 +121,6 @@ extension LoginViewController:LoginButtonDelegate {
     
     func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
         guard let token = result?.token?.tokenString else {return}
-        
         loginPresenter?.loginWithFB(token: token)
         
         

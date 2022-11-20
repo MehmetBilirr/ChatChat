@@ -121,7 +121,6 @@
 				B564F251E790F31A4A72C347 /* Pods-ChatChat.debug.xcconfig */,
 				12731F8B8A566A64CF3BB2D3 /* Pods-ChatChat.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -459,9 +458,9 @@
 			);
 			mainGroup = F0D386A429281C17001B8DA1;
 			packageReferences = (
-				F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				F0D3C04D292911080084C977 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD.git" */,
+				F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 			);
 			productRefGroup = F0D386AE29281C17001B8DA1 /* Products */;
 			projectDirPath = "";
@@ -777,7 +776,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -793,7 +792,7 @@
 				kind = branch;
 			};
 		};
-		F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD.git" */ = {
+		F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/relatedcode/ProgressHUD.git";
 			requirement = {
@@ -806,7 +805,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F0D3870229282D9B001B8DA1 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 		F0D3C04E292911080084C977 /* FirebaseAuth */ = {
@@ -846,7 +845,7 @@
 		};
 		F0D3C0632929151C0084C977 /* ProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD.git" */;
+			package = F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
 			productName = ProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */
