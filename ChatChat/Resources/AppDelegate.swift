@@ -9,6 +9,8 @@
 import UIKit
 import Firebase
 import FBSDKCoreKit
+import GoogleSignIn
+
     
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -22,10 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 application,
                 didFinishLaunchingWithOptions: launchOptions
             )
-
+       
         return true
     }
-
+    
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return GIDSignIn.sharedInstance.handle(url)
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

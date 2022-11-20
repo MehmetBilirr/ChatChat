@@ -8,6 +8,8 @@
 import Foundation
 import FirebaseAuth
 import ProgressHUD
+import Firebase
+import GoogleSignIn
 
 class AuthManager {
     
@@ -57,4 +59,29 @@ class AuthManager {
         let credential = FacebookAuthProvider.credential(withAccessToken: token)
         FirebaseAuth.Auth.auth().signIn(with: credential)
     }
+    
+    func firebaseSignInWithGoogle(viewController:UIViewController,completion:@escaping(Bool)->Void){
+        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+        let config = GIDConfiguration(clientID: clientID)
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: viewController) {  (user, error) in
+
+          if let error = error {
+              print(error.localizedDescription)
+            return
+          }
+
+          guard
+            let authentication = user?.authentication,
+            let idToken = authentication.idToken else {return}
+            
+          let credential = GoogleAuthProvider.credential(withIDToken: idToken,
+                                                         accessToken: authentication.accessToken)
+
+            Auth.auth().signIn(with: credential)
+            completion(true)
+        }
+    }
+    
 }

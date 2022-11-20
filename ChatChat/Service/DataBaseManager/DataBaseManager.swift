@@ -15,7 +15,7 @@ class DataBaseManager {
     static let shared = DataBaseManager()
     init(){}
     
-    func createDataFirestoreFB(imageUrl:String,firstName:String,lastName:String,completion:@escaping(Bool)-> Void){
+    func createDataFirestore(with imageUrl:String,firstName:String,lastName:String,completion:@escaping(Bool)-> Void){
         
         createDataFirestore(imageUrl: imageUrl, firstName: firstName, lastName: lastName)
         

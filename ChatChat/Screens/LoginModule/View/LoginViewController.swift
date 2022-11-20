@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 import FBSDKLoginKit
 import FirebaseAuth
+import GoogleSignIn
+import Firebase
 
 
 
@@ -16,6 +18,7 @@ import FirebaseAuth
 final class LoginViewController: UIViewController {
     var loginPresenter:ViewToPresenterLoginProtocol?
     private let fbLoginButton = FBLoginButton()
+    let googleSignInButton = GIDSignInButton()
     private let imageView = UIImageView()
     private let emailTxtFld = UITextField()
     private let passwordTxtFld = UITextField()
@@ -52,6 +55,8 @@ extension LoginViewController {
         
         fbLoginButton.permissions = ["email","public_profile"]
         fbLoginButton.delegate = self
+        
+        googleSignInButton.addTarget(self, action: #selector(didtapGoogle), for: .touchUpInside)
         
     }
     
@@ -96,6 +101,13 @@ extension LoginViewController {
             make.height.equalTo(40)
         }
         
+        view.addSubview(googleSignInButton)
+        googleSignInButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(50)
+            make.right.equalToSuperview().offset(-50)
+            make.top.equalTo(fbLoginButton.snp.bottom).offset(20)
+            make.height.equalTo(40)
+        }
       
     }
     
@@ -110,6 +122,10 @@ extension LoginViewController {
         emailTxtFld.text = ""
     }
     
+    @objc func didtapGoogle(){
+        
+        loginPresenter?.loginWithGoogle(viewController: self)
+    }
 
     
 }

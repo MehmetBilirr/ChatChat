@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 class LoginPresenter:ViewToPresenterLoginProtocol {
@@ -20,5 +21,9 @@ class LoginPresenter:ViewToPresenterLoginProtocol {
     
     func loginWithFB(token: String) {
         loginInteractor?.loginWithFB(token: token)
+    }
+    
+    func loginWithGoogle(viewController: UIViewController) {
+        loginInteractor?.loginWithGoogle(viewController: viewController)
     }
 }
