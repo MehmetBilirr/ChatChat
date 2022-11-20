@@ -7,9 +7,14 @@
 
 import UIKit
 import SnapKit
+import FBSDKLoginKit
+import FirebaseAuth
+
+
 
 final class LoginViewController: UIViewController {
     var loginPresenter:ViewToPresenterLoginProtocol?
+    private let fbLoginButton = FBLoginButton()
     private let imageView = UIImageView()
     private let emailTxtFld = UITextField()
     private let passwordTxtFld = UITextField()
@@ -20,6 +25,8 @@ final class LoginViewController: UIViewController {
         LoginRouter.createModule(ref: self, navigationController: navigationController!)
         style()
         layout()
+        
+      
         
     }
 }
@@ -41,6 +48,9 @@ extension LoginViewController {
         
         loginButton.configureButton(title: "Login", backgroundClr: .secondaryLabel)
         loginButton.addTarget(self, action: #selector(didTapLogin(_:)), for: .touchUpInside)
+        
+        fbLoginButton.permissions = ["email","public_profile"]
+        fbLoginButton.delegate = self
         
     }
     
@@ -76,7 +86,13 @@ extension LoginViewController {
             make.right.equalTo(view.right).offset(-50)
             make.height.equalTo(40)
             make.top.equalTo(passwordTxtFld.snp.bottom).offset(50)
-            make.bottom.equalTo(view.bottom).offset(-300)
+        }
+        view.addSubview(fbLoginButton)
+        fbLoginButton.snp.makeConstraints { make in
+            make.left.equalToSuperview().offset(50)
+            make.right.equalToSuperview().offset(-50)
+            make.top.equalTo(loginButton.snp.bottom).offset(50)
+            make.height.equalTo(40)
         }
         
       
@@ -93,4 +109,29 @@ extension LoginViewController {
         emailTxtFld.text = ""
     }
     
+
+    
 }
+
+extension LoginViewController:LoginButtonDelegate {
+    func loginButtonDidLogOut(_ loginButton: FBLoginButton) {
+        
+    }
+    
+    func loginButton(_ loginButton: FBLoginButton, didCompleteWith result: LoginManagerLoginResult?, error: Error?) {
+        guard let token = result?.token?.tokenString else {return}
+        
+        loginPresenter?.loginWithFB(token: token)
+        
+        
+    }
+    
+    
+}
+
+
+
+
+
+
+

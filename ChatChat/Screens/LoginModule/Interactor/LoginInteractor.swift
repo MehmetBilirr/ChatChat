@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import FBSDKLoginKit
+import ProgressHUD
 
 class LoginInteractor:PresenterToInteractorLoginProtocol {
      var navigationController: UINavigationController?
@@ -22,9 +24,28 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
             
         
     }
+    
+    func loginWithFB(token: String) {
+        AuthManager.shared.firebaseSignInWithFB(token: token)
+        let personImage = UIImageView(image: UIImage(named: "person"))
+        Profile.loadCurrentProfile { profile, error in
+            guard let firstName = profile?.firstName,let lastName = profile?.lastName else {return}
+            ProgressHUD.show()
+            DataBaseManager.shared.setupProfile(imageView: personImage, firstName: firstName, lastName: lastName) { [weak self] bool in
+                if bool {
+                    let vc = MainTabBarController()
+                    vc.modalPresentationStyle = .fullScreen
+                    self?.navigationController?.present(vc, animated: true)
+                    ProgressHUD.dismiss()
+                }
+            }
+        }
+        
+    }
     func register() {
         
         navigationController?.pushViewController(RegisterViewController(), animated: true)
+        
     }
     
     

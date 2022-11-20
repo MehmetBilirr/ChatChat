@@ -18,4 +18,7 @@ class LoginPresenter:ViewToPresenterLoginProtocol {
         loginInteractor?.register()
     }
     
+    func loginWithFB(token: String) {
+        loginInteractor?.loginWithFB(token: token)
+    }
 }

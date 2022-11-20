@@ -13,6 +13,7 @@ protocol ViewToPresenterLoginProtocol{
     var loginInteractor : PresenterToInteractorLoginProtocol? {get set}
     
     func login(email:String,password:String)
+    func loginWithFB(token:String)
     func register()
 
 }
@@ -20,6 +21,7 @@ protocol ViewToPresenterLoginProtocol{
 protocol PresenterToInteractorLoginProtocol{
     var navigationController:UINavigationController? {get set}
     func login(email:String,password:String)
+    func loginWithFB(token:String)
     func register()
 }
 

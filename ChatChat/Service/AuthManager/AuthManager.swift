@@ -13,8 +13,9 @@ class AuthManager {
     
     static let shared = AuthManager()
     init(){}
-    func firebaseSignIn(email:String,password:String,completion:@escaping(Bool)->Void){
     
+    func firebaseSignIn(email:String,password:String,completion:@escaping(Bool)->Void){
+        
         Auth.auth().signIn(withEmail: email, password: password) { data, error in
                 if error != nil {
                     ProgressHUD.showError(error?.localizedDescription)
@@ -52,4 +53,8 @@ class AuthManager {
            }
        }
     
+    func firebaseSignInWithFB(token:String){
+        let credential = FacebookAuthProvider.credential(withAccessToken: token)
+        FirebaseAuth.Auth.auth().signIn(with: credential)
+    }
 }
