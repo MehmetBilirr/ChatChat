@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import FBSDKLoginKit
+import FacebookLogin
 import FirebaseAuth
 import GoogleSignIn
 import Firebase
