@@ -10,11 +10,11 @@ import UIKit
 class NewConversationViewController: UIViewController {
     private let userTableView = UITableView()
     private let searchController = UISearchController()
-    var newConversationPresenter:ViewToPresenterNewConversationProtocol?
+    var presenter:ViewToPresenterNewConversationProtocol?
     override func viewDidLoad() {
         super.viewDidLoad()
-        NewConversationRouter.createModule(ref: self, navigationController: navigationController!)
-        newConversationPresenter?.viewDidLoad()
+        NewConversationRouter.createModule(ref: self, navigationController: navigationController)
+        presenter?.viewDidLoad()
        
     }
     
@@ -23,7 +23,7 @@ class NewConversationViewController: UIViewController {
         userTableView.frame = view.bounds
     }
     override func viewDidAppear(_ animated: Bool) {
-        newConversationPresenter?.fetchAllUser()
+        presenter?.fetchAllUser()
     }
     
 }
@@ -32,15 +32,18 @@ class NewConversationViewController: UIViewController {
 
 extension NewConversationViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return newConversationPresenter?.getChatUserCount() ?? 0
+        return presenter?.getChatUserCount() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as! UserTableViewCell
         
-        cell.configure(user: newConversationPresenter?.getChatUser(indexpath: indexPath) ?? .init(firstName: "", lastName: "", uid: "", imageUrl: ""))
+        cell.configure(user: presenter?.getChatUser(indexpath: indexPath) ?? .init(firstName: "", lastName: "", uid: "", imageUrl: ""))
         return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.didSelectRow(at: indexPath)
     }
     
     
@@ -52,10 +55,12 @@ extension NewConversationViewController:UISearchResultsUpdating,UISearchControll
         guard let text = searchController.searchBar.text else {return}
         
         let lowerText = text.lowercased()
-        newConversationPresenter?.fetchFilterUser(text: text)
+        presenter?.fetchFilterUser(text: lowerText)
     }
 }
 extension NewConversationViewController:PresenterToViewNewConversationProtocol {
+   
+    
     var isActive: Bool {
         searchController.isActive
     }

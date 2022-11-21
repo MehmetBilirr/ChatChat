@@ -12,7 +12,7 @@ import FirebaseAuth
 
  class ConversationsViewController: UIViewController {
     private let conversationsTableView = UITableView()
-    var conversationsPresenter:ViewToPresenterConversationsProcotol?
+    var presenter:ViewToPresenterConversationsProcotol?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -35,12 +35,16 @@ extension ConversationsViewController {
         view.backgroundColor = .systemBackground
         configureTableView()
         configureBarButton()
+        title = "Chats"
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotification(_:)), name: .myNotification, object: nil)
     }
     
     private func configureTableView(){
         view.addSubview(conversationsTableView)
         conversationsTableView.delegate = self
         conversationsTableView.dataSource = self
+
     }
     private func configureBarButton(){
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton(_:)))
@@ -48,7 +52,13 @@ extension ConversationsViewController {
     }
     
     @objc func didTapComposeButton(_ sender :UIBarButtonItem){
-        conversationsPresenter?.didTapComposeButton()
+        presenter?.didTapComposeButton()
+    }
+    
+    @objc func didGetNotification(_ notification:Notification){
+        if let user = notification.userInfo?["user"] as? ChatUser {
+            presenter?.didGetUser(user: user)
+            }
     }
 }
 
@@ -66,5 +76,6 @@ extension ConversationsViewController:UITableViewDelegate,UITableViewDataSource 
         return cell
     }
     
+   
     
 }

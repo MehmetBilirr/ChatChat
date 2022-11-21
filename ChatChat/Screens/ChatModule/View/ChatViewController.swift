@@ -13,12 +13,13 @@ class ChatViewController:MessagesViewController {
     
     private var messages = [Message]()
     private let selfSender = Sender(photoURL: "", senderId: "1", displayName: "Mehmet Bilir")
-
+    var chosenUser:ChatUser?
     override func viewDidLoad() {
         super.viewDidLoad()
         messages.append(.init(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello World")))
         messages.append(.init(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Hello Worlddddddddd")))
         setup()
+        print(chosenUser)
         
     }
     

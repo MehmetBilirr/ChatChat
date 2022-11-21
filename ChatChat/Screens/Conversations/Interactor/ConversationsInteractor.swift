@@ -14,6 +14,17 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
     
     func didTapComposeButton() {
         
-        navigationController?.pushViewController(NewConversationViewController(), animated: true)
+        let vc = UINavigationController(rootViewController: NewConversationViewController())
+        vc.modalPresentationStyle = .popover
+        navigationController?.present(vc, animated: true)
+    }
+    
+    func didGetUser(user: ChatUser) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            let vc = ChatViewController()
+            vc.chosenUser = user
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
 }

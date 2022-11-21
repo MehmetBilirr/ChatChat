@@ -68,6 +68,7 @@
 		F0FBA0B9292BF1E300FD6B5C /* NewConversationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA0B8292BF1E300FD6B5C /* NewConversationInteractor.swift */; };
 		F0FBA0BB292BF1EE00FD6B5C /* NewConversationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA0BA292BF1EE00FD6B5C /* NewConversationRouter.swift */; };
 		F0FBA0BD292BF1FA00FD6B5C /* NewConversationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA0BC292BF1FA00FD6B5C /* NewConversationProtocol.swift */; };
+		F0FBA0C1292C215300FD6B5C /* NSNotification + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA0C0292C215300FD6B5C /* NSNotification + extension.swift */; };
 		F9C0B45C00FD5ABD71F522CB /* Pods_ChatChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867D0833B595DC639DC80182 /* Pods_ChatChat.framework */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +126,7 @@
 		F0FBA0B8292BF1E300FD6B5C /* NewConversationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationInteractor.swift; sourceTree = "<group>"; };
 		F0FBA0BA292BF1EE00FD6B5C /* NewConversationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationRouter.swift; sourceTree = "<group>"; };
 		F0FBA0BC292BF1FA00FD6B5C /* NewConversationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewConversationProtocol.swift; sourceTree = "<group>"; };
+		F0FBA0C0292C215300FD6B5C /* NSNotification + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification + extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 				F0D3C04B29290E160084C977 /* UIAlertController + extension.swift */,
 				F0FBA0AE292BECB100FD6B5C /* UILabel + extension.swift */,
 				F0FBA0B1292BED2100FD6B5C /* UITableViewCell + extension.swift.swift */,
+				F0FBA0C0292C215300FD6B5C /* NSNotification + extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -782,6 +785,7 @@
 				F0A33E76292BD5000063FF90 /* ConversationsRouter.swift in Sources */,
 				F0D3C04C29290E160084C977 /* UIAlertController + extension.swift in Sources */,
 				F0D386F529282725001B8DA1 /* LoginProtocols.swift in Sources */,
+				F0FBA0C1292C215300FD6B5C /* NSNotification + extension.swift in Sources */,
 				F0D386EB29282169001B8DA1 /* UIButton + Extension.swift in Sources */,
 				F0FBA0B9292BF1E300FD6B5C /* NewConversationInteractor.swift in Sources */,
 				F0D386D029281E4C001B8DA1 /* RegisterViewController.swift in Sources */,

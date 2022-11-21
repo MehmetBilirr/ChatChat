@@ -9,23 +9,25 @@ import Foundation
 import UIKit
 
 protocol ViewToPresenterNewConversationProtocol {
-    var newConversationInteractor:PresenterToInteractorNewConversationProtocol?{get set}
-    var newConversationView:PresenterToViewNewConversationProtocol? {get set}
+    var interactor:PresenterToInteractorNewConversationProtocol?{get set}
+    var view:PresenterToViewNewConversationProtocol? {get set}
     func viewDidLoad()
     func fetchAllUser()
     func fetchFilterUser(text:String)
     func getChatUser(indexpath:IndexPath) -> ChatUser
     func getChatUserCount() -> Int
+    func didSelectRow(at indexpath:IndexPath)
     
     
 }
 
 
 protocol PresenterToInteractorNewConversationProtocol {
-    var newConversationPresenter:InteractorToPresenterNewConversationProtocol? {get set}
+    var presenter:InteractorToPresenterNewConversationProtocol? {get set}
     var navigationController:UINavigationController?{get set}
     func fetchAllUser()
     func fetchFilterUser(text:String)
+    func didSelectRow(user:ChatUser)
 }
 
 protocol InteractorToPresenterNewConversationProtocol {
@@ -34,6 +36,7 @@ protocol InteractorToPresenterNewConversationProtocol {
 }
 
 protocol PresenterToViewNewConversationProtocol {
+    var presenter:ViewToPresenterNewConversationProtocol? {get set}
     var isActive: Bool {get}
     func configureTableView()
     func reloadData()
@@ -43,6 +46,6 @@ protocol PresenterToViewNewConversationProtocol {
 
 protocol PresenterToRouterNewConversationProtocol {
     
-    static func createModule(ref:NewConversationViewController,navigationController:UINavigationController)
+    static func createModule(ref:NewConversationViewController,navigationController:UINavigationController?)
 }
 

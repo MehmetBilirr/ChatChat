@@ -33,17 +33,20 @@ class DataBaseManager {
     }
     
     func fetchUsers(completion:@escaping ([ChatUser])->Void){
+        guard let uid = Auth.auth().currentUser?.uid else {return}
         var users = [ChatUser]()
         Firestore.firestore().collection("users").getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else {return}
             documents.forEach { document in
-                print(document.data())
-                do {
-                    let user = try document.data(as: ChatUser.self)
-                    users.append(user)
-                }catch {
-                    print(error.localizedDescription)
+                if document.documentID != uid {
+                    do {
+                        let user = try document.data(as: ChatUser.self)
+                        users.append(user)
+                    }catch {
+                        print(error.localizedDescription)
+                    }
                 }
+                
                 
                 
             }

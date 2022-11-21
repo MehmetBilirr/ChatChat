@@ -8,13 +8,13 @@
 import Foundation
 
 class NewConversationPresenter:ViewToPresenterNewConversationProtocol {
-    var newConversationView: PresenterToViewNewConversationProtocol?
-    var newConversationInteractor: PresenterToInteractorNewConversationProtocol?
+    var view: PresenterToViewNewConversationProtocol?
+    var interactor: PresenterToInteractorNewConversationProtocol?
     var userArray = [ChatUser]()
     var filteredUsers = [ChatUser]()
     
     func getChatUser(indexpath: IndexPath) -> ChatUser {
-        if (newConversationView?.isActive)! {
+        if (view?.isActive)! {
             return filteredUsers[indexpath.row]
         }else {
             return userArray[indexpath.row]
@@ -23,7 +23,7 @@ class NewConversationPresenter:ViewToPresenterNewConversationProtocol {
    
     
     func getChatUserCount() -> Int {
-        if (newConversationView?.isActive)! {
+        if (view?.isActive)! {
             return filteredUsers.count
         }else {
             return userArray.count
@@ -31,25 +31,33 @@ class NewConversationPresenter:ViewToPresenterNewConversationProtocol {
     }
     
     func fetchAllUser() {
-        newConversationInteractor?.fetchAllUser()
+        interactor?.fetchAllUser()
     }
     func viewDidLoad() {
-        newConversationView?.configureTableView()
+        view?.configureTableView()
         
     }
     func fetchFilterUser(text: String) {
-        newConversationInteractor?.fetchFilterUser(text: text)
+        interactor?.fetchFilterUser(text: text)
     }
 }
 
 extension NewConversationPresenter:InteractorToPresenterNewConversationProtocol {
     func didFetchedAllUser(users: [ChatUser]) {
         userArray = users
-        newConversationView?.reloadData()
+        view?.reloadData()
     }
     func didFetchedFilteredUser(users: [ChatUser]) {
         filteredUsers = users
-        newConversationView?.reloadData()
+        view?.reloadData()
     }
     
+    func didSelectRow(at indexpath: IndexPath) {
+        
+        if (view?.isActive)! {
+            interactor?.didSelectRow(user: filteredUsers[indexpath.row])
+        }else {
+            interactor?.didSelectRow(user: userArray[indexpath.row])
+        }
+    }
 }

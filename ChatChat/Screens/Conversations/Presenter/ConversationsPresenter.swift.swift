@@ -8,9 +8,13 @@
 import Foundation
 
 class ConversationsPresenter:ViewToPresenterConversationsProcotol {
-    var conversationsInteractor: PresenterToInteractorConversationsProtocol?
+    var interactor: PresenterToInteractorConversationsProtocol?
     
     func didTapComposeButton() {
-        conversationsInteractor?.didTapComposeButton()
+        interactor?.didTapComposeButton()
+    }
+    
+    func didGetUser(user: ChatUser) {
+        interactor?.didGetUser(user: user)
     }
 }

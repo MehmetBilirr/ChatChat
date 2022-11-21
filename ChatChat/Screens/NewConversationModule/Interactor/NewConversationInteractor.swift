@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class NewConversationInteractor:PresenterToInteractorNewConversationProtocol {
-    var newConversationPresenter: InteractorToPresenterNewConversationProtocol?
+    var presenter: InteractorToPresenterNewConversationProtocol?
     var navigationController: UINavigationController?
     var usersArray = [ChatUser]()
     var filteredUsers = [ChatUser]()
@@ -17,7 +17,7 @@ class NewConversationInteractor:PresenterToInteractorNewConversationProtocol {
         
         DataBaseManager.shared.fetchUsers { [weak self] users in
             self?.usersArray = users
-            self?.newConversationPresenter?.didFetchedAllUser(users: users)
+            self?.presenter?.didFetchedAllUser(users: users)
         }
         
     }
@@ -34,8 +34,18 @@ class NewConversationInteractor:PresenterToInteractorNewConversationProtocol {
             }
             
         })
-        newConversationPresenter?.didFetchedFilteredUser(users: filteredUsers)
+        presenter?.didFetchedFilteredUser(users: filteredUsers)
         
     }
+    
+    func didSelectRow(user: ChatUser) {
+        let userDataDict:[String: ChatUser] = ["user": user]
+        NotificationCenter.default.post(name: .myNotification, object: nil, userInfo: userDataDict)
+        navigationController?.dismiss(animated: true)
+        
+        
+    }
+    
+    
 }
 
