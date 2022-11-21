@@ -9,10 +9,14 @@
 /* Begin PBXBuildFile section */
 		F015156429295F9000243674 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F015156329295F9000243674 /* SceneDelegate.swift */; };
 		F018822F292AB16F0062F9C3 /* ConversationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F018822E292AB16F0062F9C3 /* ConversationsInteractor.swift */; };
+		F0A33E74292BD4ED0063FF90 /* ConversationsPresenter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A33E73292BD4ED0063FF90 /* ConversationsPresenter.swift.swift */; };
+		F0A33E76292BD5000063FF90 /* ConversationsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A33E75292BD5000063FF90 /* ConversationsRouter.swift */; };
+		F0A33E78292BD5110063FF90 /* ConversationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A33E77292BD5110063FF90 /* ConversationsProtocols.swift */; };
 		F0C6485F292B9E580096B8C4 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = F0C6485E292B9E580096B8C4 /* FacebookCore */; };
 		F0C64861292B9E580096B8C4 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64860292B9E580096B8C4 /* FacebookLogin */; };
 		F0C64864292B9F4F0096B8C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64863292B9F4F0096B8C4 /* GoogleSignIn */; };
 		F0C64866292B9F4F0096B8C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64865292B9F4F0096B8C4 /* GoogleSignInSwift */; };
+		F0C64869292BA0350096B8C4 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64868292BA0350096B8C4 /* MessageKit */; };
 		F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386B029281C17001B8DA1 /* AppDelegate.swift */; };
 		F0D386B529281C17001B8DA1 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */; };
 		F0D386BA29281C18001B8DA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0D386B929281C18001B8DA1 /* Assets.xcassets */; };
@@ -61,6 +65,9 @@
 		F01515622929558500243674 /* ChatChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatChat.entitlements; sourceTree = "<group>"; };
 		F015156329295F9000243674 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F018822E292AB16F0062F9C3 /* ConversationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsInteractor.swift; sourceTree = "<group>"; };
+		F0A33E73292BD4ED0063FF90 /* ConversationsPresenter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsPresenter.swift.swift; sourceTree = "<group>"; };
+		F0A33E75292BD5000063FF90 /* ConversationsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsRouter.swift; sourceTree = "<group>"; };
+		F0A33E77292BD5110063FF90 /* ConversationsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsProtocols.swift; sourceTree = "<group>"; };
 		F0D386AD29281C17001B8DA1 /* ChatChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D386B029281C17001B8DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +113,7 @@
 				F0D3870329282D9B001B8DA1 /* SnapKit in Frameworks */,
 				F0D3C053292911080084C977 /* FirebaseFirestore in Frameworks */,
 				F0D3C05B292911080084C977 /* FirebaseStorageCombine-Community in Frameworks */,
+				F0C64869292BA0350096B8C4 /* MessageKit in Frameworks */,
 				F0D3C0642929151C0084C977 /* ProgressHUD in Frameworks */,
 				F0C6485F292B9E580096B8C4 /* FacebookCore in Frameworks */,
 				F0C64866292B9F4F0096B8C4 /* GoogleSignInSwift in Frameworks */,
@@ -126,33 +134,12 @@
 			isa = PBXGroup;
 			children = (
 				F018822D292AB13D0062F9C3 /* View */,
+				F0A33E72292BD4B00063FF90 /* Presenter */,
 				F018822C292AB1370062F9C3 /* Interactor */,
-				F018822B292AB1310062F9C3 /* Presenter */,
-				F018822A292AB12A0062F9C3 /* Router */,
-				F0188229292AB1220062F9C3 /* Protocol */,
+				F0A33E70292BD4A20063FF90 /* Router */,
+				F0A33E71292BD4A80063FF90 /* Protocols */,
 			);
 			path = Conversations;
-			sourceTree = "<group>";
-		};
-		F0188229292AB1220062F9C3 /* Protocol */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
-		F018822A292AB12A0062F9C3 /* Router */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Router;
-			sourceTree = "<group>";
-		};
-		F018822B292AB1310062F9C3 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		F018822C292AB1370062F9C3 /* Interactor */ = {
@@ -169,6 +156,30 @@
 				F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F0A33E70292BD4A20063FF90 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				F0A33E75292BD5000063FF90 /* ConversationsRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		F0A33E71292BD4A80063FF90 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				F0A33E77292BD5110063FF90 /* ConversationsProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F0A33E72292BD4B00063FF90 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F0A33E73292BD4ED0063FF90 /* ConversationsPresenter.swift.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 		F0D386A429281C17001B8DA1 = {
@@ -468,6 +479,7 @@
 				F0C64860292B9E580096B8C4 /* FacebookLogin */,
 				F0C64863292B9F4F0096B8C4 /* GoogleSignIn */,
 				F0C64865292B9F4F0096B8C4 /* GoogleSignInSwift */,
+				F0C64868292BA0350096B8C4 /* MessageKit */,
 			);
 			productName = ChatChat;
 			productReference = F0D386AD29281C17001B8DA1 /* ChatChat.app */;
@@ -503,6 +515,7 @@
 				F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
 				F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 				F0C64862292B9F4F0096B8C4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				F0C64867292BA0350096B8C4 /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			productRefGroup = F0D386AE29281C17001B8DA1 /* Products */;
 			projectDirPath = "";
@@ -553,16 +566,19 @@
 				F0D3870D292835C5001B8DA1 /* RegisterProtocols.swift in Sources */,
 				F0D387132928371F001B8DA1 /* RegisterInteractor.swift in Sources */,
 				F0D386D229281E57001B8DA1 /* PhotoViewerViewController.swift in Sources */,
+				F0A33E74292BD4ED0063FF90 /* ConversationsPresenter.swift.swift in Sources */,
 				F0D386FB292829D5001B8DA1 /* LoginRouter.swift in Sources */,
 				F0D3C06929291C010084C977 /* DataBaseManager.swift in Sources */,
 				F0D386D429281E5F001B8DA1 /* VideoPlayerViewController.swift in Sources */,
 				F0D386F7292828A4001B8DA1 /* LoginPresenter.swift in Sources */,
 				F0D3C076292940000084C977 /* ProfileRouter.swift in Sources */,
 				F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */,
+				F0A33E76292BD5000063FF90 /* ConversationsRouter.swift in Sources */,
 				F0D3C04C29290E160084C977 /* UIAlertController + extension.swift in Sources */,
 				F0D386F529282725001B8DA1 /* LoginProtocols.swift in Sources */,
 				F0D386EB29282169001B8DA1 /* UIButton + Extension.swift in Sources */,
 				F0D386D029281E4C001B8DA1 /* RegisterViewController.swift in Sources */,
+				F0A33E78292BD5110063FF90 /* ConversationsProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -796,6 +812,14 @@
 				minimumVersion = 6.0.0;
 			};
 		};
+		F0C64867292BA0350096B8C4 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MessageKit/MessageKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -842,6 +866,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F0C64862292B9F4F0096B8C4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		F0C64868292BA0350096B8C4 /* MessageKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F0C64867292BA0350096B8C4 /* XCRemoteSwiftPackageReference "MessageKit" */;
+			productName = MessageKit;
 		};
 		F0D3870229282D9B001B8DA1 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

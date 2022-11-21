@@ -6,8 +6,13 @@
 //
 
 import Foundation
+import UIKit
 
-
-class ConversationsInteractor {
+class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
+    var navigationController: UINavigationController?
     
+    
+    func didTapComposeButton() {
+        print("tapped")
+    }
 }
