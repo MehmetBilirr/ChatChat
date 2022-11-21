@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct ChatAppUser:Codable {
-    
+struct ChatUser:Codable {
     let firstName:String
     let lastName:String
     let uid:String

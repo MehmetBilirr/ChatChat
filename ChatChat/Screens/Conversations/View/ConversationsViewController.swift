@@ -17,6 +17,7 @@ import FirebaseAuth
         super.viewDidLoad()
         
         setup()
+        
     }
     
     override func viewDidLayoutSubviews() {

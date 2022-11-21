@@ -10,6 +10,7 @@ import UIKit
 import FirebaseStorage
 import FirebaseFirestore
 import FirebaseAuth
+import FirebaseFirestoreSwift
 
 class DataBaseManager {
     static let shared = DataBaseManager()
@@ -31,13 +32,46 @@ class DataBaseManager {
         
     }
     
+    func fetchUsers(completion:@escaping ([ChatUser])->Void){
+        var users = [ChatUser]()
+        Firestore.firestore().collection("users").getDocuments { snapshot, error in
+            guard let documents = snapshot?.documents else {return}
+            documents.forEach { document in
+                print(document.data())
+                do {
+                    let user = try document.data(as: ChatUser.self)
+                    users.append(user)
+                }catch {
+                    print(error.localizedDescription)
+                }
+                
+                
+            }
+            completion(users)
+            
+        }
+        
+        
+    }
+    
+    func checkIfUserLogin(completion:@escaping(Bool) -> Void) {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        
+        Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
+            guard let snapshot = snapshot else {return}
+            completion(snapshot.exists)
+        }
+        
+    }
+    
+    
     private func createDataFirestore(imageUrl:String,firstName:String,lastName:String){
         
         guard let user = Auth.auth().currentUser else {return}
         
         
         let data = [
-                    "fistName":firstName,
+                    "firstName":firstName,
                     "lastName":lastName,
                     "imageUrl":imageUrl,
                     "uid":user.uid,
@@ -80,4 +114,7 @@ class DataBaseManager {
             }
             
         }
+    
+    
+    
 }

@@ -14,6 +14,6 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
     
     func didTapComposeButton() {
         
-        navigationController?.pushViewController(ChatViewController(), animated: true)
+        navigationController?.pushViewController(NewConversationViewController(), animated: true)
     }
 }

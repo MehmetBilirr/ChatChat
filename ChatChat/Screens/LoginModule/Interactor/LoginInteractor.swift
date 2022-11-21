@@ -50,13 +50,18 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 if bool {
-                    let user = Auth.auth().currentUser
-                    guard let user = user else {return}
-                    guard let imageUrl = user.photoURL?.absoluteString, let name = user.displayName else {return}
-                    let array = name.components(separatedBy: " ")
+                    DataBaseManager.shared.checkIfUserLogin { bool in
+                        if !bool {
+                            let user = Auth.auth().currentUser
+                            guard let user = user else {return}
+                            guard let imageUrl = user.photoURL?.absoluteString, let name = user.displayName else {return}
+                            let array = name.components(separatedBy: " ")
 
+                            
+                            DataBaseManager.shared.createDataFirestore(with: imageUrl, firstName: array[0], lastName: array[1])
+                        }
+                    }
                     
-                    DataBaseManager.shared.createDataFirestore(with: imageUrl, firstName: array[0], lastName: array[1])
                     self.presentMainVC()
                     
                     
