@@ -16,7 +16,6 @@
 		F0C64861292B9E580096B8C4 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64860292B9E580096B8C4 /* FacebookLogin */; };
 		F0C64864292B9F4F0096B8C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64863292B9F4F0096B8C4 /* GoogleSignIn */; };
 		F0C64866292B9F4F0096B8C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64865292B9F4F0096B8C4 /* GoogleSignInSwift */; };
-		F0C64869292BA0350096B8C4 /* MessageKit in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64868292BA0350096B8C4 /* MessageKit */; };
 		F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386B029281C17001B8DA1 /* AppDelegate.swift */; };
 		F0D386B529281C17001B8DA1 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */; };
 		F0D386BA29281C18001B8DA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0D386B929281C18001B8DA1 /* Assets.xcassets */; };
@@ -59,9 +58,15 @@
 		F0D3C0782929404E0084C977 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C0772929404E0084C977 /* ProfilePresenter.swift */; };
 		F0D3C07A292942080084C977 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C079292942080084C977 /* ProfileInteractor.swift */; };
 		F0D6A790292AA55800BE1CCF /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D6A78F292AA55800BE1CCF /* ChatUser.swift */; };
+		F0FBA09D292BDE2A00FD6B5C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA09C292BDE2A00FD6B5C /* ChatViewController.swift */; };
+		F0FBA09F292BDE8100FD6B5C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA09E292BDE8100FD6B5C /* Message.swift */; };
+		F9C0B45C00FD5ABD71F522CB /* Pods_ChatChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 867D0833B595DC639DC80182 /* Pods_ChatChat.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		321AFD873D044664904E44F3 /* Pods-ChatChat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatChat.release.xcconfig"; path = "Target Support Files/Pods-ChatChat/Pods-ChatChat.release.xcconfig"; sourceTree = "<group>"; };
+		867D0833B595DC639DC80182 /* Pods_ChatChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB1B3866295D481F3D26B929 /* Pods-ChatChat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatChat.debug.xcconfig"; path = "Target Support Files/Pods-ChatChat/Pods-ChatChat.debug.xcconfig"; sourceTree = "<group>"; };
 		F01515622929558500243674 /* ChatChat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChatChat.entitlements; sourceTree = "<group>"; };
 		F015156329295F9000243674 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		F018822E292AB16F0062F9C3 /* ConversationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsInteractor.swift; sourceTree = "<group>"; };
@@ -103,6 +108,8 @@
 		F0D3C0772929404E0084C977 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		F0D3C079292942080084C977 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		F0D6A78F292AA55800BE1CCF /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
+		F0FBA09C292BDE2A00FD6B5C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		F0FBA09E292BDE8100FD6B5C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,7 +120,6 @@
 				F0D3870329282D9B001B8DA1 /* SnapKit in Frameworks */,
 				F0D3C053292911080084C977 /* FirebaseFirestore in Frameworks */,
 				F0D3C05B292911080084C977 /* FirebaseStorageCombine-Community in Frameworks */,
-				F0C64869292BA0350096B8C4 /* MessageKit in Frameworks */,
 				F0D3C0642929151C0084C977 /* ProgressHUD in Frameworks */,
 				F0C6485F292B9E580096B8C4 /* FacebookCore in Frameworks */,
 				F0C64866292B9F4F0096B8C4 /* GoogleSignInSwift in Frameworks */,
@@ -124,12 +130,31 @@
 				F0C64861292B9E580096B8C4 /* FacebookLogin in Frameworks */,
 				F0D3C04F292911080084C977 /* FirebaseAuth in Frameworks */,
 				F0D3C057292911080084C977 /* FirebaseFirestoreSwift in Frameworks */,
+				F9C0B45C00FD5ABD71F522CB /* Pods_ChatChat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35D512BDCF513C51117AA331 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				867D0833B595DC639DC80182 /* Pods_ChatChat.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8F2D298105249AD908E9FA01 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DB1B3866295D481F3D26B929 /* Pods-ChatChat.debug.xcconfig */,
+				321AFD873D044664904E44F3 /* Pods-ChatChat.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		F0188228292AB1100062F9C3 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +212,8 @@
 			children = (
 				F0D386AF29281C17001B8DA1 /* ChatChat */,
 				F0D386AE29281C17001B8DA1 /* Products */,
+				8F2D298105249AD908E9FA01 /* Pods */,
+				35D512BDCF513C51117AA331 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -229,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				F0D6A78F292AA55800BE1CCF /* ChatUser.swift */,
+				F0FBA09E292BDE8100FD6B5C /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -240,6 +268,7 @@
 				F0D3870629283525001B8DA1 /* RegisterModule */,
 				F0D3C06A292924050084C977 /* ProfileModule */,
 				F0188228292AB1100062F9C3 /* Conversations */,
+				F0FBA096292BDDAA00FD6B5C /* ChatModule */,
 				F0D386D129281E57001B8DA1 /* PhotoViewerViewController.swift */,
 				F0D386D329281E5F001B8DA1 /* VideoPlayerViewController.swift */,
 				F0D386D529281E6A001B8DA1 /* NewConversationViewController.swift */,
@@ -449,6 +478,54 @@
 			path = MainTabBarModule;
 			sourceTree = "<group>";
 		};
+		F0FBA096292BDDAA00FD6B5C /* ChatModule */ = {
+			isa = PBXGroup;
+			children = (
+				F0FBA09B292BDE1A00FD6B5C /* View */,
+				F0FBA09A292BDE1600FD6B5C /* Presenter */,
+				F0FBA099292BDE0F00FD6B5C /* Interactor */,
+				F0FBA098292BDE0B00FD6B5C /* Router */,
+				F0FBA097292BDE0400FD6B5C /* Protocols */,
+			);
+			path = ChatModule;
+			sourceTree = "<group>";
+		};
+		F0FBA097292BDE0400FD6B5C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		F0FBA098292BDE0B00FD6B5C /* Router */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		F0FBA099292BDE0F00FD6B5C /* Interactor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Interactor;
+			sourceTree = "<group>";
+		};
+		F0FBA09A292BDE1600FD6B5C /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		F0FBA09B292BDE1A00FD6B5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F0FBA09C292BDE2A00FD6B5C /* ChatViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -456,9 +533,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F0D386C129281C18001B8DA1 /* Build configuration list for PBXNativeTarget "ChatChat" */;
 			buildPhases = (
+				6921C4DDF4CCFC18E1161C87 /* [CP] Check Pods Manifest.lock */,
 				F0D386A929281C17001B8DA1 /* Sources */,
 				F0D386AA29281C17001B8DA1 /* Frameworks */,
 				F0D386AB29281C17001B8DA1 /* Resources */,
+				0B8C0CA835E216405F41D5A0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -479,7 +558,6 @@
 				F0C64860292B9E580096B8C4 /* FacebookLogin */,
 				F0C64863292B9F4F0096B8C4 /* GoogleSignIn */,
 				F0C64865292B9F4F0096B8C4 /* GoogleSignInSwift */,
-				F0C64868292BA0350096B8C4 /* MessageKit */,
 			);
 			productName = ChatChat;
 			productReference = F0D386AD29281C17001B8DA1 /* ChatChat.app */;
@@ -510,12 +588,11 @@
 			);
 			mainGroup = F0D386A429281C17001B8DA1;
 			packageReferences = (
-				F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit.git" */,
 				F0D3C04D292911080084C977 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD" */,
-				F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
+				F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD.git" */,
+				F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk.git" */,
 				F0C64862292B9F4F0096B8C4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
-				F0C64867292BA0350096B8C4 /* XCRemoteSwiftPackageReference "MessageKit" */,
 			);
 			productRefGroup = F0D386AE29281C17001B8DA1 /* Products */;
 			projectDirPath = "";
@@ -538,6 +615,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0B8C0CA835E216405F41D5A0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatChat/Pods-ChatChat-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ChatChat/Pods-ChatChat-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatChat/Pods-ChatChat-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6921C4DDF4CCFC18E1161C87 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ChatChat-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F0D386A929281C17001B8DA1 /* Sources */ = {
@@ -572,12 +691,14 @@
 				F0D386D429281E5F001B8DA1 /* VideoPlayerViewController.swift in Sources */,
 				F0D386F7292828A4001B8DA1 /* LoginPresenter.swift in Sources */,
 				F0D3C076292940000084C977 /* ProfileRouter.swift in Sources */,
+				F0FBA09F292BDE8100FD6B5C /* Message.swift in Sources */,
 				F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */,
 				F0A33E76292BD5000063FF90 /* ConversationsRouter.swift in Sources */,
 				F0D3C04C29290E160084C977 /* UIAlertController + extension.swift in Sources */,
 				F0D386F529282725001B8DA1 /* LoginProtocols.swift in Sources */,
 				F0D386EB29282169001B8DA1 /* UIButton + Extension.swift in Sources */,
 				F0D386D029281E4C001B8DA1 /* RegisterViewController.swift in Sources */,
+				F0FBA09D292BDE2A00FD6B5C /* ChatViewController.swift in Sources */,
 				F0A33E78292BD5110063FF90 /* ConversationsProtocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,6 +833,7 @@
 		};
 		F0D386C229281C18001B8DA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DB1B3866295D481F3D26B929 /* Pods-ChatChat.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -743,6 +865,7 @@
 		};
 		F0D386C329281C18001B8DA1 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 321AFD873D044664904E44F3 /* Pods-ChatChat.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -796,7 +919,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+		F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/facebook/facebook-ios-sdk.git";
 			requirement = {
@@ -812,15 +935,7 @@
 				minimumVersion = 6.0.0;
 			};
 		};
-		F0C64867292BA0350096B8C4 /* XCRemoteSwiftPackageReference "MessageKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/MessageKit/MessageKit.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-		F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+		F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -836,7 +951,7 @@
 				kind = branch;
 			};
 		};
-		F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {
+		F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/relatedcode/ProgressHUD.git";
 			requirement = {
@@ -849,12 +964,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		F0C6485E292B9E580096B8C4 /* FacebookCore */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk.git" */;
 			productName = FacebookCore;
 		};
 		F0C64860292B9E580096B8C4 /* FacebookLogin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			package = F0C6485D292B9E580096B8C4 /* XCRemoteSwiftPackageReference "facebook-ios-sdk.git" */;
 			productName = FacebookLogin;
 		};
 		F0C64863292B9F4F0096B8C4 /* GoogleSignIn */ = {
@@ -867,14 +982,9 @@
 			package = F0C64862292B9F4F0096B8C4 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
 		};
-		F0C64868292BA0350096B8C4 /* MessageKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F0C64867292BA0350096B8C4 /* XCRemoteSwiftPackageReference "MessageKit" */;
-			productName = MessageKit;
-		};
 		F0D3870229282D9B001B8DA1 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			package = F0D3870129282D9B001B8DA1 /* XCRemoteSwiftPackageReference "SnapKit.git" */;
 			productName = SnapKit;
 		};
 		F0D3C04E292911080084C977 /* FirebaseAuth */ = {
@@ -914,7 +1024,7 @@
 		};
 		F0D3C0632929151C0084C977 /* ProgressHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD" */;
+			package = F0D3C0622929151C0084C977 /* XCRemoteSwiftPackageReference "ProgressHUD.git" */;
 			productName = ProgressHUD;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -13,6 +13,7 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
     
     
     func didTapComposeButton() {
-        print("tapped")
+        
+        navigationController?.pushViewController(ChatViewController(), animated: true)
     }
 }
