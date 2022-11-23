@@ -10,10 +10,10 @@ import Foundation
 class NewConversationPresenter:ViewToPresenterNewConversationProtocol {
     var view: PresenterToViewNewConversationProtocol?
     var interactor: PresenterToInteractorNewConversationProtocol?
-    var userArray = [ChatUser]()
-    var filteredUsers = [ChatUser]()
+    var userArray = [User]()
+    var filteredUsers = [User]()
     
-    func getChatUser(indexpath: IndexPath) -> ChatUser {
+    func getChatUser(indexpath: IndexPath) -> User {
         if (view?.isActive)! {
             return filteredUsers[indexpath.row]
         }else {
@@ -43,11 +43,11 @@ class NewConversationPresenter:ViewToPresenterNewConversationProtocol {
 }
 
 extension NewConversationPresenter:InteractorToPresenterNewConversationProtocol {
-    func didFetchedAllUser(users: [ChatUser]) {
+    func didFetchedAllUser(users: [User]) {
         userArray = users
         view?.reloadData()
     }
-    func didFetchedFilteredUser(users: [ChatUser]) {
+    func didFetchedFilteredUser(users: [User]) {
         filteredUsers = users
         view?.reloadData()
     }

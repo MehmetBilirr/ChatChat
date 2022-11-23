@@ -12,13 +12,13 @@ import UIKit
 protocol ViewToPresenterConversationsProcotol {
     var interactor:PresenterToInteractorConversationsProtocol?{get set}
     func didTapComposeButton()
-    func didGetUser(user:ChatUser)
+    func didGetUser(user:User)
 }
 
 protocol PresenterToInteractorConversationsProtocol {
     var navigationController:UINavigationController?{get set}
     func didTapComposeButton()
-    func didGetUser(user:ChatUser)
+    func didGetUser(user:User)
 }
 
 

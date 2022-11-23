@@ -7,9 +7,10 @@
 
 import Foundation
 
-struct ChatUser:Codable {
+struct User:Codable {
     let firstName:String
     let lastName:String
     let uid:String
     let imageUrl:String
+    let email:String
 }

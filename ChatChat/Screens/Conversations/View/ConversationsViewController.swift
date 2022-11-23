@@ -18,6 +18,7 @@ import FirebaseAuth
         
         setup()
         
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -25,6 +26,9 @@ import FirebaseAuth
         conversationsTableView.frame = view.bounds
     }
 
+     override func viewDidAppear(_ animated: Bool) {
+         DataBaseManager.shared.getConversations()
+     }
 }
 
 
@@ -56,7 +60,7 @@ extension ConversationsViewController {
     }
     
     @objc func didGetNotification(_ notification:Notification){
-        if let user = notification.userInfo?["user"] as? ChatUser {
+        if let user = notification.userInfo?["user"] as? User {
             presenter?.didGetUser(user: user)
             }
     }

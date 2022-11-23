@@ -16,7 +16,7 @@ class RegisterInteractor:PresenterToInteractorRegisterProtocol {
         ProgressHUD.show()
         AuthManager.shared.firebaseSignUp(email: email, password: password) { [weak self] bool in
             if bool {
-                DataBaseManager.shared.setupProfile(imageView: profileImageView, firstName: firstName, lastName: lastName) { [weak self] bool in
+                DataBaseManager.shared.setupProfile(imageView: profileImageView, firstName: firstName, lastName: lastName, email: email) { [weak self] bool in
                     if bool {
                         let vc = MainTabBarController()
                         vc.modalPresentationStyle = .fullScreen

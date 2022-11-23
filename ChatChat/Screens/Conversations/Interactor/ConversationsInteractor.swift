@@ -19,7 +19,7 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
         navigationController?.present(vc, animated: true)
     }
     
-    func didGetUser(user: ChatUser) {
+    func didGetUser(user: User) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
             let vc = ChatViewController()
             vc.chosenUser = user

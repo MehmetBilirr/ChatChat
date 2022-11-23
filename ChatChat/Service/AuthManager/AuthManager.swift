@@ -57,7 +57,7 @@ class AuthManager {
     
     func firebaseSignInWithFB(token:String){
         let credential = FacebookAuthProvider.credential(withAccessToken: token)
-        FirebaseAuth.Auth.auth().signIn(with: credential)
+        Auth.auth().signIn(with: credential)
     }
     
     func firebaseSignInWithGoogle(viewController:UIViewController,completion:@escaping(Bool)->Void){

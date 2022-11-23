@@ -12,35 +12,40 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseFirestoreSwift
 
+
+// MARK: - Get and Fetch UserData
 class DataBaseManager {
     static let shared = DataBaseManager()
+    let firestore = Firestore.firestore()
+    let auth  = Auth.auth()
     init(){}
     
-    func createDataFirestore(with imageUrl:String,firstName:String,lastName:String){
+    
+    func createDataFirestore(with imageUrl:String,firstName:String,lastName:String,email:String){
         
-        createDataFirestore(imageUrl: imageUrl, firstName: firstName, lastName: lastName)
+        createDataFirestore(imageUrl: imageUrl, firstName: firstName, lastName: lastName, email: email)
         
     }
     
-    func setupProfile(imageView:UIImageView,firstName:String,lastName:String,completion:@escaping(Bool)-> Void){
+    func setupProfile(imageView:UIImageView,firstName:String,lastName:String,email:String,completion:@escaping(Bool)-> Void){
         
         
         getImageUrl(imageView: imageView) { imageUrl in
-            self.createDataFirestore(imageUrl: imageUrl, firstName: firstName, lastName: lastName)
+            self.createDataFirestore(imageUrl: imageUrl, firstName: firstName, lastName: lastName, email: email)
             completion(true)
         }
         
     }
     
-    func fetchUsers(completion:@escaping ([ChatUser])->Void){
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        var users = [ChatUser]()
-        Firestore.firestore().collection("users").getDocuments { snapshot, error in
+    func fetchUsers(completion:@escaping ([User])->Void){
+        guard let uid = auth.currentUser?.uid else {return}
+        var users = [User]()
+        firestore.collection("users").getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else {return}
             documents.forEach { document in
                 if document.documentID != uid {
                     do {
-                        let user = try document.data(as: ChatUser.self)
+                        let user = try document.data(as: User.self)
                         users.append(user)
                     }catch {
                         print(error.localizedDescription)
@@ -58,9 +63,9 @@ class DataBaseManager {
     }
     
     func checkIfUserLogin(completion:@escaping(Bool) -> Void) {
-        guard let uid = Auth.auth().currentUser?.uid else {return}
+        guard let uid = auth.currentUser?.uid else {return}
         
-        Firestore.firestore().collection("users").document(uid).getDocument { snapshot, error in
+        firestore.collection("users").document(uid).getDocument { snapshot, error in
             guard let snapshot = snapshot else {return}
             completion(snapshot.exists)
         }
@@ -68,19 +73,20 @@ class DataBaseManager {
     }
     
     
-    private func createDataFirestore(imageUrl:String,firstName:String,lastName:String){
+    private func createDataFirestore(imageUrl:String,firstName:String,lastName:String,email:String){
         
-        guard let user = Auth.auth().currentUser else {return}
+        guard let uid = auth.currentUser?.uid else {return}
         
         
         let data = [
-                    "firstName":firstName,
-                    "lastName":lastName,
-                    "imageUrl":imageUrl,
-                    "uid":user.uid,
-                    ] as [String : Any]
+            "firstName":firstName,
+            "lastName":lastName,
+            "imageUrl":imageUrl,
+            "email":email,
+            "uid":uid,
+        ] as [String : Any]
         
-        Firestore.firestore().collection("users").document(user.uid).setData(data) { error in
+        firestore.collection("users").document(uid).setData(data) { error in
             
             guard let error = error else {
                 print(error?.localizedDescription)
@@ -91,9 +97,9 @@ class DataBaseManager {
         
     }
     
-
     
-     private func getImageUrl(imageView:UIImageView,completion:@escaping(String)->Void){
+    
+    private func getImageUrl(imageView:UIImageView,completion:@escaping(String)->Void){
         
         guard let data = imageView.image?.jpegData(compressionQuality: 0.5) else {return }
         let uuid = UUID().uuidString
@@ -108,16 +114,119 @@ class DataBaseManager {
                 ref.downloadURL { imageUrl, error in
                     
                     guard let imageUrl = imageUrl?.absoluteString else{return}
-                        completion(imageUrl)
-                       
-                        
-                    }
+                    completion(imageUrl)
+                    
                     
                 }
+                
+            }
+        }
+        
+    }
+    
+    func fetchUser(uuid:String,completion:@escaping (User)->Void){
+        
+        Firestore.firestore().collection("users").document(uuid).getDocument { snapshot, error in
+            guard let snaphot = snapshot else {return}
+            
+            guard let user = try? snapshot?.data(as: User.self) else {return}
+            completion(user)
+        }
+    }
+    
+    
+    
+}
+
+// MARK: - Sending Messages & Conversation
+extension DataBaseManager {
+    
+    func createNewConversation(toUserId:String,name:String,firstMessage:Message,completion:@escaping (Bool)-> Void) {
+        print(name)
+        var message = ""
+        var currentUserName = ""
+        guard let uid = auth.currentUser?.uid , let email = auth.currentUser?.email else {return}
+        let messageDate = firstMessage.sentDate.dateAndTimetoString()
+        fetchUser(uuid: uid) { user in
+            
+            currentUserName = user.firstName + user.lastName
+        }
+        switch firstMessage.kind {
+            
+        case .text(let messageText):
+            message = messageText
+        case .attributedText(_):
+            break
+        case .photo(_):
+            break
+        case .video(_):
+            break
+        case .location(_):
+            break
+        case .emoji(_):
+            break
+        case .audio(_):
+            break
+        case .contact(_):
+            break
+        case .linkPreview(_):
+            break
+        case .custom(_):
+            break
+        }
+        
+        print(name)
+        let senderData : [String:Any] = [
+            "user_id":toUserId,
+            "user_name":name,
+            "latest_message": [
+                "date":messageDate,
+                "message":message,
+                "is_read":false
+            ]
+        ]
+        
+        let recivierData:[String:Any] = [
+                                         "user_id":uid,
+                                         "user_name":currentUserName,
+                                         "latest_message":["date":messageDate,
+                                                           "message":message,
+                                                           "isRead":false]]
+        
+        firestore.collection("conversations").document(uid).collection(uid).document(toUserId).setData(senderData) { error in
+            
+            guard let error = error else {
+                print(error?.localizedDescription)
+                return
             }
             
         }
+        
+        
+        firestore.collection("conversations").document(toUserId).collection(toUserId).document(uid).setData(recivierData) { error in
+            guard let error = error else {
+                print(error?.localizedDescription)
+                return
+            }
+        }
+    }
     
     
+    func getConversations(){
+        var conversationArray = [Conversation]()
+        guard let uid = auth.currentUser?.uid else {return}
+        firestore.collection("conversations").document(uid).collection(uid).getDocuments { snapshot, error in
+            guard let documents = snapshot?.documents else {return}
+            documents.forEach { document in
+                do {
+                    let conversation = try document.data(as: Conversation.self)
+                    conversationArray.append(conversation)
+                }catch {
+                    print(error.localizedDescription)
+                }
+            }
+            print(conversationArray)
+        }
+    }
     
 }

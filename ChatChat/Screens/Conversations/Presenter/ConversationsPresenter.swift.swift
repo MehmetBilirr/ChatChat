@@ -14,7 +14,7 @@ class ConversationsPresenter:ViewToPresenterConversationsProcotol {
         interactor?.didTapComposeButton()
     }
     
-    func didGetUser(user: ChatUser) {
+    func didGetUser(user: User) {
         interactor?.didGetUser(user: user)
     }
 }

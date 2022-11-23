@@ -11,8 +11,8 @@ import UIKit
 class NewConversationInteractor:PresenterToInteractorNewConversationProtocol {
     var presenter: InteractorToPresenterNewConversationProtocol?
     var navigationController: UINavigationController?
-    var usersArray = [ChatUser]()
-    var filteredUsers = [ChatUser]()
+    var usersArray = [User]()
+    var filteredUsers = [User]()
     func fetchAllUser() {
         
         DataBaseManager.shared.fetchUsers { [weak self] users in
@@ -38,8 +38,8 @@ class NewConversationInteractor:PresenterToInteractorNewConversationProtocol {
         
     }
     
-    func didSelectRow(user: ChatUser) {
-        let userDataDict:[String: ChatUser] = ["user": user]
+    func didSelectRow(user: User) {
+        let userDataDict:[String: User] = ["user": user]
         NotificationCenter.default.post(name: .myNotification, object: nil, userInfo: userDataDict)
         navigationController?.dismiss(animated: true)
         

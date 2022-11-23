@@ -14,7 +14,7 @@ protocol ViewToPresenterNewConversationProtocol {
     func viewDidLoad()
     func fetchAllUser()
     func fetchFilterUser(text:String)
-    func getChatUser(indexpath:IndexPath) -> ChatUser
+    func getChatUser(indexpath:IndexPath) -> User
     func getChatUserCount() -> Int
     func didSelectRow(at indexpath:IndexPath)
     
@@ -27,12 +27,12 @@ protocol PresenterToInteractorNewConversationProtocol {
     var navigationController:UINavigationController?{get set}
     func fetchAllUser()
     func fetchFilterUser(text:String)
-    func didSelectRow(user:ChatUser)
+    func didSelectRow(user:User)
 }
 
 protocol InteractorToPresenterNewConversationProtocol {
-    func didFetchedAllUser(users:[ChatUser])
-    func didFetchedFilteredUser(users:[ChatUser])
+    func didFetchedAllUser(users:[User])
+    func didFetchedFilteredUser(users:[User])
 }
 
 protocol PresenterToViewNewConversationProtocol {

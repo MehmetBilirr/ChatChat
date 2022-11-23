@@ -36,8 +36,8 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
         AuthManager.shared.firebaseSignInWithFB(token: token)
         Profile.loadCurrentProfile { profile, error in
             guard error == nil else {return}
-            guard let firstName = profile?.firstName,let lastName = profile?.lastName,let imageUrl = profile?.imageURL(forMode: .square, size: CGSize(width: 200, height: 200))?.absoluteString else {return}
-            DataBaseManager.shared.createDataFirestore(with: imageUrl, firstName: firstName, lastName: lastName)
+            guard let firstName = profile?.firstName,let lastName = profile?.lastName,let imageUrl = profile?.imageURL(forMode: .square, size: CGSize(width: 200, height: 200))?.absoluteString, let email = profile?.email else {return}
+            DataBaseManager.shared.createDataFirestore(with: imageUrl, firstName: firstName, lastName: lastName, email: email)
             self.presentMainVC()
             
         }
@@ -47,18 +47,21 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
     func loginWithGoogle(viewController: UIViewController) {
         
         AuthManager.shared.firebaseSignInWithGoogle(viewController: viewController) {  bool in
-            
+           
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 if bool {
+                    
                     DataBaseManager.shared.checkIfUserLogin { bool in
                         if !bool {
                             let user = Auth.auth().currentUser
+       
                             guard let user = user else {return}
-                            guard let imageUrl = user.photoURL?.absoluteString, let name = user.displayName else {return}
+                            guard let imageUrl = user.photoURL?.absoluteString, let name = user.displayName, let email = user.email else {return}
+                            
                             let array = name.components(separatedBy: " ")
 
                             
-                            DataBaseManager.shared.createDataFirestore(with: imageUrl, firstName: array[0], lastName: array[1])
+                            DataBaseManager.shared.createDataFirestore(with: imageUrl, firstName: array[0], lastName: array[1], email: email)
                         }
                     }
                     

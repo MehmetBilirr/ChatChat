@@ -60,7 +60,7 @@ class UserTableViewCell: UITableViewCell {
         
     }
     
-    func configure(user:ChatUser) {
+    func configure(user:User) {
         nameLbl.text = ("\(user.firstName) \(user.lastName)")
 
         userImageView.sd_setImage(with: URL(string: user.imageUrl ?? ""))
