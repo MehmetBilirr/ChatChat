@@ -11,6 +11,7 @@
 		F018822F292AB16F0062F9C3 /* ConversationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F018822E292AB16F0062F9C3 /* ConversationsInteractor.swift */; };
 		F08B76D2292E8829008C76FE /* Date + extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08B76D1292E8829008C76FE /* Date + extension.swift */; };
 		F08B76D4292EA5E4008C76FE /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08B76D3292EA5E4008C76FE /* Conversation.swift */; };
+		F08B76D7292EB26A008C76FE /* ConversationsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08B76D6292EB26A008C76FE /* ConversationsTableViewCell.swift */; };
 		F0A33E74292BD4ED0063FF90 /* ConversationsPresenter.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A33E73292BD4ED0063FF90 /* ConversationsPresenter.swift.swift */; };
 		F0A33E76292BD5000063FF90 /* ConversationsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A33E75292BD5000063FF90 /* ConversationsRouter.swift */; };
 		F0A33E78292BD5110063FF90 /* ConversationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A33E77292BD5110063FF90 /* ConversationsProtocols.swift */; };
@@ -84,6 +85,7 @@
 		F018822E292AB16F0062F9C3 /* ConversationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsInteractor.swift; sourceTree = "<group>"; };
 		F08B76D1292E8829008C76FE /* Date + extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + extension.swift"; sourceTree = "<group>"; };
 		F08B76D3292EA5E4008C76FE /* Conversation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		F08B76D6292EB26A008C76FE /* ConversationsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsTableViewCell.swift; sourceTree = "<group>"; };
 		F0A33E73292BD4ED0063FF90 /* ConversationsPresenter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsPresenter.swift.swift; sourceTree = "<group>"; };
 		F0A33E75292BD5000063FF90 /* ConversationsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsRouter.swift; sourceTree = "<group>"; };
 		F0A33E77292BD5110063FF90 /* ConversationsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsProtocols.swift; sourceTree = "<group>"; };
@@ -204,6 +206,14 @@
 				F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F08B76D5292EB254008C76FE /* ConversationsTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				F08B76D6292EB26A008C76FE /* ConversationsTableViewCell.swift */,
+			);
+			path = ConversationsTableViewCell;
 			sourceTree = "<group>";
 		};
 		F0A33E70292BD4A20063FF90 /* Router */ = {
@@ -510,6 +520,7 @@
 		F0FBA096292BDDAA00FD6B5C /* ChatModule */ = {
 			isa = PBXGroup;
 			children = (
+				F08B76D5292EB254008C76FE /* ConversationsTableViewCell */,
 				F0FBA09B292BDE1A00FD6B5C /* View */,
 				F0FBA09A292BDE1600FD6B5C /* Presenter */,
 				F0FBA099292BDE0F00FD6B5C /* Interactor */,
@@ -766,6 +777,7 @@
 				F0D386F9292828BB001B8DA1 /* LoginInteractor.swift in Sources */,
 				F015156429295F9000243674 /* SceneDelegate.swift in Sources */,
 				F0FBA0C3292C33D200FD6B5C /* Sender.swift in Sources */,
+				F08B76D7292EB26A008C76FE /* ConversationsTableViewCell.swift in Sources */,
 				F0D386D629281E6A001B8DA1 /* NewConversationViewController.swift in Sources */,
 				F0D387052928311E001B8DA1 /* UIView + extension.swift in Sources */,
 				F0D3870F29283705001B8DA1 /* RegisterRouter.swift in Sources */,

@@ -26,9 +26,7 @@ import FirebaseAuth
         conversationsTableView.frame = view.bounds
     }
 
-     override func viewDidAppear(_ animated: Bool) {
-         DataBaseManager.shared.getConversations()
-     }
+     
 }
 
 

@@ -147,10 +147,7 @@ extension DataBaseManager {
         var currentUserName = ""
         guard let uid = auth.currentUser?.uid , let email = auth.currentUser?.email else {return}
         let messageDate = firstMessage.sentDate.dateAndTimetoString()
-        fetchUser(uuid: uid) { user in
-            
-            currentUserName = user.firstName + user.lastName
-        }
+        
         switch firstMessage.kind {
             
         case .text(let messageText):
@@ -175,23 +172,15 @@ extension DataBaseManager {
             break
         }
         
-        print(name)
         let senderData : [String:Any] = [
             "user_id":toUserId,
             "user_name":name,
             "latest_message": [
                 "date":messageDate,
                 "message":message,
-                "is_read":false
+                "isRead":false
             ]
         ]
-        
-        let recivierData:[String:Any] = [
-                                         "user_id":uid,
-                                         "user_name":currentUserName,
-                                         "latest_message":["date":messageDate,
-                                                           "message":message,
-                                                           "isRead":false]]
         
         firestore.collection("conversations").document(uid).collection(uid).document(toUserId).setData(senderData) { error in
             
@@ -202,17 +191,31 @@ extension DataBaseManager {
             
         }
         
-        
-        firestore.collection("conversations").document(toUserId).collection(toUserId).document(uid).setData(recivierData) { error in
-            guard let error = error else {
-                print(error?.localizedDescription)
-                return
+        fetchUser(uuid: uid) { user in
+            
+            currentUserName = user.firstName + user.lastName
+            
+            let recivierData:[String:Any] = [
+                "user_id":uid,
+                "user_name":currentUserName,
+                "latest_message":["date":messageDate,
+                                  "message":message,
+                                  "isRead":false]]
+            
+            self.firestore.collection("conversations").document(toUserId).collection(toUserId).document(uid).setData(recivierData) { error in
+                guard let error = error else {
+                    print(error?.localizedDescription)
+                    return
+                }
             }
         }
+        
+        
+        
+        
     }
     
-    
-    func getConversations(){
+    func getConversations(completion:@escaping ([Conversation])->Void){
         var conversationArray = [Conversation]()
         guard let uid = auth.currentUser?.uid else {return}
         firestore.collection("conversations").document(uid).collection(uid).getDocuments { snapshot, error in
@@ -225,7 +228,7 @@ extension DataBaseManager {
                     print(error.localizedDescription)
                 }
             }
-            print(conversationArray)
+            completion(conversationArray)
         }
     }
     
