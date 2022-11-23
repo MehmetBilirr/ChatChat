@@ -12,6 +12,8 @@ class ConversationsTableViewCell: UITableViewCell {
   
     private let userImageView = UIImageView()
     private let nameLbl = UILabel()
+    private let messageLbl = UILabel()
+    private let dateLbl = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,6 +38,12 @@ class ConversationsTableViewCell: UITableViewCell {
         nameLbl.configureStyle(size: 16, weight: .regular, color: .black)
         nameLbl.text = "Mehmet Bilir"
         
+        messageLbl.configureStyle(size: 14, weight: .regular, color: .gray)
+        messageLbl.text = "asdjasdjasjd naksjn dajkshbdajh bdajhsdbasjhdba sjdahjsdbajshdb ajdajhb dajhsbd"
+        
+        dateLbl.configureStyle(size: 10, weight: .regular, color: .gray)
+        dateLbl.text = "2022-11-23 22:54"
+        
 
     }
     
@@ -56,8 +64,21 @@ class ConversationsTableViewCell: UITableViewCell {
         
         nameLbl.snp.makeConstraints { make in
             make.left.equalTo(userImageView.snp.right).offset(10)
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(5)
            
+        }
+        
+        contentView.addSubview(messageLbl)
+        messageLbl.snp.makeConstraints { make in
+            make.left.equalTo(nameLbl.snp.left)
+            make.top.equalTo(nameLbl.snp.bottom).offset(2)
+            make.right.equalToSuperview()
+        }
+        
+        contentView.addSubview(dateLbl)
+        dateLbl.snp.makeConstraints { make in
+            make.right.equalToSuperview()
+            make.top.equalToSuperview()
         }
         
     }

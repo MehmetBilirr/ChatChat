@@ -46,6 +46,8 @@ extension ConversationsViewController {
         view.addSubview(conversationsTableView)
         conversationsTableView.delegate = self
         conversationsTableView.dataSource = self
+        conversationsTableView.register(ConversationsTableViewCell.self, forCellReuseIdentifier: ConversationsTableViewCell.identifier)
+        conversationsTableView.rowHeight = 70
 
     }
     private func configureBarButton(){
@@ -73,8 +75,7 @@ extension ConversationsViewController:UITableViewDelegate,UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "Test"
+        let cell = tableView.dequeueReusableCell(withIdentifier: ConversationsTableViewCell.identifier, for: indexPath) as! ConversationsTableViewCell
         return cell
     }
     

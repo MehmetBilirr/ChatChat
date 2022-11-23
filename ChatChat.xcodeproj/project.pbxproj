@@ -183,6 +183,7 @@
 		F0188228292AB1100062F9C3 /* Conversations */ = {
 			isa = PBXGroup;
 			children = (
+				F08B76D5292EB254008C76FE /* ConversationsTableViewCell */,
 				F018822D292AB13D0062F9C3 /* View */,
 				F0A33E72292BD4B00063FF90 /* Presenter */,
 				F018822C292AB1370062F9C3 /* Interactor */,
@@ -520,7 +521,6 @@
 		F0FBA096292BDDAA00FD6B5C /* ChatModule */ = {
 			isa = PBXGroup;
 			children = (
-				F08B76D5292EB254008C76FE /* ConversationsTableViewCell */,
 				F0FBA09B292BDE1A00FD6B5C /* View */,
 				F0FBA09A292BDE1600FD6B5C /* Presenter */,
 				F0FBA099292BDE0F00FD6B5C /* Interactor */,
