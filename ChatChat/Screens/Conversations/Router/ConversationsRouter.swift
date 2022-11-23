@@ -12,9 +12,12 @@ import UIKit
 class ConversationsRouter:PresenterToRouterConversationsProcol {
 
     static func createModule(ref:ConversationsViewController,navigationController:UINavigationController){
-        
-        ref.presenter = ConversationsPresenter()
-        ref.presenter?.interactor = ConversationsInteractor()
+        let presenter = ConversationsPresenter()
+        let interactor = ConversationsInteractor()
+        ref.presenter = presenter
+        ref.presenter?.view = ref
+        ref.presenter?.interactor = interactor
+        ref.presenter?.interactor?.presenter = presenter
         ref.presenter?.interactor?.navigationController = navigationController
     }
     

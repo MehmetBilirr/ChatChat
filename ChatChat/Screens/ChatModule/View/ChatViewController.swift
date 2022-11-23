@@ -70,14 +70,14 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {return}
         guard let uid = Auth.auth().currentUser?.uid else {return}
         guard let chosenUser = chosenUser else {return}
-        let chosenUserId = chosenUser.uid
+
         let chosenUserName = "\(chosenUser.firstName) \(chosenUser.lastName)"
-        let messageId = chosenUserId
+        let messageId = chosenUser.uid
 
         let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
         if !isNewConversation {
-            DataBaseManager.shared.createNewConversation(toUserId: chosenUserId, name: chosenUserName, firstMessage: message) { bool in
-                print("")
+            DataBaseManager.shared.createNewConversation(receiverUser: chosenUser, firstMessage: message) { bool in
+                print("success")
             }
         }
     }

@@ -25,6 +25,10 @@ import FirebaseAuth
         super.viewDidLayoutSubviews()
         conversationsTableView.frame = view.bounds
     }
+     
+     override func viewDidAppear(_ animated: Bool) {
+         presenter?.getConversations()
+     }
 
      
 }
@@ -70,15 +74,28 @@ extension ConversationsViewController {
 extension ConversationsViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 10
+        return presenter?.getConversationCount() ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ConversationsTableViewCell.identifier, for: indexPath) as! ConversationsTableViewCell
+        cell.configure(conversation: presenter?.getConversation(indexpath: indexPath) ?? .init(latest_message: LatestMessage(date: "", message: "", isRead: false), user_id: "", user_name: "", user_imageUrl: ""))
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
     }
     
    
     
+}
+
+extension ConversationsViewController:PresenterToViewConversationProtocol {
+    
+    
+    func reloadData() {
+        conversationsTableView.reloadData()
+    }
 }

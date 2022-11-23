@@ -8,6 +8,8 @@
 import Foundation
 
 class ConversationsPresenter:ViewToPresenterConversationsProcotol {
+    var view: PresenterToViewConversationProtocol?
+    var conversationArray = [Conversation]()
     var interactor: PresenterToInteractorConversationsProtocol?
     
     func didTapComposeButton() {
@@ -17,4 +19,28 @@ class ConversationsPresenter:ViewToPresenterConversationsProcotol {
     func didGetUser(user: User) {
         interactor?.didGetUser(user: user)
     }
+    
+    func getConversations() {
+        interactor?.getConversations()
+    }
+    
+    func getConversation(indexpath: IndexPath) -> Conversation {
+        
+        return conversationArray[indexpath.row]
+    }
+    
+    func getConversationCount() -> Int {
+        conversationArray.count
+    }
+}
+
+
+extension ConversationsPresenter:InteractorToPresenterConversationProtocol{
+    func didfetchConvervations(conversations: [Conversation]) {
+        conversationArray = conversations
+     
+        view?.reloadData()
+    }
+    
+    
 }

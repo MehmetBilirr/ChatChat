@@ -38,8 +38,9 @@ class ConversationsTableViewCell: UITableViewCell {
         nameLbl.configureStyle(size: 16, weight: .regular, color: .black)
         nameLbl.text = "Mehmet Bilir"
         
-        messageLbl.configureStyle(size: 14, weight: .regular, color: .gray)
-        messageLbl.text = "asdjasdjasjd naksjn dajkshbdajh bdajhsdbasjhdba sjdahjsdbajshdb ajdajhb dajhsbd"
+        messageLbl.configureStyle(size: 15, weight: .regular, color: .gray)
+        messageLbl.text = "asdjasdjasjd naksjn dajkshbdajh bdajhsdbasjhdba sjdahjsdbajshdb ajdajhb ajdajhb ajdajhb ajdajhb ajdajhb ajdajhb ajdajhb  "
+       
         
         dateLbl.configureStyle(size: 10, weight: .regular, color: .gray)
         dateLbl.text = "2022-11-23 22:54"
@@ -64,7 +65,7 @@ class ConversationsTableViewCell: UITableViewCell {
         
         nameLbl.snp.makeConstraints { make in
             make.left.equalTo(userImageView.snp.right).offset(10)
-            make.top.equalToSuperview().offset(5)
+            make.top.equalToSuperview().offset(5 )
            
         }
         
@@ -73,6 +74,7 @@ class ConversationsTableViewCell: UITableViewCell {
             make.left.equalTo(nameLbl.snp.left)
             make.top.equalTo(nameLbl.snp.bottom).offset(2)
             make.right.equalToSuperview()
+            
         }
         
         contentView.addSubview(dateLbl)
@@ -83,10 +85,13 @@ class ConversationsTableViewCell: UITableViewCell {
         
     }
     
-    func configure(user:User) {
-        nameLbl.text = ("\(user.firstName) \(user.lastName)")
-
-        userImageView.sd_setImage(with: URL(string: user.imageUrl ?? ""))
+    func configure(conversation:Conversation) {
+        nameLbl.text = (conversation.user_name)
+        dateLbl.text = conversation.latest_message.date
+        messageLbl.text = conversation.latest_message.message
+        
+        
+        userImageView.sd_setImage(with: URL(string: conversation.user_imageUrl))
     }
 
 }

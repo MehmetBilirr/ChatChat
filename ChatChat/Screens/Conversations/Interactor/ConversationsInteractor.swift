@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 
 class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
+    var presenter: InteractorToPresenterConversationProtocol?
+    
     var navigationController: UINavigationController?
     
     
@@ -27,4 +29,12 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
         }
         
     }
+    
+    func getConversations() {
+        
+        DataBaseManager.shared.getConversations { conservations in
+            self.presenter?.didfetchConvervations(conversations: conservations)
+        }
+    }
 }
+

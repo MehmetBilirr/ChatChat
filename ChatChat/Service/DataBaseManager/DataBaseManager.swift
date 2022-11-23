@@ -141,8 +141,8 @@ class DataBaseManager {
 // MARK: - Sending Messages & Conversation
 extension DataBaseManager {
     
-    func createNewConversation(toUserId:String,name:String,firstMessage:Message,completion:@escaping (Bool)-> Void) {
-        print(name)
+    func createNewConversation(receiverUser:User,firstMessage:Message,completion:@escaping (Bool)-> Void) {
+      
         var message = ""
         var currentUserName = ""
         guard let uid = auth.currentUser?.uid , let email = auth.currentUser?.email else {return}
@@ -173,8 +173,9 @@ extension DataBaseManager {
         }
         
         let senderData : [String:Any] = [
-            "user_id":toUserId,
-            "user_name":name,
+            "user_id":receiverUser.uid,
+            "user_name":"\(receiverUser.firstName) \(receiverUser.lastName)",
+            "user_imageUrl":receiverUser.imageUrl,
             "latest_message": [
                 "date":messageDate,
                 "message":message,
@@ -182,7 +183,7 @@ extension DataBaseManager {
             ]
         ]
         
-        firestore.collection("conversations").document(uid).collection(uid).document(toUserId).setData(senderData) { error in
+        firestore.collection("conversations").document(uid).collection(uid).document(receiverUser.uid).setData(senderData) { error in
             
             guard let error = error else {
                 print(error?.localizedDescription)
@@ -193,16 +194,17 @@ extension DataBaseManager {
         
         fetchUser(uuid: uid) { user in
             
-            currentUserName = user.firstName + user.lastName
+            currentUserName = "\(user.firstName) \(user.lastName)"
             
             let recivierData:[String:Any] = [
                 "user_id":uid,
                 "user_name":currentUserName,
+                "user_imageUrl":user.imageUrl,
                 "latest_message":["date":messageDate,
                                   "message":message,
                                   "isRead":false]]
             
-            self.firestore.collection("conversations").document(toUserId).collection(toUserId).document(uid).setData(recivierData) { error in
+            self.firestore.collection("conversations").document(receiverUser.uid).collection(receiverUser.uid).document(uid).setData(recivierData) { error in
                 guard let error = error else {
                     print(error?.localizedDescription)
                     return

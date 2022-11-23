@@ -11,6 +11,7 @@ struct Conversation:Codable {
     let latest_message:LatestMessage
     let user_id:String
     let user_name:String
+    let user_imageUrl:String
 }
 
 struct LatestMessage:Codable {
