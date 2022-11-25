@@ -13,6 +13,7 @@ import SwiftUI
 
 class ChatViewController:MessagesViewController {
     var isNewConversation = false
+    var presenter: ViewToPresenterChatProtocol?
     private var messages = [Message]()
     private let selfSender : SenderType = {
         let auth = Auth.auth().currentUser
@@ -24,7 +25,8 @@ class ChatViewController:MessagesViewController {
     var chosenConversation:Conversation?
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
+        ChatRouter.createModule(ref: self, navigationController: navigationController!)
+        presenter?.viewDidLoad()
         
         
         
@@ -32,6 +34,7 @@ class ChatViewController:MessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
+        
         
         DataBaseManager.shared.getChats(otherId: otId) { result in
             switch result {
@@ -45,23 +48,6 @@ class ChatViewController:MessagesViewController {
     }
    
     
-    
-}
-
-extension ChatViewController {
-    
-    private func setup(){
-        configureCollectionView()
-    }
-    private func configureCollectionView(){
-        messagesCollectionView.messagesDisplayDelegate = self
-        messagesCollectionView.messagesLayoutDelegate = self
-        messagesCollectionView.messagesDataSource = self
-        messageInputBar.delegate = self
-        self.navigationController?.navigationBar.prefersLargeTitles = false
-        let title = chosenConversation == nil ? "\(chosenUser!.firstName) \(chosenUser!.lastName)" : chosenConversation?.user_name
-        navigationItem.title = title
-    }
     
 }
 
@@ -98,6 +84,27 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
                 print("success")
             }
         }
+    }
+    
+    
+}
+
+
+extension ChatViewController:PresenterToViewChatProtocol {
+    func configureCollectionView() {
+            messagesCollectionView.messagesDisplayDelegate = self
+            messagesCollectionView.messagesLayoutDelegate = self
+            messagesCollectionView.messagesDataSource = self
+            messageInputBar.delegate = self
+            self.navigationController?.navigationBar.prefersLargeTitles = false
+            let title = chosenConversation == nil ? "\(chosenUser!.firstName) \(chosenUser!.lastName)" : chosenConversation?.user_name
+            navigationItem.title = title
+        
+    }
+    
+    
+    func reloadData() {
+        messagesCollectionView.reloadData()
     }
     
     
