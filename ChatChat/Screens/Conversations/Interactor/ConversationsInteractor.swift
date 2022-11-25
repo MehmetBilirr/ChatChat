@@ -36,5 +36,12 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
             self.presenter?.didfetchConvervations(conversations: conservations)
         }
     }
+    
+    func didSelectRow(conversation: Conversation) {
+        
+        let vc = ChatViewController()
+        vc.chosenConversation = conversation
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 

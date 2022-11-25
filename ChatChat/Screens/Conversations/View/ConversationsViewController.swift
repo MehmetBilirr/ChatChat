@@ -86,6 +86,7 @@ extension ConversationsViewController:UITableViewDelegate,UITableViewDataSource 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        presenter?.didSelectRow(at: indexPath)
     }
     
    

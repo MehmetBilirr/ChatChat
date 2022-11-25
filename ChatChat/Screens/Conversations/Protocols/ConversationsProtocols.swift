@@ -17,6 +17,7 @@ protocol ViewToPresenterConversationsProcotol {
     func getConversations()
     func getConversation(indexpath:IndexPath) -> Conversation
     func getConversationCount() -> Int
+    func didSelectRow(at indexpath:IndexPath)
 }
 
 protocol PresenterToInteractorConversationsProtocol {
@@ -25,6 +26,7 @@ protocol PresenterToInteractorConversationsProtocol {
     func didTapComposeButton()
     func didGetUser(user:User)
     func getConversations()
+    func didSelectRow(conversation:Conversation)
 }
 
 

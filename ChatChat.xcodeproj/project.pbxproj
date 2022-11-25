@@ -436,6 +436,7 @@
 		F0D3C05E2929149C0084C977 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				F0E2C24E2930E9EF005A275B /* Error */,
 				F0D3C06529291AE60084C977 /* DataBaseManager */,
 				F0D3C05F292914AB0084C977 /* AuthManager */,
 			);
@@ -516,6 +517,13 @@
 				F0D3C0712929254D0084C977 /* MainTabBarController.swift */,
 			);
 			path = MainTabBarModule;
+			sourceTree = "<group>";
+		};
+		F0E2C24E2930E9EF005A275B /* Error */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Error;
 			sourceTree = "<group>";
 		};
 		F0FBA096292BDDAA00FD6B5C /* ChatModule */ = {

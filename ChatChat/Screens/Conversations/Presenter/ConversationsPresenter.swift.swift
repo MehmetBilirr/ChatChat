@@ -32,6 +32,11 @@ class ConversationsPresenter:ViewToPresenterConversationsProcotol {
     func getConversationCount() -> Int {
         conversationArray.count
     }
+    
+    func didSelectRow(at indexpath: IndexPath) {
+        let conversation = conversationArray[indexpath.row]
+        interactor?.didSelectRow(conversation: conversation)
+    }
 }
 
 

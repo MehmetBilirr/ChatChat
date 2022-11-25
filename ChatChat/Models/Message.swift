@@ -17,3 +17,30 @@ struct Message:MessageType {
 }
 
 
+extension MessageKind {
+    
+    var messageKindString:String {
+        switch self {
+        case .text(_):
+            return "text"
+        case .attributedText(_):
+            return "attributedText"
+        case .photo(_):
+            return "mediaItem"
+        case .video(_):
+            return "mediaItem"
+        case .location(_):
+            return "locationItem"
+        case .emoji(_):
+            return "emoji"
+        case .audio(_):
+            return "audioItem"
+        case .contact(_):
+            return "contactItem"
+        case .linkPreview(_):
+            return "linkItem"
+        case .custom(_):
+            return "optional"
+        }
+    }
+}

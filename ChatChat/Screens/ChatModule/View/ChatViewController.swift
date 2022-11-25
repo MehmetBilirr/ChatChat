@@ -20,10 +20,10 @@ class ChatViewController:MessagesViewController {
         return selfsender
     }()
     var chosenUser:User?
+    var chosenConversation:Conversation?
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
     }
     
    
@@ -42,7 +42,8 @@ extension ChatViewController {
         messagesCollectionView.messagesDataSource = self
         messageInputBar.delegate = self
         self.navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.title = ("\(chosenUser!.firstName) \(chosenUser!.lastName)")
+        let title = chosenConversation == nil ? "\(chosenUser!.firstName) \(chosenUser!.lastName)" : chosenConversation?.user_name
+        navigationItem.title = title
     }
     
 }

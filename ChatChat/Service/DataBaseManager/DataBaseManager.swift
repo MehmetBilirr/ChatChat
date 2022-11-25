@@ -88,9 +88,8 @@ class DataBaseManager {
         
         firestore.collection("users").document(uid).setData(data) { error in
             
-            guard let error = error else {
+            if error != nil {
                 print(error?.localizedDescription)
-                return
             }
             
         }
@@ -145,7 +144,7 @@ extension DataBaseManager {
       
         var message = ""
         var currentUserName = ""
-        guard let uid = auth.currentUser?.uid , let email = auth.currentUser?.email else {return}
+        guard let uid = auth.currentUser?.uid else {return}
         let messageDate = firstMessage.sentDate.dateAndTimetoString()
         
         switch firstMessage.kind {
@@ -176,22 +175,19 @@ extension DataBaseManager {
             "user_id":receiverUser.uid,
             "user_name":"\(receiverUser.firstName) \(receiverUser.lastName)",
             "user_imageUrl":receiverUser.imageUrl,
-            "latest_message": [
+            "latest_message":[
                 "date":messageDate,
                 "message":message,
                 "isRead":false
             ]
         ]
-        
         firestore.collection("conversations").document(uid).collection(uid).document(receiverUser.uid).setData(senderData) { error in
             
-            guard let error = error else {
+            if error != nil {
                 print(error?.localizedDescription)
-                return
             }
             
         }
-        
         fetchUser(uuid: uid) { user in
             
             currentUserName = "\(user.firstName) \(user.lastName)"
@@ -205,12 +201,42 @@ extension DataBaseManager {
                                   "isRead":false]]
             
             self.firestore.collection("conversations").document(receiverUser.uid).collection(receiverUser.uid).document(uid).setData(recivierData) { error in
-                guard let error = error else {
+                if error != nil {
                     print(error?.localizedDescription)
-                    return
                 }
             }
         }
+        
+        createChat(receiverUser: receiverUser, type: firstMessage.kind.messageKindString, date: messageDate, content: message, completion: completion)
+        
+        
+    }
+    
+    private func createChat(receiverUser:User,type:String,date:String,content:String,completion:@escaping (Bool)-> Void){
+        guard let uid = auth.currentUser?.uid else {return}
+        let data : [String:Any] = [
+            "receiverId":receiverUser.uid,
+            "type":type,
+            "content":content,
+            "date":date,
+            "senderId":uid,
+            "isRead":false
+            ]
+        
+        firestore.collection("chats").document(uid).collection(receiverUser.uid).addDocument(data: data) { error in
+            
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+            
+        }
+        
+        firestore.collection("chats").document(receiverUser.uid).collection(uid).addDocument(data: data) { error in
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
+        completion(true)
         
         
         
@@ -230,8 +256,12 @@ extension DataBaseManager {
                     print(error.localizedDescription)
                 }
             }
-            completion(conversationArray)
+           
+            completion(conversationArray.sorted(by: {$0.latest_message.date > $1.latest_message.date}))
         }
     }
+    
+    
+    
     
 }
