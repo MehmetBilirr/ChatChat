@@ -9,6 +9,7 @@ import Foundation
 import MessageKit
 import InputBarAccessoryView
 import FirebaseAuth
+import SwiftUI
 
 class ChatViewController:MessagesViewController {
     var isNewConversation = false
@@ -24,8 +25,24 @@ class ChatViewController:MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        
+        
+        
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
+        
+        DataBaseManager.shared.getChats(otherId: otId) { result in
+            switch result {
+                
+            case .success(let data):
+                print(data)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
    
     
     

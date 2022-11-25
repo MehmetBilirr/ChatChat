@@ -61,6 +61,8 @@
 		F0D3C0782929404E0084C977 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C0772929404E0084C977 /* ProfilePresenter.swift */; };
 		F0D3C07A292942080084C977 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C079292942080084C977 /* ProfileInteractor.swift */; };
 		F0D6A790292AA55800BE1CCF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D6A78F292AA55800BE1CCF /* User.swift */; };
+		F0E2C2522930EA8B005A275B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2C2512930EA8B005A275B /* AppError.swift */; };
+		F0E2C2542930EB36005A275B /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2C2532930EB36005A275B /* Chat.swift */; };
 		F0FBA09D292BDE2A00FD6B5C /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA09C292BDE2A00FD6B5C /* ChatViewController.swift */; };
 		F0FBA09F292BDE8100FD6B5C /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA09E292BDE8100FD6B5C /* Message.swift */; };
 		F0FBA0AD292BEC6A00FD6B5C /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FBA0AC292BEC6A00FD6B5C /* UserTableViewCell.swift */; };
@@ -124,6 +126,8 @@
 		F0D3C0772929404E0084C977 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		F0D3C079292942080084C977 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		F0D6A78F292AA55800BE1CCF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F0E2C2512930EA8B005A275B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		F0E2C2532930EB36005A275B /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		F0FBA09C292BDE2A00FD6B5C /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F0FBA09E292BDE8100FD6B5C /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		F0FBA0AC292BEC6A00FD6B5C /* UserTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
@@ -293,6 +297,7 @@
 				F0FBA09E292BDE8100FD6B5C /* Message.swift */,
 				F0FBA0C2292C33D200FD6B5C /* Sender.swift */,
 				F08B76D3292EA5E4008C76FE /* Conversation.swift */,
+				F0E2C2532930EB36005A275B /* Chat.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -522,6 +527,7 @@
 		F0E2C24E2930E9EF005A275B /* Error */ = {
 			isa = PBXGroup;
 			children = (
+				F0E2C2512930EA8B005A275B /* AppError.swift */,
 			);
 			path = Error;
 			sourceTree = "<group>";
@@ -793,6 +799,7 @@
 				F0FBA0AD292BEC6A00FD6B5C /* UserTableViewCell.swift in Sources */,
 				F0FBA0B2292BED2100FD6B5C /* UITableViewCell + extension.swift.swift in Sources */,
 				F08B76D2292E8829008C76FE /* Date + extension.swift in Sources */,
+				F0E2C2542930EB36005A275B /* Chat.swift in Sources */,
 				F0D3C07A292942080084C977 /* ProfileInteractor.swift in Sources */,
 				F0D386B529281C17001B8DA1 /* ConversationsViewController.swift in Sources */,
 				F0D3C0782929404E0084C977 /* ProfilePresenter.swift in Sources */,
@@ -816,6 +823,7 @@
 				F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */,
 				F0A33E76292BD5000063FF90 /* ConversationsRouter.swift in Sources */,
 				F0D3C04C29290E160084C977 /* UIAlertController + extension.swift in Sources */,
+				F0E2C2522930EA8B005A275B /* AppError.swift in Sources */,
 				F0D386F529282725001B8DA1 /* LoginProtocols.swift in Sources */,
 				F0FBA0C1292C215300FD6B5C /* NSNotification + extension.swift in Sources */,
 				F0D386EB29282169001B8DA1 /* UIButton + Extension.swift in Sources */,
