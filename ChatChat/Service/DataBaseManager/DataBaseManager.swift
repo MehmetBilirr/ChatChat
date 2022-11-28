@@ -250,29 +250,34 @@ extension DataBaseManager {
     func getConversations(completion:@escaping ([Conversation])->Void){
         var conversationArray = [Conversation]()
         guard let uid = auth.currentUser?.uid else {return}
-        firestore.collection("conversations").document(uid).collection(uid).getDocuments { snapshot, error in
-            guard let documents = snapshot?.documents else {return}
-            documents.forEach { document in
-                do {
-                    let conversation = try document.data(as: Conversation.self)
-                    conversationArray.append(conversation)
-                }catch {
-                    print(error.localizedDescription)
-                }
-            }
+        firestore.collection("conversations").document(uid).collection(uid).addSnapshotListener({ snapshot, error in
+            
            
-            completion(conversationArray.sorted(by: {$0.latest_message.date > $1.latest_message.date}))
-        }
+                guard let documents = snapshot?.documents else {return}
+            conversationArray.removeAll(keepingCapacity: true)
+                documents.forEach { document in
+                    do {
+                        let conversation = try document.data(as: Conversation.self)
+                        conversationArray.append(conversation)
+                    }catch {
+                        print(error.localizedDescription)
+                    }
+                }
+               
+                completion(conversationArray.sorted(by: {$0.latest_message.date > $1.latest_message.date}))
+        })
+        
     }
     
     
     func getChats(otherId:String,completion:@escaping (Result<[Chat],Error>)->Void) {
         var chatArray = [Chat]()
         guard let uid = auth.currentUser?.uid else {return}
-        firestore.collection("chats").document(uid).collection(otherId).getDocuments { snapshot, error in
+        firestore.collection("chats").document(uid).collection(otherId).addSnapshotListener({ snapshot, error in
             guard let documents = snapshot?.documents else {
                 completion(.failure(AppError.serverError("There is no documents")))
                 return}
+            chatArray.removeAll(keepingCapacity: true)
             documents.forEach { document in
                 do {
                     let conversation = try document.data(as: Chat.self)
@@ -283,7 +288,7 @@ extension DataBaseManager {
             }
            
             completion(.success((chatArray.sorted(by: {$0.date < $1.date}))))
-        }
+        })
     }
     
 }

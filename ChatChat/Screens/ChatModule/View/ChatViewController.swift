@@ -67,6 +67,8 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
         let messageId = (chosenUser == nil ? chosenConversation?.user_id : chosenUser?.uid)!
        
         presenter?.sendMessage(text: text, otherUserId: messageId, sender: selfSender)
+        
+        
     }
     
     
@@ -87,12 +89,16 @@ extension ChatViewController:PresenterToViewChatProtocol {
     
     
     func reloadData() {
-        messagesCollectionView.reloadData()
-        messagesCollectionView.scrollToBottom(animated: true)
+        DispatchQueue.main.async {
+            self.messagesCollectionView.reloadData()
+            self.messagesCollectionView.scrollToBottom(animated: true)
+        }
+        
     }
     
     func messageArray(messageArray: [Message]) {
         messages = messageArray
+        messageInputBar.inputTextView.text = nil
         
         
     }
