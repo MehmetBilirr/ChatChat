@@ -15,20 +15,24 @@ protocol ViewToPresenterChatProtocol {
     var view:PresenterToViewChatProtocol?{get set}
     func getChats(otherId:String)
     func viewDidLoad()
+    func sendMessage(text:String,otherUserId:String,sender:SenderType)
     func chatForItem(at indexPath:IndexPath) -> Message
     func numberOfSection()->Int
+    
 }
 
 
 protocol PresenterToInteractorChatProtocol {
     var presenter:InteractorToPresenterChatProtocol?{get set}
     var navigationController:UINavigationController? {get set}
+    func sendMessage(text:String,otherUserId:String,sender:SenderType)
     func getChats(otherId:String)
 }
 
 protocol InteractorToPresenterChatProtocol {
     
     func didFetchMessages(messages:[Message])
+    func didSendMessage()
 }
 
 
@@ -37,6 +41,7 @@ protocol PresenterToViewChatProtocol {
     func reloadData()
     func configureCollectionView()
     func messageArray(messageArray:[Message])
+
 }
 
 protocol PresenterToRouterChatPRocotol {

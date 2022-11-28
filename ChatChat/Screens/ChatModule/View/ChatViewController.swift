@@ -34,8 +34,6 @@ class ChatViewController:MessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
-        
-
         presenter?.getChats(otherId: otId)
     }
    
@@ -51,9 +49,9 @@ extension ChatViewController:MessagesDataSource,MessagesLayoutDelegate,MessagesD
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
 
-        return messages[indexPath.row]
+        return messages[indexPath.section]
     }
-    
+   
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
@@ -65,15 +63,10 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {return}
-
-        let messageId = chosenUser == nil ? chosenConversation?.user_id : chosenUser?.uid
+ 
+        let messageId = (chosenUser == nil ? chosenConversation?.user_id : chosenUser?.uid)!
        
-
-        let message = Message(sender: selfSender, messageId: messageId!, sentDate: Date(), kind: .text(text))
-        DataBaseManager.shared.createNewConversation(receiverUserId: messageId!, firstMessage: message) { bool in
-                print("success")
-            }
-        
+        presenter?.sendMessage(text: text, otherUserId: messageId, sender: selfSender)
     }
     
     
@@ -95,11 +88,14 @@ extension ChatViewController:PresenterToViewChatProtocol {
     
     func reloadData() {
         messagesCollectionView.reloadData()
+        messagesCollectionView.scrollToBottom(animated: true)
     }
     
     func messageArray(messageArray: [Message]) {
         messages = messageArray
-
+        
+        
     }
+    
     
 }
