@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import MessageKit
 
 
 protocol ViewToPresenterChatProtocol {
@@ -14,6 +15,8 @@ protocol ViewToPresenterChatProtocol {
     var view:PresenterToViewChatProtocol?{get set}
     func getChats(otherId:String)
     func viewDidLoad()
+    func chatForItem(at indexPath:IndexPath) -> Message
+    func numberOfSection()->Int
 }
 
 
@@ -25,7 +28,7 @@ protocol PresenterToInteractorChatProtocol {
 
 protocol InteractorToPresenterChatProtocol {
     
-    func didFetchChats(chats:[Chat])
+    func didFetchMessages(messages:[Message])
 }
 
 
@@ -33,6 +36,7 @@ protocol PresenterToViewChatProtocol {
     var presenter:ViewToPresenterChatProtocol?{get set}
     func reloadData()
     func configureCollectionView()
+    func messageArray(messageArray:[Message])
 }
 
 protocol PresenterToRouterChatPRocotol {

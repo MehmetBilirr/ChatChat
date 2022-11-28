@@ -35,16 +35,8 @@ class ChatViewController:MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
         
-        
-        DataBaseManager.shared.getChats(otherId: otId) { result in
-            switch result {
-                
-            case .success(let data):
-                print(data)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+
+        presenter?.getChats(otherId: otId)
     }
    
     
@@ -58,11 +50,12 @@ extension ChatViewController:MessagesDataSource,MessagesLayoutDelegate,MessagesD
 
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        return messages[indexPath.section]
+
+        return messages[indexPath.row]
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
-        messages.count
+        return messages.count
     }
     
     
@@ -72,18 +65,15 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {return}
-        guard let uid = Auth.auth().currentUser?.uid else {return}
-        guard let chosenUser = chosenUser else {return}
 
-        let chosenUserName = "\(chosenUser.firstName) \(chosenUser.lastName)"
-        let messageId = chosenUser.uid
+        let messageId = chosenUser == nil ? chosenConversation?.user_id : chosenUser?.uid
+       
 
-        let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
-        if !isNewConversation {
-            DataBaseManager.shared.createNewConversation(receiverUser: chosenUser, firstMessage: message) { bool in
+        let message = Message(sender: selfSender, messageId: messageId!, sentDate: Date(), kind: .text(text))
+        DataBaseManager.shared.createNewConversation(receiverUserId: messageId!, firstMessage: message) { bool in
                 print("success")
             }
-        }
+        
     }
     
     
@@ -107,5 +97,9 @@ extension ChatViewController:PresenterToViewChatProtocol {
         messagesCollectionView.reloadData()
     }
     
+    func messageArray(messageArray: [Message]) {
+        messages = messageArray
+
+    }
     
 }

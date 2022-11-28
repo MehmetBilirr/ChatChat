@@ -140,7 +140,7 @@ class DataBaseManager {
 // MARK: - Sending Messages & Conversation
 extension DataBaseManager {
     
-    func createNewConversation(receiverUser:User,firstMessage:Message,completion:@escaping (Bool)-> Void) {
+    func createNewConversation(receiverUserId:String,firstMessage:Message,completion:@escaping (Bool)-> Void) {
       
         var message = ""
         var currentUserName = ""
@@ -170,24 +170,28 @@ extension DataBaseManager {
         case .custom(_):
             break
         }
-        
-        let senderData : [String:Any] = [
-            "user_id":receiverUser.uid,
-            "user_name":"\(receiverUser.firstName) \(receiverUser.lastName)",
-            "user_imageUrl":receiverUser.imageUrl,
-            "latest_message":[
-                "date":messageDate,
-                "message":message,
-                "isRead":false
+        fetchUser(uuid: receiverUserId) { user in
+            currentUserName = "\(user.firstName) \(user.lastName)"
+            let senderData : [String:Any] = [
+                "user_id":user.uid,
+                "user_name":currentUserName,
+                "user_imageUrl":user.imageUrl,
+                "latest_message":[
+                    "date":messageDate,
+                    "message":message,
+                    "isRead":false
+                ]
             ]
-        ]
-        firestore.collection("conversations").document(uid).collection(uid).document(receiverUser.uid).setData(senderData) { error in
-            
-            if error != nil {
-                print(error?.localizedDescription)
+            self.firestore.collection("conversations").document(uid).collection(uid).document(receiverUserId).setData(senderData) { error in
+                
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                
             }
-            
         }
+        
+        
         fetchUser(uuid: uid) { user in
             
             currentUserName = "\(user.firstName) \(user.lastName)"
@@ -200,22 +204,22 @@ extension DataBaseManager {
                                   "message":message,
                                   "isRead":false]]
             
-            self.firestore.collection("conversations").document(receiverUser.uid).collection(receiverUser.uid).document(uid).setData(recivierData) { error in
+            self.firestore.collection("conversations").document(receiverUserId).collection(receiverUserId).document(uid).setData(recivierData) { error in
                 if error != nil {
                     print(error?.localizedDescription)
                 }
             }
         }
         
-        createChat(receiverUser: receiverUser, type: firstMessage.kind.messageKindString, date: messageDate, content: message, completion: completion)
+        createChat(receiverUserId: receiverUserId, type: firstMessage.kind.messageKindString, date: messageDate, content: message, completion: completion)
         
         
     }
     
-    private func createChat(receiverUser:User,type:String,date:String,content:String,completion:@escaping (Bool)-> Void){
+     private func createChat(receiverUserId:String,type:String,date:String,content:String,completion:@escaping (Bool)-> Void){
         guard let uid = auth.currentUser?.uid else {return}
         let data : [String:Any] = [
-            "receiverId":receiverUser.uid,
+            "receiverId":receiverUserId,
             "type":type,
             "content":content,
             "date":date,
@@ -223,7 +227,7 @@ extension DataBaseManager {
             "isRead":false
             ]
         
-        firestore.collection("chats").document(uid).collection(receiverUser.uid).addDocument(data: data) { error in
+        firestore.collection("chats").document(uid).collection(receiverUserId).addDocument(data: data) { error in
             
             if error != nil {
                 print(error?.localizedDescription)
@@ -231,7 +235,7 @@ extension DataBaseManager {
             
         }
         
-        firestore.collection("chats").document(receiverUser.uid).collection(uid).addDocument(data: data) { error in
+        firestore.collection("chats").document(receiverUserId).collection(uid).addDocument(data: data) { error in
             if error != nil {
                 print(error?.localizedDescription)
             }

@@ -61,6 +61,7 @@
 		F0D3C0782929404E0084C977 /* ProfilePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C0772929404E0084C977 /* ProfilePresenter.swift */; };
 		F0D3C07A292942080084C977 /* ProfileInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D3C079292942080084C977 /* ProfileInteractor.swift */; };
 		F0D6A790292AA55800BE1CCF /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D6A78F292AA55800BE1CCF /* User.swift */; };
+		F0DFD3512934F615003EE41F /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0DFD3502934F615003EE41F /* String + Extension.swift */; };
 		F0E2C2522930EA8B005A275B /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2C2512930EA8B005A275B /* AppError.swift */; };
 		F0E2C2542930EB36005A275B /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2C2532930EB36005A275B /* Chat.swift */; };
 		F0E2C2562930F412005A275B /* ChatPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E2C2552930F412005A275B /* ChatPresenter.swift */; };
@@ -130,6 +131,7 @@
 		F0D3C0772929404E0084C977 /* ProfilePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePresenter.swift; sourceTree = "<group>"; };
 		F0D3C079292942080084C977 /* ProfileInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInteractor.swift; sourceTree = "<group>"; };
 		F0D6A78F292AA55800BE1CCF /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F0DFD3502934F615003EE41F /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
 		F0E2C2512930EA8B005A275B /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		F0E2C2532930EB36005A275B /* Chat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		F0E2C2552930F412005A275B /* ChatPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatPresenter.swift; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				F0FBA0B1292BED2100FD6B5C /* UITableViewCell + extension.swift.swift */,
 				F0FBA0C0292C215300FD6B5C /* NSNotification + extension.swift */,
 				F08B76D1292E8829008C76FE /* Date + extension.swift */,
+				F0DFD3502934F615003EE41F /* String + Extension.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -794,6 +797,7 @@
 			files = (
 				F0D386ED29282251001B8DA1 /* UIImageView + Extension.swift in Sources */,
 				F0E2C25C2930F445005A275B /* ChatProtocols.swift in Sources */,
+				F0DFD3512934F615003EE41F /* String + Extension.swift in Sources */,
 				F018822F292AB16F0062F9C3 /* ConversationsInteractor.swift in Sources */,
 				F0D386CE29281E44001B8DA1 /* LoginViewController.swift in Sources */,
 				F0D3C0722929254D0084C977 /* MainTabBarController.swift in Sources */,
