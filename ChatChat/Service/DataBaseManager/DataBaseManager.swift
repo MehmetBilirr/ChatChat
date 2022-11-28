@@ -273,7 +273,7 @@ extension DataBaseManager {
     func getChats(otherId:String,completion:@escaping (Result<[Chat],Error>)->Void) {
         var chatArray = [Chat]()
         guard let uid = auth.currentUser?.uid else {return}
-        firestore.collection("chats").document(uid).collection(otherId).addSnapshotListener({ snapshot, error in
+        firestore.collection("chats").document(uid).collection(otherId).order(by: "date", descending: false).addSnapshotListener({ snapshot, error in
             guard let documents = snapshot?.documents else {
                 completion(.failure(AppError.serverError("There is no documents")))
                 return}
