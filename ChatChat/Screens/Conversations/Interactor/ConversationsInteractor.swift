@@ -43,5 +43,13 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
         vc.chosenConversation = conversation
         navigationController?.pushViewController(vc, animated: true)
     }
+    func delete(receiverId: String) {
+        
+        DataBaseManager.shared.deleteConversations(otherId: receiverId) { bool in
+            if bool {
+                
+            }
+        }
+    }
 }
 

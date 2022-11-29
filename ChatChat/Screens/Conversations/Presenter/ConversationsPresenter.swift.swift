@@ -37,13 +37,16 @@ class ConversationsPresenter:ViewToPresenterConversationsProcotol {
         let conversation = conversationArray[indexpath.row]
         interactor?.didSelectRow(conversation: conversation)
     }
+    func delete(at indexpath: IndexPath) {
+        let receiverId = conversationArray[indexpath.row].user_id
+        interactor?.delete(receiverId: receiverId)
+    }
 }
 
 
 extension ConversationsPresenter:InteractorToPresenterConversationProtocol{
     func didfetchConvervations(conversations: [Conversation]) {
         conversationArray = conversations
-     
         view?.reloadData()
     }
     

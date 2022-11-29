@@ -309,4 +309,29 @@ extension DataBaseManager {
         })
     }
     
+    func deleteConversations(otherId:String,completion: @escaping (Bool)->Void) {
+        let firestore = Firestore.firestore()
+        guard let uid = auth.currentUser?.uid else {return}
+        firestore.collection("conversations").document(uid).collection(uid).document(otherId).delete { error in
+            if error != nil {
+                print(error?.localizedDescription)
+                completion(false)
+            }else {
+                firestore.collection("chats").document(uid).collection(otherId).addSnapshotListener { snapshot, error in
+                    guard let documents = snapshot?.documents else {return}
+                    documents.forEach { document in
+                        let documentId = document.documentID
+                        firestore.collection("chats").document(uid).collection(otherId).document(documentId).delete { error in
+                            if error != nil {
+                                print(error?.localizedDescription)
+                                completion(false)
+                            }else {
+                                completion(true)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

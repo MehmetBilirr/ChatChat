@@ -89,6 +89,11 @@ extension ConversationsViewController:UITableViewDelegate,UITableViewDataSource 
         presenter?.didSelectRow(at: indexPath)
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            presenter?.delete(at: indexPath)
+        }
+    }
    
     
 }
