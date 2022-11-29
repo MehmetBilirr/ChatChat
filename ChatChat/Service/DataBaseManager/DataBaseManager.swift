@@ -11,6 +11,7 @@ import FirebaseStorage
 import FirebaseFirestore
 import FirebaseAuth
 import FirebaseFirestoreSwift
+import MessageKit
 
 
 // MARK: - Get and Fetch UserData
@@ -98,7 +99,7 @@ class DataBaseManager {
     
     
     
-    private func getImageUrl(imageView:UIImageView,completion:@escaping(String)->Void){
+    func getImageUrl(imageView:UIImageView,completion:@escaping(String)->Void){
         
         guard let data = imageView.image?.jpegData(compressionQuality: 0.5) else {return }
         let uuid = UUID().uuidString
@@ -153,7 +154,10 @@ extension DataBaseManager {
             message = messageText
         case .attributedText(_):
             break
-        case .photo(_):
+        case .photo(let mediaItem):
+            if let urlString = mediaItem.url?.absoluteString {
+                message = urlString
+            }
             break
         case .video(_):
             break
@@ -226,6 +230,7 @@ extension DataBaseManager {
             "senderId":uid,
             "isRead":false
             ]
+         
         
         firestore.collection("chats").document(uid).collection(receiverUserId).addDocument(data: data) { error in
             
@@ -280,8 +285,18 @@ extension DataBaseManager {
             chatArray.removeAll(keepingCapacity: true)
             documents.forEach { document in
                 do {
-                    let conversation = try document.data(as: Chat.self)
-                    chatArray.append(conversation)
+                    let chat = try document.data(as: Chat.self)
+                    var messageKind:MessageKind?
+                    if chat.type == "photo" {
+                        let media = Media(url: URL(string: chat.content),
+                                          image: nil,
+                                          placeholderImage: UIImage(systemName: "plus")!,
+                                          size: CGSize(width: 300, height: 300))
+                        messageKind = .photo(media)
+                    } else  {
+                        messageKind = .text(chat.content)
+                    }
+                    chatArray.append(chat)
                 }catch {
                     completion(.failure(AppError.errorDecoding))
                 }

@@ -19,6 +19,8 @@
 		F0C64861292B9E580096B8C4 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64860292B9E580096B8C4 /* FacebookLogin */; };
 		F0C64864292B9F4F0096B8C4 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64863292B9F4F0096B8C4 /* GoogleSignIn */; };
 		F0C64866292B9F4F0096B8C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64865292B9F4F0096B8C4 /* GoogleSignInSwift */; };
+		F0CF46AB29366FAB004C5224 /* ActionNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF46AA29366FAB004C5224 /* ActionNames.swift */; };
+		F0CF46B029367C42004C5224 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF46AF29367C42004C5224 /* Media.swift */; };
 		F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386B029281C17001B8DA1 /* AppDelegate.swift */; };
 		F0D386B529281C17001B8DA1 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */; };
 		F0D386BA29281C18001B8DA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0D386B929281C18001B8DA1 /* Assets.xcassets */; };
@@ -96,6 +98,8 @@
 		F0A33E73292BD4ED0063FF90 /* ConversationsPresenter.swift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsPresenter.swift.swift; sourceTree = "<group>"; };
 		F0A33E75292BD5000063FF90 /* ConversationsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsRouter.swift; sourceTree = "<group>"; };
 		F0A33E77292BD5110063FF90 /* ConversationsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsProtocols.swift; sourceTree = "<group>"; };
+		F0CF46AA29366FAB004C5224 /* ActionNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNames.swift; sourceTree = "<group>"; };
+		F0CF46AF29367C42004C5224 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
 		F0D386AD29281C17001B8DA1 /* ChatChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D386B029281C17001B8DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
@@ -308,6 +312,8 @@
 				F0FBA0C2292C33D200FD6B5C /* Sender.swift */,
 				F08B76D3292EA5E4008C76FE /* Conversation.swift */,
 				F0E2C2532930EB36005A275B /* Chat.swift */,
+				F0CF46AA29366FAB004C5224 /* ActionNames.swift */,
+				F0CF46AF29367C42004C5224 /* Media.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -835,6 +841,7 @@
 				F0A33E74292BD4ED0063FF90 /* ConversationsPresenter.swift.swift in Sources */,
 				F0E2C25A2930F435005A275B /* ChatRouter.swift in Sources */,
 				F0D386FB292829D5001B8DA1 /* LoginRouter.swift in Sources */,
+				F0CF46B029367C42004C5224 /* Media.swift in Sources */,
 				F0D3C06929291C010084C977 /* DataBaseManager.swift in Sources */,
 				F0D386D429281E5F001B8DA1 /* VideoPlayerViewController.swift in Sources */,
 				F0D386F7292828A4001B8DA1 /* LoginPresenter.swift in Sources */,
@@ -845,6 +852,7 @@
 				F0D3C04C29290E160084C977 /* UIAlertController + extension.swift in Sources */,
 				F0E2C2522930EA8B005A275B /* AppError.swift in Sources */,
 				F0D386F529282725001B8DA1 /* LoginProtocols.swift in Sources */,
+				F0CF46AB29366FAB004C5224 /* ActionNames.swift in Sources */,
 				F0FBA0C1292C215300FD6B5C /* NSNotification + extension.swift in Sources */,
 				F0D386EB29282169001B8DA1 /* UIButton + Extension.swift in Sources */,
 				F0FBA0B9292BF1E300FD6B5C /* NewConversationInteractor.swift in Sources */,

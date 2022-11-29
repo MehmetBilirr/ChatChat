@@ -17,7 +17,9 @@ protocol ViewToPresenterChatProtocol {
     func viewDidLoad()
     func sendMessage(text:String,otherUserId:String,sender:SenderType)
     func chatForItem(at indexPath:IndexPath) -> Message
+    func configureAvatarView(uid:String,avatarView:AvatarView)
     func numberOfSection()->Int
+    func didFinishPickingMedia(receiverId:String,imageView:UIImageView,sender: SenderType)
     
 }
 
@@ -27,12 +29,16 @@ protocol PresenterToInteractorChatProtocol {
     var navigationController:UINavigationController? {get set}
     func sendMessage(text:String,otherUserId:String,sender:SenderType)
     func getChats(otherId:String)
+    func getCurrentUser()
+    func configureAvatarView(uid:String,avatarView:AvatarView)
+    func didFinishPickingMedia(receiverId:String,imageView:UIImageView,sender: SenderType)
 }
 
 protocol InteractorToPresenterChatProtocol {
     
     func didFetchMessages(messages:[Message])
     func didSendMessage()
+    func didFetchCurrentUser(user:User)
 }
 
 
@@ -41,6 +47,8 @@ protocol PresenterToViewChatProtocol {
     func reloadData()
     func configureCollectionView()
     func messageArray(messageArray:[Message])
+    func selfSender(sender:SenderType)
+    func configureInputButton()
 
 }
 
