@@ -32,18 +32,16 @@ class ConversationsTableViewCell: UITableViewCell {
         userImageView.clipsToBounds = true
         userImageView.layer.cornerRadius = 25
         userImageView.layer.masksToBounds = true
-        userImageView.image = UIImage(named: "UserImage")
-        userImageView.image = UIImage(named: "person")
-        
+      
         nameLbl.configureStyle(size: 16, weight: .regular, color: .black)
-        nameLbl.text = "Mehmet Bilir"
+
         
         messageLbl.configureStyle(size: 15, weight: .regular, color: .gray)
-        messageLbl.text = "asdjasdjasjd naksjn dajkshbdajh bdajhsdbasjhdba sjdahjsdbajshdb ajdajhb ajdajhb ajdajhb ajdajhb ajdajhb ajdajhb ajdajhb  "
+      
        
         
-        dateLbl.configureStyle(size: 10, weight: .regular, color: .gray)
-        dateLbl.text = "2022-11-23 22:54"
+        dateLbl.configureStyle(size: 12, weight: .regular, color: .gray)
+      
         
 
     }
@@ -79,7 +77,7 @@ class ConversationsTableViewCell: UITableViewCell {
         
         contentView.addSubview(dateLbl)
         dateLbl.snp.makeConstraints { make in
-            make.right.equalToSuperview()
+            make.right.equalToSuperview().offset(-2)
             make.top.equalToSuperview()
         }
         
@@ -87,12 +85,22 @@ class ConversationsTableViewCell: UITableViewCell {
     
     func configure(conversation:Conversation) {
         nameLbl.text = (conversation.user_name)
-        dateLbl.text = conversation.latest_message.date
-        messageLbl.text = conversation.latest_message.message
-        
-        
+        handleDate(date: conversation.latest_message.date)
+        handleMessage(message: conversation.latest_message.message)
         userImageView.sd_setImage(with: URL(string: conversation.user_imageUrl))
     }
+    
+    private func handleMessage(message:String) {
+        if message.contains("https") {
+            messageLbl.text = "Media"
+        }else {
+            messageLbl.text = message
+        }
+    }
 
+    private func handleDate(date:String){
+        let stringToDate = date.convertToDate()
+        dateLbl.text = stringToDate.timeIn24HourFormat()
+    }
 }
 
