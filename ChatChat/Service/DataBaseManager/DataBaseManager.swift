@@ -275,14 +275,14 @@ extension DataBaseManager {
     }
     
     
-    func getChats(otherId:String,completion:@escaping (Result<[Chat],Error>)->Void) {
-        var chatArray = [Chat]()
+    func getChats(otherId:String,completion:@escaping (Result<[Message],Error>)->Void) {
+        var messageArray = [Message]()
         guard let uid = auth.currentUser?.uid else {return}
         firestore.collection("chats").document(uid).collection(otherId).order(by: "date", descending: false).addSnapshotListener({ snapshot, error in
             guard let documents = snapshot?.documents else {
                 completion(.failure(AppError.serverError("There is no documents")))
                 return}
-            chatArray.removeAll(keepingCapacity: true)
+            messageArray.removeAll(keepingCapacity: true)
             documents.forEach { document in
                 do {
                     let chat = try document.data(as: Chat.self)
@@ -296,13 +296,16 @@ extension DataBaseManager {
                     } else  {
                         messageKind = .text(chat.content)
                     }
-                    chatArray.append(chat)
+                    guard let finalKind = messageKind else {return}
+                    let sender = Sender(photoURL: "", senderId: chat.senderId, displayName: "")
+                    let message  = Message(sender: sender, messageId: chat.receiverId, sentDate: chat.date.convertToDate(), kind: finalKind)
+                    messageArray.append(message)
                 }catch {
                     completion(.failure(AppError.errorDecoding))
                 }
             }
            
-            completion(.success((chatArray.sorted(by: {$0.date < $1.date}))))
+            completion(.success(messageArray))
         })
     }
     

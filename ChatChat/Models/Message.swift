@@ -26,11 +26,11 @@ extension MessageKind {
         case .attributedText(_):
             return "attributedText"
         case .photo(_):
-            return "mediaItem"
+            return "photo"
         case .video(_):
-            return "mediaItem"
+            return "video"
         case .location(_):
-            return "locationItem"
+            return "location"
         case .emoji(_):
             return "emoji"
         case .audio(_):

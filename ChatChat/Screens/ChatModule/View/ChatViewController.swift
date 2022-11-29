@@ -76,6 +76,18 @@ extension ChatViewController: MessageCellDelegate {
             presenter?.configureAvatarView(uid: uid, avatarView: avatarView)
         }
     }
+    
+    func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        guard let message = message as? Message else {return}
+        switch message.kind {
+     
+        case .photo(let media):
+            guard let imageUrl = media.url else {return}
+            imageView.sd_setImage(with: imageUrl)
+        default:
+            break
+        }
+    }
 }
 
 extension ChatViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {

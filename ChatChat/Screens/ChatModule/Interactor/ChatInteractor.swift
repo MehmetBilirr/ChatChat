@@ -17,20 +17,12 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
 
     
     func getChats(otherId: String) {
-
-        DataBaseManager.shared.getChats(otherId: otherId) { [weak self] result in
-
-            switch result {
-            case .success(let chats):
-                self?.messages.removeAll(keepingCapacity: false)
-                chats.map { chat in
-                    let sender = Sender(photoURL: "", senderId: chat.senderId, displayName: "")
-                    let message = Message(sender: sender, messageId: chat.receiverId, sentDate: chat.date.convertToDate(), kind: .text(chat.content))
-                    self?.messages.append(message)
         
-                }
-                self?.presenter?.didFetchMessages(messages: self!.messages)
+        DataBaseManager.shared.getChats(otherId: otherId) { [weak self] result in
+            switch result {
                 
+            case .success(let messages):
+                self?.presenter?.didFetchMessages(messages: messages)
             case .failure(let error):
                 print(error.localizedDescription)
             }
