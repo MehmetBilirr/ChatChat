@@ -31,7 +31,10 @@ class ChatViewController:MessagesViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         presenter?.getChats(otherId: otherID)
+        
     }
+    
+    
     
 }
 
@@ -94,6 +97,7 @@ extension ChatViewController: MessageCellDelegate {
         case .photo(let media):
             guard let imageUrl = media.url else {return}
             let vc = PhotoViewerViewController(with: imageUrl)
+            
             navigationController?.pushViewController(vc, animated: true)
         default: break
         }
@@ -148,9 +152,9 @@ extension ChatViewController:PresenterToViewChatProtocol {
             messageInputBar.delegate = self
             messagesCollectionView.messageCellDelegate = self
        
-            self.navigationController?.navigationBar.prefersLargeTitles = false
+            
             let title = chosenConversation == nil ? "\(chosenUser!.firstName) \(chosenUser!.lastName)" : chosenConversation?.user_name
-            navigationItem.title = title
+            
         
     }
     

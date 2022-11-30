@@ -46,15 +46,15 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
     
     func loginWithGoogle(viewController: UIViewController) {
         
-        AuthManager.shared.firebaseSignInWithGoogle(viewController: viewController) {  bool in
+        AuthManager.shared.firebaseSignInWithGoogle(viewController: viewController) {  [weak self] bool in
            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 if bool {
                     
-                    DataBaseManager.shared.checkIfUserLogin { bool in
+                    DataBaseManager.shared.checkIfUserLogin { [weak self] bool in
                         if !bool {
                             let user = Auth.auth().currentUser
-       
+
                             guard let user = user else {return}
                             guard let imageUrl = user.photoURL?.absoluteString, let name = user.displayName, let email = user.email else {return}
                             
@@ -65,7 +65,7 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
                         }
                     }
                     
-                    self.presentMainVC()
+                    self?.presentMainVC()
                     
                     
                 }
@@ -74,6 +74,7 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
             
         }
     }
+
     
     func register() {
         

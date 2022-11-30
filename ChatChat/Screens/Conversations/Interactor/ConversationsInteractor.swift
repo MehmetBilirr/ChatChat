@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import ProgressHUD
+import FirebaseAuth
 
 class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
     var presenter: InteractorToPresenterConversationProtocol?
@@ -54,6 +55,13 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
         vc.chosenUser = user
         vc.chosenConversation = conversation
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func updateStatusOnline() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            DataBaseManager.shared.updateStatus(status: .Online)
+        }
+        
     }
 }
 

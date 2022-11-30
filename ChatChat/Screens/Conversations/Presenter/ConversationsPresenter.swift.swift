@@ -41,6 +41,13 @@ class ConversationsPresenter:ViewToPresenterConversationsProcotol {
         let receiverId = conversationArray[indexpath.row].user_id
         interactor?.delete(receiverId: receiverId)
     }
+    func viewDidLoad() {
+        view?.style()
+        view?.configureTableView()
+        view?.configureBarButton()
+        interactor?.updateStatusOnline()
+        
+    }
 }
 
 

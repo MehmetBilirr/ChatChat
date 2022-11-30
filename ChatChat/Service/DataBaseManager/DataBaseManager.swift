@@ -19,6 +19,10 @@ class DataBaseManager {
     static let shared = DataBaseManager()
     let firestore = Firestore.firestore()
     let auth  = Auth.auth()
+    private var uid:String  {
+        guard let uid = auth.currentUser?.uid else {return ""}
+        return uid
+    }
     init(){}
     
     
@@ -39,12 +43,11 @@ class DataBaseManager {
     }
     
     func fetchUsers(completion:@escaping ([User])->Void){
-        guard let uid = auth.currentUser?.uid else {return}
         var users = [User]()
         firestore.collection("users").getDocuments { snapshot, error in
             guard let documents = snapshot?.documents else {return}
             documents.forEach { document in
-                if document.documentID != uid {
+                if document.documentID != self.uid {
                     do {
                         let user = try document.data(as: User.self)
                         users.append(user)
@@ -53,19 +56,12 @@ class DataBaseManager {
                     }
                 }
                 
-                
-                
             }
             completion(users)
-            
         }
-        
-        
     }
     
     func checkIfUserLogin(completion:@escaping(Bool) -> Void) {
-        guard let uid = auth.currentUser?.uid else {return}
-        
         firestore.collection("users").document(uid).getDocument { snapshot, error in
             guard let snapshot = snapshot else {return}
             completion(snapshot.exists)
@@ -75,16 +71,12 @@ class DataBaseManager {
     
     
     private func createDataFirestore(imageUrl:String,firstName:String,lastName:String,email:String){
-        
-        guard let uid = auth.currentUser?.uid else {return}
-        
-        
         let data = [
             "firstName":firstName,
             "lastName":lastName,
             "imageUrl":imageUrl,
             "email":email,
-            "uid":uid,
+            "uid":uid
         ] as [String : Any]
         
         firestore.collection("users").document(uid).setData(data) { error in
@@ -95,6 +87,16 @@ class DataBaseManager {
             
         }
         
+    }
+    
+    func updateStatus(status:Status){
+        guard let uid = auth.currentUser?.uid else {return}
+        firestore.collection("users").document(uid).updateData(["status":status.rawValue]) { error in
+            
+            if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
     }
     
     
@@ -145,7 +147,6 @@ extension DataBaseManager {
       
         var message = ""
         var currentUserName = ""
-        guard let uid = auth.currentUser?.uid else {return}
         let messageDate = firstMessage.sentDate.dateAndTimetoString()
         
         switch firstMessage.kind {
@@ -186,7 +187,7 @@ extension DataBaseManager {
                     "isRead":false
                 ]
             ]
-            self.firestore.collection("conversations").document(uid).collection(uid).document(receiverUserId).setData(senderData) { error in
+            self.firestore.collection("conversations").document(self.uid).collection(self.uid).document(receiverUserId).setData(senderData) { error in
                 
                 if error != nil {
                     print(error?.localizedDescription)
@@ -201,14 +202,14 @@ extension DataBaseManager {
             currentUserName = "\(user.firstName) \(user.lastName)"
             
             let recivierData:[String:Any] = [
-                "user_id":uid,
+                "user_id":self.uid,
                 "user_name":currentUserName,
                 "user_imageUrl":user.imageUrl,
                 "latest_message":["date":messageDate,
                                   "message":message,
                                   "isRead":false]]
             
-            self.firestore.collection("conversations").document(receiverUserId).collection(receiverUserId).document(uid).setData(recivierData) { error in
+            self.firestore.collection("conversations").document(receiverUserId).collection(receiverUserId).document(self.uid).setData(recivierData) { error in
                 if error != nil {
                     print(error?.localizedDescription)
                 }
@@ -221,7 +222,6 @@ extension DataBaseManager {
     }
     
      private func createChat(receiverUserId:String,type:String,date:String,content:String,completion:@escaping (Bool)-> Void){
-        guard let uid = auth.currentUser?.uid else {return}
         let data : [String:Any] = [
             "receiverId":receiverUserId,
             "type":type,
@@ -254,7 +254,6 @@ extension DataBaseManager {
     
     func getConversations(completion:@escaping ([Conversation])->Void){
         var conversationArray = [Conversation]()
-        guard let uid = auth.currentUser?.uid else {return}
         firestore.collection("conversations").document(uid).collection(uid).addSnapshotListener({ snapshot, error in
             
            
@@ -277,7 +276,6 @@ extension DataBaseManager {
     
     func getChats(otherId:String,completion:@escaping (Result<[Message],Error>)->Void) {
         var messageArray = [Message]()
-        guard let uid = auth.currentUser?.uid else {return}
         firestore.collection("chats").document(uid).collection(otherId).order(by: "date", descending: false).addSnapshotListener({ snapshot, error in
             guard let documents = snapshot?.documents else {
                 completion(.failure(AppError.serverError("There is no documents")))
@@ -311,17 +309,16 @@ extension DataBaseManager {
     
     func deleteConversations(otherId:String,completion: @escaping (Bool)->Void) {
         let firestore = Firestore.firestore()
-        guard let uid = auth.currentUser?.uid else {return}
         firestore.collection("conversations").document(uid).collection(uid).document(otherId).delete { error in
             if error != nil {
                 print(error?.localizedDescription)
                 completion(false)
             }else {
-                firestore.collection("chats").document(uid).collection(otherId).addSnapshotListener { snapshot, error in
+                firestore.collection("chats").document(self.uid).collection(otherId).addSnapshotListener { snapshot, error in
                     guard let documents = snapshot?.documents else {return}
                     documents.forEach { document in
                         let documentId = document.documentID
-                        firestore.collection("chats").document(uid).collection(otherId).document(documentId).delete { error in
+                        firestore.collection("chats").document(self.uid).collection(otherId).document(documentId).delete { error in
                             if error != nil {
                                 print(error?.localizedDescription)
                                 completion(false)

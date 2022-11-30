@@ -15,10 +15,11 @@ class AuthManager {
     
     static let shared = AuthManager()
     init(){}
+    private let auth = Auth.auth()
     
     func firebaseSignIn(email:String,password:String,completion:@escaping(Bool)->Void){
         
-        Auth.auth().signIn(withEmail: email, password: password) { data, error in
+        auth.signIn(withEmail: email, password: password) { data, error in
                 if error != nil {
                     ProgressHUD.showError(error?.localizedDescription)
                     completion(false)
@@ -33,7 +34,7 @@ class AuthManager {
     
     func firebaseSignUp(email:String,password:String,completion:@escaping(Bool) -> Void){
         
-        Auth.auth().createUser(withEmail: email, password: password) { data, error in
+        auth.createUser(withEmail: email, password: password) { data, error in
             if error != nil {
                 ProgressHUD.showError(error?.localizedDescription)
                 completion(false)
@@ -47,7 +48,8 @@ class AuthManager {
     
     func firebaseLogOut(completion:(Bool)->Void){
            do {
-               try Auth.auth().signOut()
+               DataBaseManager.shared.updateStatus(status: .Offline)
+               try auth.signOut()
                completion(true)
            }catch{
                completion(false)
@@ -57,7 +59,7 @@ class AuthManager {
     
     func firebaseSignInWithFB(token:String){
         let credential = FacebookAuthProvider.credential(withAccessToken: token)
-        Auth.auth().signIn(with: credential)
+        auth.signIn(with: credential)
     }
     
     func firebaseSignInWithGoogle(viewController:UIViewController,completion:@escaping(Bool)->Void){
@@ -79,7 +81,7 @@ class AuthManager {
           let credential = GoogleAuthProvider.credential(withIDToken: idToken,
                                                          accessToken: authentication.accessToken)
 
-            Auth.auth().signIn(with: credential)
+            self.auth.signIn(with: credential)
             completion(true)
         }
     }

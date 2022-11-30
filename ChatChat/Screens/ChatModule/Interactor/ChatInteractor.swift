@@ -18,11 +18,12 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
 
     
     func getChats(otherId: String) {
-        
+        print(otherId)
         DataBaseManager.shared.getChats(otherId: otherId) { [weak self] result in
             switch result {
                 
             case .success(let messages):
+                print(messages)
                 self?.presenter?.didFetchMessages(messages: messages)
                 
             case .failure(let error):

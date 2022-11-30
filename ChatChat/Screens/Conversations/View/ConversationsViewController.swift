@@ -6,19 +6,18 @@
 //
 
 import UIKit
-import FBSDKLoginKit
-import FirebaseAuth
+import SnapKit
 
 
  class ConversationsViewController: UIViewController {
     private let conversationsTableView = UITableView()
     var presenter:ViewToPresenterConversationsProcotol?
+    private let noConversationLabel = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setup()
-        
-        
+        ConversationsRouter.createModule(ref: self, navigationController: navigationController!)
+        presenter?.viewDidLoad()
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -28,6 +27,7 @@ import FirebaseAuth
      
      override func viewDidAppear(_ animated: Bool) {
          presenter?.getConversations()
+         
      }
 
      
@@ -35,30 +35,6 @@ import FirebaseAuth
 
 
 extension ConversationsViewController {
-    
-    private func setup(){
-        ConversationsRouter.createModule(ref: self, navigationController: navigationController!)
-        view.backgroundColor = .systemBackground
-        configureTableView()
-        configureBarButton()
-        title = "Chats"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotification(_:)), name: .myNotification, object: nil)
-    }
-    
-    private func configureTableView(){
-        view.addSubview(conversationsTableView)
-        conversationsTableView.delegate = self
-        conversationsTableView.dataSource = self
-        conversationsTableView.register(ConversationsTableViewCell.self, forCellReuseIdentifier: ConversationsTableViewCell.identifier)
-        conversationsTableView.rowHeight = 70
-
-    }
-    private func configureBarButton(){
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton(_:)))
-        
-    }
-    
     @objc func didTapComposeButton(_ sender :UIBarButtonItem){
         presenter?.didTapComposeButton()
     }
@@ -100,8 +76,32 @@ extension ConversationsViewController:UITableViewDelegate,UITableViewDataSource 
 
 extension ConversationsViewController:PresenterToViewConversationProtocol {
     
-    
     func reloadData() {
         conversationsTableView.reloadData()
     }
+
+    func configureTableView(){
+        view.addSubview(conversationsTableView)
+        conversationsTableView.delegate = self
+        conversationsTableView.dataSource = self
+        conversationsTableView.register(ConversationsTableViewCell.self, forCellReuseIdentifier: ConversationsTableViewCell.identifier)
+        conversationsTableView.rowHeight = 70
+
+    }
+    func configureBarButton(){
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(didTapComposeButton(_:)))
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+    }
+    
+    func style() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        view.backgroundColor = .systemBackground
+        title = "Chats"
+        NotificationCenter.default.addObserver(self, selector: #selector(didGetNotification(_:)), name: .myNotification, object: nil)
+        
+        
+    }
+    
+   
 }

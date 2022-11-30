@@ -15,6 +15,7 @@ class RegisterInteractor:PresenterToInteractorRegisterProtocol {
     func register(profileImageView: UIImageView, firstName: String, lastName: String, email: String, password: String) {
         ProgressHUD.show()
         AuthManager.shared.firebaseSignUp(email: email, password: password) { [weak self] bool in
+            
             if bool {
                 DataBaseManager.shared.setupProfile(imageView: profileImageView, firstName: firstName, lastName: lastName, email: email) { [weak self] bool in
                     if bool {

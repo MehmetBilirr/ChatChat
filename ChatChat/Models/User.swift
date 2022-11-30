@@ -13,4 +13,14 @@ struct User:Codable {
     let uid:String
     let imageUrl:String
     let email:String
+    let status:Status
+}
+
+
+enum Status:String, Codable {
+    case Online = "Online"
+    case Offline = "Offline"
+    
+    
+    
 }

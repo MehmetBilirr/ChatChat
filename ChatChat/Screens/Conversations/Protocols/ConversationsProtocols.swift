@@ -12,6 +12,7 @@ import UIKit
 protocol ViewToPresenterConversationsProcotol {
     var interactor:PresenterToInteractorConversationsProtocol?{get set}
     var view:PresenterToViewConversationProtocol? {get set}
+    func viewDidLoad()
     func didTapComposeButton()
     func didGetUser(user:User)
     func getConversations()
@@ -19,6 +20,7 @@ protocol ViewToPresenterConversationsProcotol {
     func getConversationCount() -> Int
     func didSelectRow(at indexpath:IndexPath)
     func delete(at indexpath:IndexPath)
+
 }
 
 protocol PresenterToInteractorConversationsProtocol {
@@ -29,6 +31,7 @@ protocol PresenterToInteractorConversationsProtocol {
     func getConversations()
     func didSelectRow(conversation:Conversation)
     func delete(receiverId:String)
+    func updateStatusOnline()
 }
 
 
@@ -39,6 +42,10 @@ protocol InteractorToPresenterConversationProtocol {
 
 protocol PresenterToViewConversationProtocol {
     func reloadData()
+    func configureTableView()
+    func configureBarButton()
+    func style()
+
 }
 
 

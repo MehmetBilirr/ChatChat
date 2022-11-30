@@ -39,7 +39,7 @@ extension NewConversationViewController:UITableViewDataSource,UITableViewDelegat
         
         let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as! UserTableViewCell
         
-        cell.configure(user: presenter?.getChatUser(indexpath: indexPath) ?? .init(firstName: "", lastName: "", uid: "", imageUrl: "", email: ""))
+        cell.configure(user: presenter?.getChatUser(indexpath: indexPath) ?? .init(firstName: "", lastName: "", uid: "", imageUrl: "", email: "", status: .Offline))
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
