@@ -15,10 +15,11 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
     var navigationController: UINavigationController?
     var messages = [Message]()
     var presenter: InteractorToPresenterChatProtocol?
+    var otherID :String?
 
     
     func getChats(otherId: String) {
-        print(otherId)
+        otherID = otherId
         DataBaseManager.shared.getChats(otherId: otherId) { [weak self] result in
             switch result {
                 
@@ -31,6 +32,15 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
             }
         }
         
+    }
+    
+    func configureChatStatusView(view: ChatStatusView) {
+        guard let uid = otherID else {return}
+        DataBaseManager.shared.fetchUser(uuid: uid) { user in
+            view.nameLbl.text = "\(user.firstName) \(user.lastName)"
+            view.statusLbl.text = user.status.rawValue
+            view.imageView.sd_setImage(with: URL(string: user.imageUrl))
+        }
     }
     
     func getCurrentUser() {
@@ -64,10 +74,7 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
                     print("succcess")
                 }
             }
-        
-            
         }
-
     }
     
 }

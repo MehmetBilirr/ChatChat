@@ -49,6 +49,10 @@ class ChatPresenter:ViewToPresenterChatProtocol {
     func didFinishPickingMedia(receiverId: String, imageView: UIImageView, sender: SenderType) {
         interactor?.didFinishPickingMedia(receiverId: receiverId, imageView: imageView, sender: sender)
     }
+    
+    func configureChatStatusView(view: ChatStatusView) {
+        interactor?.configureChatStatusView(view: view)
+    }
 }
 
 
@@ -65,6 +69,7 @@ extension ChatPresenter:InteractorToPresenterChatProtocol {
     }
     func didFetchCurrentUser(user: User) {
         let sender = Sender(photoURL: user.imageUrl, senderId: user.uid, displayName: user.firstName + user.lastName)
+        print(user)
         view?.selfSender(sender: sender)
     }
     

@@ -20,6 +20,7 @@ protocol ViewToPresenterChatProtocol {
     func configureAvatarView(uid:String,avatarView:AvatarView)
     func numberOfSection()->Int
     func didFinishPickingMedia(receiverId:String,imageView:UIImageView,sender: SenderType)
+    func configureChatStatusView(view:ChatStatusView)
     
 }
 
@@ -32,6 +33,7 @@ protocol PresenterToInteractorChatProtocol {
     func getCurrentUser()
     func configureAvatarView(uid:String,avatarView:AvatarView)
     func didFinishPickingMedia(receiverId:String,imageView:UIImageView,sender: SenderType)
+    func configureChatStatusView(view:ChatStatusView)
 }
 
 protocol InteractorToPresenterChatProtocol {

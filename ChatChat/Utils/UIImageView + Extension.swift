@@ -15,7 +15,7 @@ extension UIImageView {
         
         translatesAutoresizingMaskIntoConstraints = false
         image = UIImage(named: imageName)
-        contentMode = .scaleAspectFill
+        contentMode = .scaleAspectFit
     }
     
 }

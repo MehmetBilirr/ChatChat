@@ -10,6 +10,7 @@ import MessageKit
 import InputBarAccessoryView
 import FirebaseAuth
 import SwiftUI
+import SnapKit
 
 class ChatViewController:MessagesViewController {
     var presenter: ViewToPresenterChatProtocol?
@@ -17,6 +18,7 @@ class ChatViewController:MessagesViewController {
     private var selfSender : SenderType?
     var chosenUser:User?
     var chosenConversation:Conversation?
+    let viewChat = ChatStatusView(frame: .zero)
     private var otherID:String {
         let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
         return otId
@@ -27,14 +29,23 @@ class ChatViewController:MessagesViewController {
         super.viewDidLoad()
         ChatRouter.createModule(ref: self, navigationController: navigationController!)
         presenter?.viewDidLoad()
+        configureView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         presenter?.getChats(otherId: otherID)
-        
+        presenter?.configureChatStatusView(view: viewChat)
     }
     
-    
+    func configureView(){
+        view.addSubview(viewChat)
+        viewChat.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.top.equalToSuperview()
+            make.height.equalTo(90)
+            make.width.equalToSuperview()
+        }
+    }
     
 }
 
@@ -102,6 +113,8 @@ extension ChatViewController: MessageCellDelegate {
         default: break
         }
     }
+    
+    
 }
 
 extension ChatViewController:UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -143,7 +156,6 @@ extension ChatViewController:UIImagePickerControllerDelegate, UINavigationContro
  
 }
 
-
 extension ChatViewController:PresenterToViewChatProtocol {
     func configureCollectionView() {
             messagesCollectionView.messagesDisplayDelegate = self
@@ -167,6 +179,9 @@ extension ChatViewController:PresenterToViewChatProtocol {
         }
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
         messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
+        
+        
+        
     }
     
     private func presentInputActionSheet(){

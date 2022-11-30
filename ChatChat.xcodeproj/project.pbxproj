@@ -21,6 +21,7 @@
 		F0C64866292B9F4F0096B8C4 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = F0C64865292B9F4F0096B8C4 /* GoogleSignInSwift */; };
 		F0CF46AB29366FAB004C5224 /* ActionNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF46AA29366FAB004C5224 /* ActionNames.swift */; };
 		F0CF46B029367C42004C5224 /* Media.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0CF46AF29367C42004C5224 /* Media.swift */; };
+		F0D0F6C22937CF2D00ED1D79 /* ChatStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0F6C12937CF2D00ED1D79 /* ChatStatusView.swift */; };
 		F0D386B129281C17001B8DA1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386B029281C17001B8DA1 /* AppDelegate.swift */; };
 		F0D386B529281C17001B8DA1 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */; };
 		F0D386BA29281C18001B8DA1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0D386B929281C18001B8DA1 /* Assets.xcassets */; };
@@ -100,6 +101,7 @@
 		F0A33E77292BD5110063FF90 /* ConversationsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsProtocols.swift; sourceTree = "<group>"; };
 		F0CF46AA29366FAB004C5224 /* ActionNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionNames.swift; sourceTree = "<group>"; };
 		F0CF46AF29367C42004C5224 /* Media.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Media.swift; sourceTree = "<group>"; };
+		F0D0F6C12937CF2D00ED1D79 /* ChatStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatStatusView.swift; sourceTree = "<group>"; };
 		F0D386AD29281C17001B8DA1 /* ChatChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0D386B029281C17001B8DA1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0D386B429281C17001B8DA1 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
@@ -265,6 +267,14 @@
 				F0D386D129281E57001B8DA1 /* PhotoViewerViewController.swift */,
 			);
 			path = PhotoViewweViewController;
+			sourceTree = "<group>";
+		};
+		F0D0F6C02937CF1400ED1D79 /* ChatStatusView */ = {
+			isa = PBXGroup;
+			children = (
+				F0D0F6C12937CF2D00ED1D79 /* ChatStatusView.swift */,
+			);
+			path = ChatStatusView;
 			sourceTree = "<group>";
 		};
 		F0D386A429281C17001B8DA1 = {
@@ -560,6 +570,7 @@
 		F0FBA096292BDDAA00FD6B5C /* ChatModule */ = {
 			isa = PBXGroup;
 			children = (
+				F0D0F6C02937CF1400ED1D79 /* ChatStatusView */,
 				F0FBA09B292BDE1A00FD6B5C /* View */,
 				F0FBA09A292BDE1600FD6B5C /* Presenter */,
 				F0FBA099292BDE0F00FD6B5C /* Interactor */,
@@ -831,6 +842,7 @@
 				F0D3C061292914B70084C977 /* AuthManager.swift in Sources */,
 				F0FBA0AD292BEC6A00FD6B5C /* UserTableViewCell.swift in Sources */,
 				F0FBA0B2292BED2100FD6B5C /* UITableViewCell + extension.swift.swift in Sources */,
+				F0D0F6C22937CF2D00ED1D79 /* ChatStatusView.swift in Sources */,
 				F08B76D2292E8829008C76FE /* Date + extension.swift in Sources */,
 				F0E2C2542930EB36005A275B /* Chat.swift in Sources */,
 				F0D3C07A292942080084C977 /* ProfileInteractor.swift in Sources */,

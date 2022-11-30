@@ -28,7 +28,6 @@ class UserTableViewCell: UITableViewCell {
         userImageView.clipsToBounds = true
         userImageView.layer.cornerRadius = 25
         userImageView.layer.masksToBounds = true
-        userImageView.image = UIImage(named: "UserImage")
         userImageView.image = UIImage(named: "person")
         
         nameLbl.configureStyle(size: 16, weight: .regular, color: .black)
