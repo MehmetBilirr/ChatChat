@@ -259,6 +259,14 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		F0D0F6BF29379BA800ED1D79 /* PhotoViewweViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F0D386D129281E57001B8DA1 /* PhotoViewerViewController.swift */,
+			);
+			path = PhotoViewweViewController;
+			sourceTree = "<group>";
+		};
 		F0D386A429281C17001B8DA1 = {
 			isa = PBXGroup;
 			children = (
@@ -327,7 +335,7 @@
 				F0188228292AB1100062F9C3 /* Conversations */,
 				F0FBA096292BDDAA00FD6B5C /* ChatModule */,
 				F0FBA0A3292BEB8400FD6B5C /* NewConversationModule */,
-				F0D386D129281E57001B8DA1 /* PhotoViewerViewController.swift */,
+				F0D0F6BF29379BA800ED1D79 /* PhotoViewweViewController */,
 				F0D386D329281E5F001B8DA1 /* VideoPlayerViewController.swift */,
 			);
 			path = Screens;

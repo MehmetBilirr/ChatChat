@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 import FirebaseAuth
 import MessageKit
+import ProgressHUD
 
 class ChatInteractor:PresenterToInteractorChatProtocol {
     var navigationController: UINavigationController?
@@ -23,6 +24,7 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
                 
             case .success(let messages):
                 self?.presenter?.didFetchMessages(messages: messages)
+                
             case .failure(let error):
                 print(error.localizedDescription)
             }

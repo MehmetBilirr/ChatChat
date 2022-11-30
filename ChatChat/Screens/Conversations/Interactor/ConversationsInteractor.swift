@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import ProgressHUD
 
 class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
     var presenter: InteractorToPresenterConversationProtocol?
@@ -23,9 +24,7 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
     
     func didGetUser(user: User) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            let vc = ChatViewController()
-            vc.chosenUser = user
-            self.navigationController?.pushViewController(vc, animated: true)
+            self.pushNavigation(user: user)
         }
         
     }
@@ -38,18 +37,23 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
     }
     
     func didSelectRow(conversation: Conversation) {
+        self.pushNavigation(conversation:conversation)
         
-        let vc = ChatViewController()
-        vc.chosenConversation = conversation
-        navigationController?.pushViewController(vc, animated: true)
     }
     func delete(receiverId: String) {
         
         DataBaseManager.shared.deleteConversations(otherId: receiverId) { bool in
             if bool {
-                
+               print("seccess")
             }
         }
+    }
+    
+    private func pushNavigation(user:User?=nil,conversation:Conversation?=nil){
+        let vc = ChatViewController()
+        vc.chosenUser = user
+        vc.chosenConversation = conversation
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

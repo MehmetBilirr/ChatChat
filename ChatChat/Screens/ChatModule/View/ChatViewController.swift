@@ -17,6 +17,10 @@ class ChatViewController:MessagesViewController {
     private var selfSender : SenderType?
     var chosenUser:User?
     var chosenConversation:Conversation?
+    private var otherID:String {
+        let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
+        return otId
+    }
     
     
     override func viewDidLoad() {
@@ -26,9 +30,7 @@ class ChatViewController:MessagesViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
-        presenter?.getChats(otherId: otId)
-        
+        presenter?.getChats(otherId: otherID)
     }
     
 }
@@ -56,9 +58,7 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {return}
  
-        let messageId = (chosenUser == nil ? chosenConversation?.user_id : chosenUser?.uid)!
-       
-        presenter?.sendMessage(text: text, otherUserId: messageId, sender: selfSender!)
+        presenter?.sendMessage(text: text, otherUserId: otherID, sender: selfSender!)
     }
     
 }
@@ -70,10 +70,8 @@ extension ChatViewController: MessageCellDelegate {
         if sender.senderId == selfSender!.senderId {
             presenter?.configureAvatarView(uid: sender.senderId, avatarView: avatarView)
         }else {
-            
-            let uid = (chosenUser == nil ? chosenConversation?.user_id : chosenUser?.uid)!
 
-            presenter?.configureAvatarView(uid: uid, avatarView: avatarView)
+            presenter?.configureAvatarView(uid: otherID, avatarView: avatarView)
         }
     }
     
@@ -86,6 +84,18 @@ extension ChatViewController: MessageCellDelegate {
             imageView.sd_setImage(with: imageUrl)
         default:
             break
+        }
+    }
+    
+    func didTapImage(in cell: MessageCollectionViewCell) {
+        guard let indexPath = self.messagesCollectionView.indexPath(for: cell) else {return}
+        let message = messages[indexPath.section]
+        switch message.kind {
+        case .photo(let media):
+            guard let imageUrl = media.url else {return}
+            let vc = PhotoViewerViewController(with: imageUrl)
+            navigationController?.pushViewController(vc, animated: true)
+        default: break
         }
     }
 }
@@ -122,8 +132,7 @@ extension ChatViewController:UIImagePickerControllerDelegate, UINavigationContro
         guard let selectedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage else {return}
         let imageView = UIImageView()
         imageView.image = selectedImage
-        let uid = (chosenUser == nil ? chosenConversation?.user_id : chosenUser?.uid)!
-        presenter?.didFinishPickingMedia(receiverId: uid, imageView: imageView, sender: selfSender!)
+        presenter?.didFinishPickingMedia(receiverId: otherID, imageView: imageView, sender: selfSender!)
         self.dismiss(animated: true)
     }
     
