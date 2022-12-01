@@ -335,20 +335,28 @@ extension DataBaseManager {
     }
     
     func deleteUserData(completion:@escaping (Bool)-> Void){
-        firestore.collection("conversations").document(uid).delete { error in
+        
+        firestore.collection("users").document(uid).delete { error in
             if error != nil {
                 print(error?.localizedDescription)
             }else {
-                self.firestore.collection("chats").document(self.uid).delete { error in
+                self.firestore.collection("conversations").document(self.uid).delete { error in
                     if error != nil {
                         print(error?.localizedDescription)
                     }else {
-                        completion(true)
+                        self.firestore.collection("chats").document(self.uid).delete { error in
+                            if error != nil {
+                                print(error?.localizedDescription)
+                            }else {
+                                completion(true)
+                            }
+                        }
                     }
+                 
                 }
             }
-            
         }
+         
     }
     
 }

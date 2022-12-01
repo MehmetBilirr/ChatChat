@@ -99,12 +99,16 @@ class AuthManager {
         })
     }
     func deleteAccount(completion:@escaping (Bool)-> Void){
-        auth.currentUser?.delete(completion: { error in
-            if error != nil {
-                print(error?.localizedDescription)
-            }else {
-                DataBaseManager.shared.deleteUserData(completion: completion)
+        DataBaseManager.shared.deleteUserData { bool in
+            if bool {
+                self.auth.currentUser?.delete(completion: { error in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                    }else {
+                        completion(true)
+                    }
+                })
             }
-        })
+        }
     }
 }

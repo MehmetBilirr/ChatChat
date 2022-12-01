@@ -26,7 +26,6 @@ class ProfileViewController: UIViewController {
     private let deleteButton = UIButton()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         ProfileRouter.createModule(ref: self, navigationController: navigationController!)
         presenter?.viewDidLoad()
     }

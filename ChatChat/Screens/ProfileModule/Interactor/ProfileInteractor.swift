@@ -19,13 +19,12 @@ class ProfileInteractor:PresenterToInteractorProfileProcotol {
         
         actionSheet.configureAction(title: "Cancel", style: .cancel, handler: nil)
         
-        actionSheet.configureAction(title: "Logout", style: .default) { [weak self] _ in
+        actionSheet.configureAction(title: "Logout", style: .default) { _ in
             AuthManager.shared.firebaseLogOut { bool in
                 if bool {
+
                     LoginManager().logOut()
-                    let navLoginVc = UINavigationController(rootViewController: LoginViewController())
-                    navLoginVc.modalPresentationStyle = .fullScreen
-                    self?.navigationController?.present(navLoginVc, animated: true)
+                    self.pushToLoginVC()
                     
                     
                 }
@@ -43,9 +42,18 @@ class ProfileInteractor:PresenterToInteractorProfileProcotol {
     func didTapChangePassword(newPass: String) {
         AuthManager.shared.changePassword(newPass: newPass)
     }
+    
     func didTapDelete() {
-        
-        
+        AuthManager.shared.deleteAccount { bool in
+            if bool {
+                self.pushToLoginVC()
+            }
+        }
     }
     
+    private func pushToLoginVC(){
+        let navLoginVc = UINavigationController(rootViewController: LoginViewController())
+        navLoginVc.modalPresentationStyle = .fullScreen
+        navigationController?.present(navLoginVc, animated: true)
+    }
 }

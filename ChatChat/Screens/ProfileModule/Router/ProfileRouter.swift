@@ -11,9 +11,10 @@ import UIKit
 class ProfileRouter:PresenterToRouterProfileProtocol {
     
     static func createModule(ref: ProfileViewController, navigationController: UINavigationController) {
-        
-        ref.presenter = ProfilePresenter()
-        ref.presenter?.interactor = ProfileInteractor()
+        let presenter = ProfilePresenter()
+        let interactor = ProfileInteractor()
+        ref.presenter = presenter
+        ref.presenter?.interactor = interactor
         ref.presenter?.view = ref
         ref.presenter?.interactor?.navigationController = navigationController
     }
