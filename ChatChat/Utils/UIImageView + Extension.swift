@@ -11,11 +11,12 @@ import UIKit
 
 extension UIImageView {
     
-    func configureImageView(imageName:String){
-        
+    func configureImageView(){
         translatesAutoresizingMaskIntoConstraints = false
-        image = UIImage(named: imageName)
+        layer.cornerRadius = self.frame.width / 2
         contentMode = .scaleAspectFit
+        clipsToBounds = true
+        layer.masksToBounds = true
     }
     
 }

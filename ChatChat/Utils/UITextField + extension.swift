@@ -24,7 +24,7 @@ extension UITextField {
         leftViewMode = .always
         layer.cornerRadius = 12
         layer.borderWidth = 0.5
-        layer.borderColor = UIColor.secondaryLabel.cgColor
+        layer.borderColor = UIColor.secondarySystemFill.cgColor
     }
     
     func enablePasswordToggle(){

@@ -71,7 +71,7 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
             let message = Message(sender: sender, messageId: receiverId, sentDate: Date(), kind: .photo(media))
             DataBaseManager.shared.createNewConversation(receiverUserId: receiverId, firstMessage: message) { [weak self] bool in
                 if bool {
-                    print("succcess")
+                    
                 }
             }
         }

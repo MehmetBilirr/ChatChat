@@ -60,14 +60,10 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
                             
                             let array = name.components(separatedBy: " ")
 
-                            
                             DataBaseManager.shared.createDataFirestore(with: imageUrl, firstName: array[0], lastName: array[1], email: email)
                         }
                     }
-                    
                     self?.presentMainVC()
-                    
-                    
                 }
                 
             }

@@ -10,7 +10,7 @@ import UIKit
 class ConversationsTableViewCell: UITableViewCell {
 
   
-    private let userImageView = UIImageView()
+    private let userImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     private let nameLbl = UILabel()
     private let messageLbl = UILabel()
     private let dateLbl = UILabel()
@@ -27,11 +27,7 @@ class ConversationsTableViewCell: UITableViewCell {
     
     
     private func stylee(){
-        userImageView.translatesAutoresizingMaskIntoConstraints = false
-        userImageView.contentMode = .scaleAspectFit
-        userImageView.clipsToBounds = true
-        userImageView.layer.cornerRadius = 25
-        userImageView.layer.masksToBounds = true
+        userImageView.configureImageView()
       
         nameLbl.configureStyle(size: 16, weight: .regular, color: .black)
 
@@ -52,10 +48,10 @@ class ConversationsTableViewCell: UITableViewCell {
         
         userImageView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
-            make.top.equalToSuperview().offset(5)
-            make.height.equalTo(50)
-            make.width.equalTo(50)
-            make.bottom.equalToSuperview().offset(-5)
+            make.top.equalToSuperview().offset(10)
+            make.height.equalTo(userImageView.frame.height)
+            make.width.equalTo(userImageView.frame.width)
+            
         }
         
         
@@ -63,7 +59,7 @@ class ConversationsTableViewCell: UITableViewCell {
         
         nameLbl.snp.makeConstraints { make in
             make.left.equalTo(userImageView.snp.right).offset(10)
-            make.top.equalToSuperview().offset(5 )
+            make.top.equalToSuperview().offset(10)
            
         }
         

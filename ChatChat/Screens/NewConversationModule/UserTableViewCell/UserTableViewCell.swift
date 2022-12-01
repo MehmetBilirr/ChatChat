@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 class UserTableViewCell: UITableViewCell {
-    private let userImageView = UIImageView()
+    private let userImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
     private let nameLbl = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -23,17 +23,10 @@ class UserTableViewCell: UITableViewCell {
     
     
     private func stylee(){
-        userImageView.translatesAutoresizingMaskIntoConstraints = false
-        userImageView.contentMode = .scaleAspectFit
-        userImageView.clipsToBounds = true
-        userImageView.layer.cornerRadius = 25
-        userImageView.layer.masksToBounds = true
-        userImageView.image = UIImage(named: "person")
+        userImageView.configureImageView()
         
         nameLbl.configureStyle(size: 16, weight: .regular, color: .black)
-        nameLbl.text = "Mehmet Bilir"
-        
-
+    
     }
     
     private func layout(){
@@ -42,10 +35,11 @@ class UserTableViewCell: UITableViewCell {
         
         userImageView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(15)
-            make.top.equalToSuperview().offset(5)
-            make.height.equalTo(50)
-            make.width.equalTo(50)
-            make.bottom.equalToSuperview().offset(-5)
+            make.top.equalToSuperview().offset(10)
+            make.height.equalTo(userImageView.frame.height)
+            make.width.equalTo(userImageView.frame.width)
+            make.bottom.equalToSuperview().offset(-10)
+
         }
         
         
@@ -53,7 +47,7 @@ class UserTableViewCell: UITableViewCell {
         
         nameLbl.snp.makeConstraints { make in
             make.left.equalTo(userImageView.snp.right).offset(10)
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(25)
            
         }
         

@@ -45,7 +45,7 @@ class ConversationsInteractor:PresenterToInteractorConversationsProtocol {
         
         DataBaseManager.shared.deleteConversations(otherId: receiverId) { bool in
             if bool {
-               print("seccess")
+              
             }
         }
     }

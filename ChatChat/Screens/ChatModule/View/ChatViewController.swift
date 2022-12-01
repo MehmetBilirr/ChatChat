@@ -53,13 +53,13 @@ extension ChatViewController:MessagesDataSource,MessagesLayoutDelegate,MessagesD
     func currentSender() -> SenderType {
         return selfSender!
     }
-
+    
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-
+        
         return messages[indexPath.section]
     }
-   
+    
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         return messages.count
     }
@@ -71,7 +71,7 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {return}
- 
+        
         presenter?.sendMessage(text: text, otherUserId: otherID, sender: selfSender!)
     }
     
@@ -84,7 +84,7 @@ extension ChatViewController: MessageCellDelegate {
         if sender.senderId == selfSender!.senderId {
             presenter?.configureAvatarView(uid: sender.senderId, avatarView: avatarView)
         }else {
-
+            
             presenter?.configureAvatarView(uid: otherID, avatarView: avatarView)
         }
     }
@@ -92,7 +92,7 @@ extension ChatViewController: MessageCellDelegate {
     func configureMediaMessageImageView(_ imageView: UIImageView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         guard let message = message as? Message else {return}
         switch message.kind {
-     
+            
         case .photo(let media):
             guard let imageUrl = media.url else {return}
             imageView.sd_setImage(with: imageUrl)
@@ -133,7 +133,7 @@ extension ChatViewController:UIImagePickerControllerDelegate, UINavigationContro
         actionSheet.addAction(UIAlertAction(title: ActionNames.Cancel.rawValue, style: .cancel))
         
         present(actionSheet, animated: true)
-    
+        
     }
     
     private func pickerView(typeSource:UIImagePickerController.SourceType){
@@ -153,20 +153,18 @@ extension ChatViewController:UIImagePickerControllerDelegate, UINavigationContro
         self.dismiss(animated: true)
     }
     
- 
+    
 }
 
 extension ChatViewController:PresenterToViewChatProtocol {
     func configureCollectionView() {
-            messagesCollectionView.messagesDisplayDelegate = self
-            messagesCollectionView.messagesLayoutDelegate = self
-            messagesCollectionView.messagesDataSource = self
-            messageInputBar.delegate = self
-            messagesCollectionView.messageCellDelegate = self
-       
-            
-            let title = chosenConversation == nil ? "\(chosenUser!.firstName) \(chosenUser!.lastName)" : chosenConversation?.user_name
-            
+        messagesCollectionView.messagesDisplayDelegate = self
+        messagesCollectionView.messagesLayoutDelegate = self
+        messagesCollectionView.messagesDataSource = self
+        messageInputBar.delegate = self
+        messagesCollectionView.messageCellDelegate = self
+        
+        let title = chosenConversation == nil ? "\(chosenUser!.firstName) \(chosenUser!.lastName)" : chosenConversation?.user_name
         
     }
     
@@ -201,7 +199,7 @@ extension ChatViewController:PresenterToViewChatProtocol {
     }
     
     
-   
+    
     
     func reloadData() {
         DispatchQueue.main.async {
@@ -221,5 +219,10 @@ extension ChatViewController:PresenterToViewChatProtocol {
     }
     
     
-    
+    func configureBarButton() {
+        let  videoButton = UIBarButtonItem(image: UIImage(systemName: "video"),style: .done,target: self, action: nil)
+        let phoneButton = UIBarButtonItem(image: UIImage(systemName: "phone"), style: .done, target: self, action: nil)
+        navigationItem.rightBarButtonItems = [phoneButton,videoButton]
+       
+    }
 }

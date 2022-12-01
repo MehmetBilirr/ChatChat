@@ -33,10 +33,10 @@ extension RegisterViewController {
     func style(){
         view.backgroundColor = .systemBackground
         
-        imageView.configureImageView(imageName: "person")
         imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = 100
         imageView.clipsToBounds = true
+        imageView.image = UIImage(named: "person")
  
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(didTapImage(_:)))
         imageView.addGestureRecognizer(gestureRecognizer)
@@ -49,6 +49,7 @@ extension RegisterViewController {
         emailTxtFld.configureStyle(placeHolder: "Email Adress...", txtColor: .black)
         
         passwordTxtFld.configureStyle(placeHolder: "Password", txtColor: .black)
+        passwordTxtFld.enablePasswordToggle()
         
         stackView.configureStyle(axiS: .vertical, space: 20)
         

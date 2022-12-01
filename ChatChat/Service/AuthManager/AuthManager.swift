@@ -44,11 +44,14 @@ class AuthManager {
             }
             
         }
+        
+        
     }
     
     func firebaseLogOut(completion:(Bool)->Void){
+        DataBaseManager.shared.updateStatus(status: .Offline)
            do {
-               DataBaseManager.shared.updateStatus(status: .Offline)
+               
                try auth.signOut()
                completion(true)
            }catch{
@@ -86,4 +89,22 @@ class AuthManager {
         }
     }
     
+    func changePassword(newPass:String) {
+        auth.currentUser?.updatePassword(to: newPass, completion: { error in
+            if error != nil {
+                ProgressHUD.showError(error?.localizedDescription)
+            }else {
+                ProgressHUD.showSucceed()
+            }
+        })
+    }
+    func deleteAccount(completion:@escaping (Bool)-> Void){
+        auth.currentUser?.delete(completion: { error in
+            if error != nil {
+                print(error?.localizedDescription)
+            }else {
+                DataBaseManager.shared.deleteUserData(completion: completion)
+            }
+        })
+    }
 }

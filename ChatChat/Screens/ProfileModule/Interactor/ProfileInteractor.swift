@@ -36,5 +36,16 @@ class ProfileInteractor:PresenterToInteractorProfileProcotol {
         
     }
     
+    func updateStatus(status: Status) {
+        DataBaseManager.shared.updateStatus(status: status)
+    }
+    
+    func didTapChangePassword(newPass: String) {
+        AuthManager.shared.changePassword(newPass: newPass)
+    }
+    func didTapDelete() {
+        
+        
+    }
     
 }

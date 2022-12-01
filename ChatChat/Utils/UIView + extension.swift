@@ -33,4 +33,10 @@ extension UIView {
     public var right:CGFloat {
         return self.frame.size.width + self.frame.origin.x
     }
+    
+    func configureBetweenView(){
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .secondarySystemFill
+        heightAnchor.constraint(equalToConstant: 1).isActive = true
+    }
 }

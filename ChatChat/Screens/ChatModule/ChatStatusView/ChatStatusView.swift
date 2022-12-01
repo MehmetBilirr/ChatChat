@@ -12,7 +12,7 @@ class ChatStatusView: UIView {
     
     let nameLbl = UILabel()
     var statusLbl = UILabel()
-    let imageView = UIImageView()
+    let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
     override init(frame: CGRect) {
         super.init(frame: frame)
         style()
@@ -27,14 +27,10 @@ class ChatStatusView: UIView {
         
         backgroundColor = .systemBackground
         nameLbl.configureStyle(size: 12, weight: .medium, color: .black)
-        nameLbl.text = "Mehmet Bilir"
         
         statusLbl.configureStyle(size: 10, weight: .regular, color: .secondaryLabel)
-        statusLbl.text = "Online"
-        imageView.configureImageView(imageName: "person")
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 20
-        imageView.layer.masksToBounds = true
+        
+        imageView.configureImageView()
         
     }
     private func layout(){
@@ -43,8 +39,8 @@ class ChatStatusView: UIView {
         imageView.snp.makeConstraints { make in
             make.left.equalToSuperview().offset(100)
             make.bottom.equalToSuperview()
-            make.height.equalTo(40)
-            make.width.equalTo(40)
+            make.height.equalTo(imageView.frame.width)
+            make.width.equalTo(imageView.frame.height)
         }
         
         addSubview(statusLbl)

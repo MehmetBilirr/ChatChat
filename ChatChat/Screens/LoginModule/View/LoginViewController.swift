@@ -43,7 +43,9 @@ extension LoginViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(didTapRegister(_:)))
         
-        imageView.configureImageView(imageName: "chat")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "chat")
+        imageView.contentMode = .scaleAspectFit
         
         emailTxtFld.configureStyle(placeHolder: "  Email adress...", txtColor: .black)
         
@@ -99,7 +101,7 @@ extension LoginViewController {
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
             make.top.equalTo(loginButton.snp.bottom).offset(50)
-            make.height.equalTo(40)
+            
         }
         
         view.addSubview(googleSignInButton)
@@ -107,7 +109,7 @@ extension LoginViewController {
             make.left.equalToSuperview().offset(50)
             make.right.equalToSuperview().offset(-50)
             make.top.equalTo(fbLoginButton.snp.bottom).offset(20)
-            make.height.equalTo(40)
+            
         }
       
     }

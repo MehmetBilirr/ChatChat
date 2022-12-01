@@ -20,6 +20,8 @@ struct User:Codable {
 enum Status:String, Codable {
     case Online = "Online"
     case Offline = "Offline"
+    case Outside = "Outside"
+    case Busy = "Busy"
     
     
     

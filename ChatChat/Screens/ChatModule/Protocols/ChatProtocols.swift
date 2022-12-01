@@ -22,6 +22,7 @@ protocol ViewToPresenterChatProtocol {
     func didFinishPickingMedia(receiverId:String,imageView:UIImageView,sender: SenderType)
     func configureChatStatusView(view:ChatStatusView)
     
+    
 }
 
 
@@ -51,6 +52,7 @@ protocol PresenterToViewChatProtocol {
     func messageArray(messageArray:[Message])
     func selfSender(sender:SenderType)
     func configureInputButton()
+    func configureBarButton()
 
 }
 

@@ -44,7 +44,7 @@ class DataBaseManager {
     
     func fetchUsers(completion:@escaping ([User])->Void){
         var users = [User]()
-        firestore.collection("users").getDocuments { snapshot, error in
+        firestore.collection("users").addSnapshotListener { snapshot, error in
             guard let documents = snapshot?.documents else {return}
             documents.forEach { document in
                 if document.documentID != self.uid {
@@ -237,15 +237,17 @@ extension DataBaseManager {
             if error != nil {
                 print(error?.localizedDescription)
             }
+            self.firestore.collection("chats").document(receiverUserId).collection(self.uid).addDocument(data: data) { error in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
+                completion(true)
+            }
             
         }
         
-        firestore.collection("chats").document(receiverUserId).collection(uid).addDocument(data: data) { error in
-            if error != nil {
-                print(error?.localizedDescription)
-            }
-        }
-        completion(true)
+        
+        
         
         
         
@@ -308,17 +310,17 @@ extension DataBaseManager {
     }
     
     func deleteConversations(otherId:String,completion: @escaping (Bool)->Void) {
-        let firestore = Firestore.firestore()
-        firestore.collection("conversations").document(uid).collection(uid).document(otherId).delete { error in
+        
+        self.firestore.collection("conversations").document(uid).collection(uid).document(otherId).delete { error in
             if error != nil {
                 print(error?.localizedDescription)
                 completion(false)
             }else {
-                firestore.collection("chats").document(self.uid).collection(otherId).addSnapshotListener { snapshot, error in
+                self.firestore.collection("chats").document(self.uid).collection(otherId).getDocuments { snapshot, error in
                     guard let documents = snapshot?.documents else {return}
                     documents.forEach { document in
                         let documentId = document.documentID
-                        firestore.collection("chats").document(self.uid).collection(otherId).document(documentId).delete { error in
+                        self.firestore.collection("chats").document(self.uid).collection(otherId).document(documentId).delete { error in
                             if error != nil {
                                 print(error?.localizedDescription)
                                 completion(false)
@@ -329,6 +331,24 @@ extension DataBaseManager {
                     }
                 }
             }
+        } 
+    }
+    
+    func deleteUserData(completion:@escaping (Bool)-> Void){
+        firestore.collection("conversations").document(uid).delete { error in
+            if error != nil {
+                print(error?.localizedDescription)
+            }else {
+                self.firestore.collection("chats").document(self.uid).delete { error in
+                    if error != nil {
+                        print(error?.localizedDescription)
+                    }else {
+                        completion(true)
+                    }
+                }
+            }
+            
         }
     }
+    
 }

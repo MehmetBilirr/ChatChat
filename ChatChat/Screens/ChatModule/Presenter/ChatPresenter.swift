@@ -23,6 +23,7 @@ class ChatPresenter:ViewToPresenterChatProtocol {
         view?.configureCollectionView()
         getCurrentUser()
         view?.configureInputButton()
+        view?.configureBarButton()
     }
     
     func chatForItem(at indexPath: IndexPath) -> Message {
@@ -69,7 +70,7 @@ extension ChatPresenter:InteractorToPresenterChatProtocol {
     }
     func didFetchCurrentUser(user: User) {
         let sender = Sender(photoURL: user.imageUrl, senderId: user.uid, displayName: user.firstName + user.lastName)
-        print(user)
+
         view?.selfSender(sender: sender)
     }
     
