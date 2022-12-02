@@ -71,7 +71,7 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {return}
-        
+        let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
         presenter?.sendMessage(text: text, otherUserId: otherID, sender: selfSender!)
     }
     

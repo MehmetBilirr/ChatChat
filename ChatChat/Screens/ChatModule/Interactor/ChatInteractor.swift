@@ -36,7 +36,7 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
     
     func configureChatStatusView(view: ChatStatusView) {
         guard let uid = otherID else {return}
-        DataBaseManager.shared.fetchUser(uuid: uid) { user in
+        DataBaseManager.shared.fetchUserAddSnapshotListener(uuid: uid) { user in
             view.nameLbl.text = "\(user.firstName) \(user.lastName)"
             view.statusLbl.text = user.status.rawValue
             view.imageView.sd_setImage(with: URL(string: user.imageUrl))
@@ -45,7 +45,7 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
     
     func getCurrentUser() {
         guard let uid = Auth.auth().currentUser?.uid else {return}
-        DataBaseManager.shared.fetchUser(uuid: uid) { [weak self] user in
+        DataBaseManager.shared.fetchUserAddSnapshotListener(uuid: uid) { [weak self] user in
             self?.presenter?.didFetchCurrentUser(user: user)
         }
     }
@@ -58,7 +58,7 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
     }
     
     func configureAvatarView(uid: String, avatarView: AvatarView) {
-        DataBaseManager.shared.fetchUser(uuid: uid) { user in
+        DataBaseManager.shared.fetchUserAddSnapshotListener(uuid: uid) { user in
             avatarView.sd_setImage(with: URL(string: user.imageUrl))
         }
     }

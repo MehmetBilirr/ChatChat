@@ -48,16 +48,21 @@ class AuthManager {
         
     }
     
-    func firebaseLogOut(completion:(Bool)->Void){
+    func firebaseLogOut(completion:@escaping(Bool)->Void){
         DataBaseManager.shared.updateStatus(status: .Offline)
-           do {
-               
-               try auth.signOut()
-               completion(true)
-           }catch{
-               completion(false)
-               ProgressHUD.showError(error.localizedDescription)
-           }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+            do {
+                
+                try self.auth.signOut()
+                completion(true)
+            }catch{
+                completion(false)
+                
+            }
+        })
+            
+        
+           
        }
     
     func firebaseSignInWithFB(token:String){

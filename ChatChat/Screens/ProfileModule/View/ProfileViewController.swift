@@ -93,7 +93,7 @@ extension ProfileViewController:PresenterToViewProfileProtocol {
         
         newPasswordTxtFld.configureStyle(placeHolder: "New Password", txtColor: .black)
         newPasswordTxtFld.isSecureTextEntry = true
-        newPasswordTxtFld.enablePasswordToggle()
+ 
         
         changeButton.setTitle("Change", for: .normal)
         changeButton.setTitleColor(.link, for: .normal)

@@ -126,7 +126,7 @@ class DataBaseManager {
         
     }
     
-    func fetchUser(uuid:String,completion:@escaping (User)->Void){
+    func fetchUserAddSnapshotListener(uuid:String,completion:@escaping (User)->Void){
         
         Firestore.firestore().collection("users").document(uuid).addSnapshotListener { snapshot, error in
             guard let snaphot = snapshot else {return}
@@ -136,6 +136,14 @@ class DataBaseManager {
         }
     }
     
+    private func fetchUser(uuid:String,completion:@escaping (User)->Void) {
+        Firestore.firestore().collection("users").document(uuid).getDocument { snapshot, error in
+            guard let snaphot = snapshot else {return}
+            
+            guard let user = try? snapshot?.data(as: User.self) else {return}
+            completion(user)
+        }
+    }
     
     
 }
@@ -175,8 +183,49 @@ extension DataBaseManager {
         case .custom(_):
             break
         }
-        fetchUser(uuid: receiverUserId) { user in
-            currentUserName = "\(user.firstName) \(user.lastName)"
+        
+        createConversationForOtherUser(Id: receiverUserId, messageDate: messageDate, message: message) { [weak self] bool in
+            if bool {
+                self?.createConversationForCurrentUser(otherId: receiverUserId, messageDate: messageDate, message: message) { [weak self] bool in
+                    if bool {
+                        self?.createChat(receiverUserId: receiverUserId, type: firstMessage.kind.messageKindString, date: messageDate, content: message, completion: completion)
+                    }
+                }
+            }
+        }
+    
+        
+        
+        
+    }
+    
+    private func createConversationForCurrentUser(otherId:String,messageDate:String,message:String,completion:@escaping(Bool)-> Void){
+        fetchUser(uuid: uid) { user in
+            
+            let currentUserName = "\(user.firstName) \(user.lastName)"
+            
+            let recivierData:[String:Any] = [
+                "user_id":self.uid,
+                "user_name":currentUserName,
+                "user_imageUrl":user.imageUrl,
+                "latest_message":["date":messageDate,
+                                  "message":message,
+                                  "isRead":false]]
+            
+            self.firestore.collection("conversations").document(otherId).collection(otherId).document(self.uid).setData(recivierData) { error in
+                if error != nil {
+                    print(error?.localizedDescription)
+                    completion(false)
+                }else {
+                    completion(true)
+                }
+            }
+        }
+    }
+    
+    private func createConversationForOtherUser(Id:String,messageDate:String,message:String,completion:@escaping(Bool)-> Void){
+        fetchUser(uuid: Id) { user in
+            let currentUserName = "\(user.firstName) \(user.lastName)"
             let senderData : [String:Any] = [
                 "user_id":user.uid,
                 "user_name":currentUserName,
@@ -187,38 +236,17 @@ extension DataBaseManager {
                     "isRead":false
                 ]
             ]
-            self.firestore.collection("conversations").document(self.uid).collection(self.uid).document(receiverUserId).setData(senderData) { error in
+            self.firestore.collection("conversations").document(self.uid).collection(self.uid).document(Id).setData(senderData) { error in
                 
                 if error != nil {
                     print(error?.localizedDescription)
+                    completion(false)
+                }else {
+                    completion(true)
                 }
                 
             }
         }
-        
-        
-        fetchUser(uuid: uid) { user in
-            
-            currentUserName = "\(user.firstName) \(user.lastName)"
-            
-            let recivierData:[String:Any] = [
-                "user_id":self.uid,
-                "user_name":currentUserName,
-                "user_imageUrl":user.imageUrl,
-                "latest_message":["date":messageDate,
-                                  "message":message,
-                                  "isRead":false]]
-            
-            self.firestore.collection("conversations").document(receiverUserId).collection(receiverUserId).document(self.uid).setData(recivierData) { error in
-                if error != nil {
-                    print(error?.localizedDescription)
-                }
-            }
-        }
-        
-        createChat(receiverUserId: receiverUserId, type: firstMessage.kind.messageKindString, date: messageDate, content: message, completion: completion)
-        
-        
     }
     
      private func createChat(receiverUserId:String,type:String,date:String,content:String,completion:@escaping (Bool)-> Void){
@@ -245,12 +273,6 @@ extension DataBaseManager {
             }
             
         }
-        
-        
-        
-        
-        
-        
         
     }
     
