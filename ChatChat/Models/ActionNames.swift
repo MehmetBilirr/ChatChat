@@ -16,5 +16,6 @@ enum ActionNames:String {
     case attachPhoto = "Attach Photo"
     case photoLibrary = "Photo Library"
     case Camera
-    
+    case Location
+    case Audio
 }

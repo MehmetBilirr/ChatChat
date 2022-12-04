@@ -24,7 +24,7 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
             switch result {
                 
             case .success(let messages):
-                print(messages)
+                
                 self?.presenter?.didFetchMessages(messages: messages)
                 
             case .failure(let error):
