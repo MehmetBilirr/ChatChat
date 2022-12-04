@@ -30,6 +30,7 @@ class ProfilePresenter:ViewToPresenterProfileProtocol {
         view?.layout()
         view?.configureNavigation()
         view?.configurePickerView()
+        getUser()
     }
     
     func didselectRow(for row: Int) {
@@ -43,4 +44,15 @@ class ProfilePresenter:ViewToPresenterProfileProtocol {
     func didTapDelete() {
         interactor?.didTapDelete()
     }
+    func getUser() {
+        interactor?.getUser()
+    }
+}
+
+extension ProfilePresenter:InteractorToPresenterProfileProtocol {
+    func didFetchUser(user: User) {
+        view?.didFetchUser(user: user)
+    }
+    
+    
 }

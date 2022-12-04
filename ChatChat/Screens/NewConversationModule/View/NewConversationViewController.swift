@@ -40,6 +40,7 @@ extension NewConversationViewController:UITableViewDataSource,UITableViewDelegat
         let cell = tableView.dequeueReusableCell(withIdentifier: UserTableViewCell.identifier, for: indexPath) as! UserTableViewCell
         
         cell.configure(user: presenter?.getChatUser(indexpath: indexPath) ?? .init(firstName: "", lastName: "", uid: "", imageUrl: "", email: "", status:.Offline))
+        cell.backgroundColor = .systemGreen.lighter()
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -68,7 +69,11 @@ extension NewConversationViewController:PresenterToViewNewConversationProtocol {
 
     
     func configureTableView() {
+        
         view.addSubview(userTableView)
+        userTableView.backgroundColor = .systemGreen.lighter()
+
+        searchController.searchBar.barTintColor = .systemGreen.lighter()
         
         userTableView.delegate = self
         userTableView.dataSource = self

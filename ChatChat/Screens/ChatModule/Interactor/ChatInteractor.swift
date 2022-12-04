@@ -64,14 +64,14 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
     }
     
     func didFinishPickingMedia(receiverId: String, imageView: UIImageView, sender: SenderType) {
-        DataBaseManager.shared.getImageUrl(imageView: imageView) { [weak self] image in
+        DataBaseManager.shared.getImageUrl(imageView: imageView) { image in
             let placeHolder = UIImage(systemName: "plus")
             let imageUrl = URL(string: image)
             let media = Media(url: imageUrl, image: nil, placeholderImage: placeHolder!, size: .zero)
             let message = Message(sender: sender, messageId: receiverId, sentDate: Date(), kind: .photo(media))
-            DataBaseManager.shared.createNewConversation(receiverUserId: receiverId, firstMessage: message) { [weak self] bool in
+            DataBaseManager.shared.createNewConversation(receiverUserId: receiverId, firstMessage: message) {  bool in
                 if bool {
-                    
+                    print("success")
                 }
             }
         }

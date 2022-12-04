@@ -31,7 +31,7 @@ final class RegisterViewController: UIViewController {
 extension RegisterViewController {
     
     func style(){
-        view.backgroundColor = .systemBackground
+        view.applyGradient(isVertical: false, colorArray: [.systemGreen.lighter(),.systemBlue.lighter()])
         
         imageView.isUserInteractionEnabled = true
         imageView.layer.cornerRadius = 100
@@ -49,7 +49,7 @@ extension RegisterViewController {
         emailTxtFld.configureStyle(placeHolder: "Email Adress...", txtColor: .black)
         
         passwordTxtFld.configureStyle(placeHolder: "Password", txtColor: .black)
-        passwordTxtFld.enablePasswordToggle()
+        passwordTxtFld.isSecureTextEntry = true
         
         stackView.configureStyle(axiS: .vertical, space: 20)
         

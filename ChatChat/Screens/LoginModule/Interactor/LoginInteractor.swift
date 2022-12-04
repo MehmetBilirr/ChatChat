@@ -51,7 +51,7 @@ class LoginInteractor:PresenterToInteractorLoginProtocol {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 if bool {
                     
-                    DataBaseManager.shared.checkIfUserLogin { [weak self] bool in
+                    DataBaseManager.shared.checkIfUserLogin {  bool in
                         if !bool {
                             let user = Auth.auth().currentUser
 

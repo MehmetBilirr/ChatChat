@@ -25,7 +25,7 @@ class ChatStatusView: UIView {
     
     private func style(){
         
-        backgroundColor = .systemBackground
+        backgroundColor = .systemGreen.lighter()
         nameLbl.configureStyle(size: 12, weight: .medium, color: .black)
         
         statusLbl.configureStyle(size: 10, weight: .regular, color: .secondaryLabel)

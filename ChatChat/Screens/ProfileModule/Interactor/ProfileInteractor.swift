@@ -8,11 +8,12 @@
 import Foundation
 import UIKit
 import FBSDKLoginKit
+import FirebaseAuth
 
 
 class ProfileInteractor:PresenterToInteractorProfileProcotol {
     var navigationController: UINavigationController?
-    
+    var presenter: InteractorToPresenterProfileProtocol?
     func logOut() {
         
         let actionSheet = UIAlertController(title: "Do you want to logout?", message: "", preferredStyle: .actionSheet)
@@ -56,4 +57,13 @@ class ProfileInteractor:PresenterToInteractorProfileProcotol {
         navLoginVc.modalPresentationStyle = .fullScreen
         navigationController?.present(navLoginVc, animated: true)
     }
+    func getUser() {
+        guard let uid = Auth.auth().currentUser?.uid else {return}
+        DataBaseManager.shared.fetchUserAddSnapshotListener(uuid: uid) { [weak self] user in
+            self?.presenter?.didFetchUser(user: user)
+        }
+    }
+    
 }
+
+

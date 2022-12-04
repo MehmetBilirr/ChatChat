@@ -16,6 +16,7 @@ class ProfileRouter:PresenterToRouterProfileProtocol {
         ref.presenter = presenter
         ref.presenter?.interactor = interactor
         ref.presenter?.view = ref
+        ref.presenter?.interactor?.presenter = presenter
         ref.presenter?.interactor?.navigationController = navigationController
     }
     

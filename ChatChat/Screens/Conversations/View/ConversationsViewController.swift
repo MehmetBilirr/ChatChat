@@ -56,6 +56,7 @@ extension ConversationsViewController:UITableViewDelegate,UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: ConversationsTableViewCell.identifier, for: indexPath) as! ConversationsTableViewCell
+        cell.backgroundColor = .systemGreen.lighter()
         cell.configure(conversation: presenter?.getConversation(indexpath: indexPath) ?? .init(latest_message: LatestMessage(date: "", message: "", isRead: false), user_id: "", user_name: "", user_imageUrl: ""))
         return cell
     }
@@ -95,8 +96,8 @@ extension ConversationsViewController:PresenterToViewConversationProtocol {
     }
     
     func style() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        view.backgroundColor = .systemBackground
+        conversationsTableView.backgroundColor = .systemGreen.lighter()
+        
         title = "Chats"
         NotificationCenter.default.addObserver(self, selector: #selector(didGetNotification(_:)), name: .myNotification, object: nil)
         

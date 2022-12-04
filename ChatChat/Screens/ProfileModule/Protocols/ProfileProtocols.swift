@@ -19,14 +19,17 @@ protocol ViewToPresenterProfileProtocol {
     func didselectRow(for row:Int)
     func didTapChangePassword(newPass:String)
     func didTapDelete()
+    func getUser()
 }
 
 protocol PresenterToInteractorProfileProcotol {
+    var presenter:InteractorToPresenterProfileProtocol?{get set}
     var navigationController:UINavigationController? {get set}
     func updateStatus(status:Status)
     func didTapChangePassword(newPass:String)
     func didTapDelete()
     func  logOut()
+    func getUser()
 }
 
 protocol PresenterToViewProfileProtocol {
@@ -36,6 +39,13 @@ protocol PresenterToViewProfileProtocol {
     func layout()
     func configureNavigation()
     func configurePickerView()
+    func getUser()
+    func didFetchUser(user:User)
+    
+}
+
+protocol InteractorToPresenterProfileProtocol {
+    func didFetchUser(user:User)
 }
 
 

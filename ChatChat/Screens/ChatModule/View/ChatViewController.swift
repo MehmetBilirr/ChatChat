@@ -71,7 +71,7 @@ extension ChatViewController:InputBarAccessoryViewDelegate {
     
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         guard !text.replacingOccurrences(of: " ", with: "").isEmpty else {return}
-        let otId = chosenConversation == nil ? chosenUser!.uid : chosenConversation!.user_id
+        
         presenter?.sendMessage(text: text, otherUserId: otherID, sender: selfSender!)
     }
     
@@ -114,6 +114,14 @@ extension ChatViewController: MessageCellDelegate {
         }
     }
     
+    func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
+        let sender = message.sender
+        if sender.senderId == selfSender?.senderId {
+            // current user
+            return .blue.lighter()
+        }
+        return .secondarySystemBackground
+    }
     
 }
 
@@ -158,13 +166,15 @@ extension ChatViewController:UIImagePickerControllerDelegate, UINavigationContro
 
 extension ChatViewController:PresenterToViewChatProtocol {
     func configureCollectionView() {
+        view.backgroundColor = .systemGreen.lighter()
         messagesCollectionView.messagesDisplayDelegate = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDataSource = self
         messageInputBar.delegate = self
         messagesCollectionView.messageCellDelegate = self
+        messagesCollectionView.backgroundColor = .systemGreen.lighter()
         
-        let title = chosenConversation == nil ? "\(chosenUser!.firstName) \(chosenUser!.lastName)" : chosenConversation?.user_name
+        
         
     }
     
@@ -176,6 +186,7 @@ extension ChatViewController:PresenterToViewChatProtocol {
             self?.presentInputActionSheet()
         }
         messageInputBar.setLeftStackViewWidthConstant(to: 36, animated: false)
+        messageInputBar.backgroundView.backgroundColor = .systemGreen.lighter()
         messageInputBar.setStackViewItems([button], forStack: .left, animated: false)
         
         

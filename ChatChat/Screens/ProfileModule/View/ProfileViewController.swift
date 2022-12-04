@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         ProfileRouter.createModule(ref: self, navigationController: navigationController!)
         presenter?.viewDidLoad()
+        
     }
   
     @objc func didLogOutButton(_ sender:UIBarButtonItem){
@@ -68,7 +69,7 @@ extension ProfileViewController:PresenterToViewProfileProtocol {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTap))
         view.addGestureRecognizer(tapGesture)
         
-        view.backgroundColor = .systemBackground
+        view.applyGradient(isVertical: false, colorArray: [.systemBlue.lighter(),.systemGreen.lighter()])
         
         userImageView.configureImageView()
         userImageView.image = UIImage(named: "person")
@@ -172,7 +173,7 @@ extension ProfileViewController:PresenterToViewProfileProtocol {
         view.addSubview(newPasswordTxtFld)
         newPasswordTxtFld.snp.makeConstraints { make in
             make.left.equalTo(betweenView1.snp.left)
-            make.top.equalTo(changePasswordLbl.snp.bottom).offset(5)
+            make.top.equalTo(changePasswordLbl.snp.bottom).offset(10)
             make.width.equalTo(200)
             make.height.equalTo(40)
         }
@@ -181,7 +182,7 @@ extension ProfileViewController:PresenterToViewProfileProtocol {
         betweenView3.snp.makeConstraints { make in
             make.left.equalTo(betweenView1.snp.left)
             make.right.equalTo(betweenView1.snp.right)
-            make.top.equalTo(changeButton.snp.bottom).offset(10)
+            make.top.equalTo(newPasswordTxtFld.snp.bottom).offset(10)
         }
         
         view.addSubview(deleteButton)
@@ -207,6 +208,18 @@ extension ProfileViewController:PresenterToViewProfileProtocol {
         statusTxtFld.placeholder = "Online"
     }
     
+    func getUser() {
+        presenter?.getUser()
+    }
+    
+    func didFetchUser(user: User) {
+        DispatchQueue.main.async {
+            self.userNameLbl.text = "\(user.firstName) \(user.lastName)"
+            self.userImageView.sd_setImage(with: URL(string: user.imageUrl))
+        }
+        
+        
+    }
 }
 
 extension ProfileViewController:UIPickerViewDelegate,UIPickerViewDataSource {

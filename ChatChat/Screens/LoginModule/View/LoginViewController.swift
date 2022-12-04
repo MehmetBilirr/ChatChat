@@ -39,7 +39,7 @@ final class LoginViewController: UIViewController {
 extension LoginViewController {
     
     func style(){
-        view.backgroundColor = .systemBackground
+        view.applyGradient(isVertical: false, colorArray: [.systemBlue.lighter(),.systemGreen.lighter()])
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Register", style: .done, target: self, action: #selector(didTapRegister(_:)))
         
@@ -55,6 +55,7 @@ extension LoginViewController {
         
         loginButton.configureButton(title: "Login", backgroundClr: .secondaryLabel)
         loginButton.addTarget(self, action: #selector(didTapLogin(_:)), for: .touchUpInside)
+    
         
         fbLoginButton.permissions = ["email","public_profile"]
         fbLoginButton.delegate = self
