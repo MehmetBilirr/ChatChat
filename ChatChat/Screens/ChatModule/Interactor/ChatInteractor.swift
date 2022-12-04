@@ -10,6 +10,7 @@ import UIKit
 import FirebaseAuth
 import MessageKit
 import ProgressHUD
+import MapKit
 
 class ChatInteractor:PresenterToInteractorChatProtocol {
     var navigationController: UINavigationController?
@@ -75,6 +76,37 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
                 }
             }
         }
+    }
+    
+    func sendLocationMessage(receiverId: String, sender: SenderType) {
+        let vc = LocationViewController()
+        vc.title = "Pick Location"
+        vc.completion = { [weak self] selectedLocation in
+            
+            guard let strongSelf = self else {
+                return
+            }
+            let longitude:Double = selectedLocation.longitude
+            let latitude:Double = selectedLocation.latitude
+            let location = Location(location:
+                                        CLLocation(latitude: latitude, longitude: longitude),
+                                    size: .zero)
+            
+
+            let message = Message(sender: sender,
+                                  messageId: receiverId,
+                                  sentDate: Date(),
+                                  kind: .location(location))
+
+            DataBaseManager.shared.createNewConversation(receiverUserId: receiverId, firstMessage: message) { bool in
+                if bool {
+                    print("success")
+                }
+            }
+            
+        }
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

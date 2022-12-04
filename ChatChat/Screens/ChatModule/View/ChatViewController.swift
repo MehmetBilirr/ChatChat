@@ -217,51 +217,8 @@ extension ChatViewController:PresenterToViewChatProtocol {
     }
     
     private func presentLocationPicker() {
-        let vc = LocationViewController()
-        vc.title = "Pick Location"
-        vc.completion = { [weak self] selectedLocation in
-            
-            guard let strongSelf = self else {
-                return
-            }
-            let longitude:Double = selectedLocation.longitude
-            let latitude:Double = selectedLocation.latitude
-            
-            
-//            guard let conversationId = strongSelf.conversationId,
-//                  let name = strongSelf.title,
-//                  let selfSender = strongSelf.selfSender,
-//                  let messageId = strongSelf.createMessageId() else {
-//                      return
-//                  }
-            
-            let location = Location(location:
-                                        CLLocation(latitude: latitude, longitude: longitude),
-                                    size: .zero)
-            
-            print(location)
-
-//            let message = Message(sender: selfSender,
-//                                  messageId: messageId,
-//                                  sentDate: Date(),
-//                                  kind: .location(location))
-//
-//            DatabaseManager.shared.sendMessage(to: conversationId,
-//                                               otherUserEmail: strongSelf.otherUserEmail,
-//                                               name: name,
-//                                               newMessage: message,
-//                                               completion: { success in
-//                if (success) {
-//                    print("Sent location message")
-//                } else {
-//                    print("failed to send location message")
-//                }
-//
-//            })
-            
-        }
-        vc.navigationItem.largeTitleDisplayMode = .never
-        navigationController?.pushViewController(vc, animated: true)
+        presenter?.sendLocationMessage(receiverId: otherID, sender: selfSender!)
+        
     }
     
     

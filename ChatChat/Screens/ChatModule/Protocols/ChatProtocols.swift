@@ -21,7 +21,7 @@ protocol ViewToPresenterChatProtocol {
     func numberOfSection()->Int
     func didFinishPickingMedia(receiverId:String,imageView:UIImageView,sender: SenderType)
     func configureChatStatusView(view:ChatStatusView)
-    
+    func sendLocationMessage(receiverId:String,sender:SenderType)
     
 }
 
@@ -35,6 +35,7 @@ protocol PresenterToInteractorChatProtocol {
     func configureAvatarView(uid:String,avatarView:AvatarView)
     func didFinishPickingMedia(receiverId:String,imageView:UIImageView,sender: SenderType)
     func configureChatStatusView(view:ChatStatusView)
+    func sendLocationMessage(receiverId:String,sender:SenderType)
 }
 
 protocol InteractorToPresenterChatProtocol {

@@ -73,7 +73,9 @@ extension ChatPresenter:InteractorToPresenterChatProtocol {
 
         view?.selfSender(sender: sender)
     }
-    
+    func sendLocationMessage(receiverId: String, sender: SenderType) {
+        interactor?.sendLocationMessage(receiverId: receiverId, sender: sender)
+    }
     
 }
 

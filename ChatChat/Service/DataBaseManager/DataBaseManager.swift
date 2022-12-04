@@ -12,6 +12,7 @@ import FirebaseFirestore
 import FirebaseAuth
 import FirebaseFirestoreSwift
 import MessageKit
+import MapKit
 
 
 // MARK: - Get and Fetch UserData
@@ -170,8 +171,10 @@ extension DataBaseManager {
             break
         case .video(_):
             break
-        case .location(_):
-            break
+        case .location(let locationData):
+            let location = locationData.location
+            message = "\(location.coordinate.longitude),\(location.coordinate.latitude)"
+
         case .emoji(_):
             break
         case .audio(_):
@@ -315,6 +318,14 @@ extension DataBaseManager {
                                           placeholderImage: UIImage(systemName: "plus")!,
                                           size: CGSize(width: 300, height: 300))
                         messageKind = .photo(media)
+                    }else if (chat.type == "location") {
+                        let locationComponents = chat.content.components(separatedBy: ",")
+                        guard let longitude = Double(locationComponents[0]),
+                              let latitude = Double(locationComponents[1]) else {return completion(.failure(AppError.unknownError))}
+                        let location = Location(location:CLLocation(latitude: latitude, longitude: longitude) ,
+                                                size: CGSize(width: 300, height: 300))
+                        messageKind = .location(location)
+                        
                     } else  {
                         messageKind = .text(chat.content)
                     }
