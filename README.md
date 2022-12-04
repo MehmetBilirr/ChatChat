@@ -1,5 +1,5 @@
 # ChatChat
-Chat Chat is a real-time application where users can log in with their Facebook and Google accounts, create new memberships and message each other, share photos and locations.
+Chat Chat is a real-time application where users can log in with their Facebook and Google accounts, create new memberships and send message each other, share photos and locations.
 
 
 # Technology and structures
