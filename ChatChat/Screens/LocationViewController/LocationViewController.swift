@@ -12,19 +12,35 @@ import MapKit
 class LocationViewController: UIViewController {
     
     public var completion:((CLLocationCoordinate2D)->Void)?
-    private var coordinates:CLLocationCoordinate2D?
+    var coordinates:CLLocationCoordinate2D?
     private var locationManager = CLLocationManager()
     private let map = MKMapView()
+    var isPickable = true
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         configureMapView()
         configureNavigationItem()
         configureLocationManager()
-        
-        
+    
     }
     
+    init(coordinates:CLLocationCoordinate2D?) {
+        if let coordinates = coordinates {
+            self.coordinates = coordinates
+            isPickable = false
+        }
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        guard let coordinates = coordinates else {return}
+        pinLocation(location: coordinates)
+    }
     private func configureMapView(){
         view.addSubview(map)
         
@@ -46,9 +62,12 @@ class LocationViewController: UIViewController {
     }
     
     @objc func  didTabSendButton() {
-        guard let coordinates = coordinates else {return}
-        navigationController?.popViewController(animated: true)
-        completion?(coordinates)
+        if isPickable {
+            guard let coordinates = coordinates else {return}
+            navigationController?.popViewController(animated: true)
+            completion?(coordinates)
+        }
+       
     }
     @objc func  didTabGesture(_ gesture:UITapGestureRecognizer) {
         let locationInView = gesture.location(in: map)
@@ -71,13 +90,19 @@ class LocationViewController: UIViewController {
 
 extension LocationViewController:CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        if isPickable  {
+            let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
+            let span = MKCoordinateSpan.init(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: location, span: span)
+            self.coordinates = location
+            self.map.setRegion(region, animated: true)
+        }else {
+            guard let coordinate = coordinates else {return}
+            let span = MKCoordinateSpan.init(latitudeDelta: 0.01, longitudeDelta: 0.01)
+            let region = MKCoordinateRegion(center: coordinate, span: span)
+            self.map.setRegion(region, animated: true)
+        }
         
-        let location = CLLocationCoordinate2D(latitude: locations[0].coordinate.latitude, longitude: locations[0].coordinate.longitude)
-        let span = MKCoordinateSpan.init(latitudeDelta: 0.01, longitudeDelta: 0.01)
-        let region = MKCoordinateRegion(center: location, span: span)
-        pinLocation(location: location)
-        self.coordinates = location
-        map.setRegion(region, animated: true)
         
     }
     

@@ -79,7 +79,7 @@ class ChatInteractor:PresenterToInteractorChatProtocol {
     }
     
     func sendLocationMessage(receiverId: String, sender: SenderType) {
-        let vc = LocationViewController()
+        let vc = LocationViewController(coordinates: nil)
         vc.title = "Pick Location"
         vc.completion = { [weak self] selectedLocation in
             

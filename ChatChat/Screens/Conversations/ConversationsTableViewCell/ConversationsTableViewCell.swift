@@ -87,8 +87,11 @@ class ConversationsTableViewCell: UITableViewCell {
     }
     
     private func handleMessage(message:String) {
+        let array = message.components(separatedBy: ",")
         if message.contains("https") {
             messageLbl.text = "Media"
+        }else if let _ =  Double(array[0]), let _ = Double(array[1]){
+            messageLbl.text = "Location"
         }else {
             messageLbl.text = message
         }

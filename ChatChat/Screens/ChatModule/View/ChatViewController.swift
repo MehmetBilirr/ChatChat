@@ -111,6 +111,20 @@ extension ChatViewController: MessageCellDelegate {
             navigationController?.pushViewController(vc, animated: true)
         default: break
         }
+        
+    }
+    
+    func didTapMessage(in cell: MessageCollectionViewCell) {
+        guard let indexPath = self.messagesCollectionView.indexPath(for: cell) else {return}
+        let message = messages[indexPath.section]
+        switch message.kind {
+        case.location(let locationData):
+            let vc = LocationViewController(coordinates: locationData.location.coordinate)
+            vc.title = "Location"
+            self.navigationController?.pushViewController(vc, animated: true)
+        default:
+            break
+        }
     }
     
     func backgroundColor(for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> UIColor {
