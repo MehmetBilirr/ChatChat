@@ -3,23 +3,23 @@ Chat Chat is a real-time application where users can log in with their Facebook 
 
 
 # Technology and structures
-✅ VIPER Pattern<br />
-✅ UIKIT<br />
-✅ Firebase Auth<br />
-✅ Firebase FireStore<br />
-✅ Firebase Storage<br />
-✅ GoogleSignIn<br />
-✅ FacebookLogin<br />
-✅ MessageKit<br />
-✅ Mapkit<br />
-✅ Snapkit<br />
-✅ UIPickerView<br />
-✅ Navigation<br />
-✅ Tabbar Controller<br />
-✅ Search Bar<br />
-✅ TableView<br />
-✅ SDWebImage<br />
-✅ ProgressHUD<br />
+* VIPER Pattern<br />
+* UIKIT<br />
+* Firebase Auth<br />
+* Firebase FireStore<br />
+* Firebase Storage<br />
+* GoogleSignIn<br />
+* FacebookLogin<br />
+* MessageKit<br />
+* Mapkit<br />
+* Snapkit<br />
+* UIPickerView<br />
+* Navigation<br />
+* Tabbar Controller<br />
+* Search Bar<br />
+* TableView<br />
+* SDWebImage<br />
+* ProgressHUD<br />
 
 
 # App Recording
